@@ -1,0 +1,5 @@
+function firstSteps(){
+    
+}
+
+firstSteps();
