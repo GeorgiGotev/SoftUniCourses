@@ -1,20 +1,18 @@
 function accountBalance(input) {
   let index = 0;
-  let comand = input[index];
+  let command = input[index++];
   let total = 0;
 
-  while (comand !== "NoMoreMoney") {
-    let currentIncr = Number(input[index]);
-
-    index++;
-    comand = input[index];
+  while (command !== "NoMoreMoney") {
+    let currentIncr = Number(command);
     if (currentIncr < 0) {
       console.log(`Invalid operation!`);
       break;
-    } else {
-      total += currentIncr;
-      console.log(`Increase: ${currentIncr.toFixed(2)}`);
     }
+    total += currentIncr;
+
+    console.log(`Increase: ${currentIncr.toFixed(2)}`);
+    command = input[index++];
   }
   console.log(`Total: ${total.toFixed(2)}`);
 }

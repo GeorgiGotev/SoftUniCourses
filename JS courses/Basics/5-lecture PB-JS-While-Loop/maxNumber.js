@@ -1,16 +1,15 @@
 function maxNumber(input) {
-  let comand = input[0];
   let index = 0;
+  let command = input[index];
 
   let max = Number.MIN_SAFE_INTEGER;
 
-  while (comand !== "Stop") {
-    let num = Number(comand);
-    if (num > max) {
+  while (command !== "Stop") {
+    let num = Number(command);
+    if (max < num) {
       max = num;
     }
-    comand = input[index];
-    index++;
+    command = input[index++];
   }
   console.log(max);
 }

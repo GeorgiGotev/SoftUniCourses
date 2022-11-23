@@ -1,17 +1,13 @@
 function sumNumbers(input) {
-  let firstNum = Number(input[0]);
+  let index = 0;
+  let firstNum = Number(input[index++]);
   let sum = 0;
-  let index = 1;
 
-  while (index <= input.length) {
-    sum = sum + Number(input[index]);
-    if (sum >= firstNum) {
-      break;
-    }
-
-    index++;
+  while (sum < firstNum) {
+    let currentDigit = Number(input[index++]);
+    sum += currentDigit;
   }
 
   console.log(sum);
 }
-sumNumbers(["20", "1", "2", "3", "4", "5", "6"]);
+sumNumbers(["100", "10", "20", "30", "40"]);

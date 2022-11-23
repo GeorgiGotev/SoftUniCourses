@@ -1,16 +1,15 @@
 function minNumber(input) {
   let index = 0;
-  let comand = input[index];
+  let command = input[index];
 
   let min = Number.MAX_SAFE_INTEGER;
 
-  while (comand !== "Stop") {
-    let num = Number(comand);
-    if (num < min) {
+  while (command !== "Stop") {
+    let num = Number(command);
+    if (min > num) {
       min = num;
     }
-    index++;
-    comand = input[index];
+    command = input[index++];
   }
   console.log(min);
 }
