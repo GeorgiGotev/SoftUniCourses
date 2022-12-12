@@ -7,12 +7,10 @@ function cake(input) {
   let cakeSize = a * b;
   let command = input[index];
   index++;
-  let takedPcs = cakeSize;
   let pcs = 0;
 
   while (command !== "STOP") {
     let curPsc = Number(command);
-
     pcs += curPsc;
 
     if (pcs > cakeSize) {
