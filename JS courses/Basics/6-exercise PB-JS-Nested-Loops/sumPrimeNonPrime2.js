@@ -1,18 +1,15 @@
 function sumPrimeNonPrime(input) {
   let index = 0;
-  let command = input[index];
-  index++;
+  let command = input[index++];
 
-  sumIsPrime = 0;
-  sumIsNoPrime = 0;
+  let sumPrime = 0;
+  let sumNoPrime = 0;
 
   while (command !== "stop") {
     let num = Number(command);
-
     if (num < 0) {
-      console.log(`Number is negative.`);
-      command = input[index];
-      index++;
+      console.log("Number is negative.");
+      command = input[index++];
       continue;
     }
 
@@ -25,15 +22,15 @@ function sumPrimeNonPrime(input) {
       }
     }
     if (isPrime === true) {
-      sumIsPrime += num;
+      sumPrime += num;
     } else {
-      sumIsNoPrime += num;
+      sumNoPrime += num;
     }
-    command = input[index];
-    index++;
+    command = input[index++];
   }
-  console.log(`Sum of all prime numbers is: ${sumIsPrime}`);
-  console.log(`Sum of all non prime numbers is: ${sumIsNoPrime}`);
+
+  console.log(`Sum of all prime numbers is: ${sumPrime}`);
+  console.log(`Sum of all non prime numbers is: ${sumNoPrime}`);
 }
 
 sumPrimeNonPrime(["3", "9", "0", "7", "19", "4", "stop"]);
