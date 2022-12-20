@@ -3,13 +3,13 @@ function familyTrip(input) {
   let numberOfNights = Number(input[1]);
   let pricePerNight = Number(input[2]);
   let addExpense = Number(input[3]) / 100;
-  if (numberOfNights >= 7) {
+  if (numberOfNights > 7) {
     pricePerNight -= pricePerNight * 0.05;
   }
   let priceForHotel = numberOfNights * pricePerNight;
   let totalPrice = budget * addExpense + priceForHotel;
 
-  if (budget > totalPrice) {
+  if (budget >= totalPrice) {
     console.log(
       `Ivanovi will be left with ${(budget - totalPrice).toFixed(
         2
