@@ -12,7 +12,6 @@ function sumPrimeNonPrime(input) {
       command = input[index++];
       continue;
     }
-
     let isPrime = true;
 
     for (let del = 2; del < num; del++) {
