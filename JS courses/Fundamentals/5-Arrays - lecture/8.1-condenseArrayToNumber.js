@@ -1,7 +1,7 @@
 function condenseArrayToNumber(arrayOfNumbers) {
   let result = [];
-  for (let i = 0; i < arrayOfNumbers.length; i++) {
-    result[i] = arrayOfNumbers[i];
+  for (let numbers of arrayOfNumbers) {
+    result.push(numbers);
   }
   while (result.length > 1) {
     let tempArray = [];
@@ -10,9 +10,8 @@ function condenseArrayToNumber(arrayOfNumbers) {
     }
     result = tempArray;
   }
-  let output = "";
-  output += result;
 
-  console.log(result.toString());
+  console.log(result.join());
 }
+
 condenseArrayToNumber([5, 0, 4, 1, 2]);
