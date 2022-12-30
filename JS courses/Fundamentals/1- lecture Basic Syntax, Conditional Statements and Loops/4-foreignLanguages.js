@@ -11,4 +11,4 @@ function foreignLanguages(country) {
     console.log("unknown");
   }
 }
-foreignLanguages(country);
+foreignLanguages("USA");
