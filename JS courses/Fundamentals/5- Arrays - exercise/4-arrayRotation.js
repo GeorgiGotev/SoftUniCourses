@@ -1,6 +1,7 @@
 function arrayRotation(arr, num) {
   let newArr = [];
-  for (let i = 0; i < num; i++) {
+  let rotations = num % arr.length;
+  for (let i = 0; i < rotations; i++) {
     let currNum = arr.shift();
     arr.push(currNum);
   }
