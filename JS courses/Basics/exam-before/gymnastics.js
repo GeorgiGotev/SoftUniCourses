@@ -53,7 +53,7 @@ function gymnastics(input) {
   let percent = ((maxPoints - sumPoints) / maxPoints) * 100;
 
   console.log(`The team of ${country} get ${sumPoints.toFixed(3)} on ${type}.`);
-  console.log(`${percent}%`);
+  console.log(`${percent.toFixed(2)}%`);
 }
 
 gymnastics(["Bulgaria", "ribbon"]);
