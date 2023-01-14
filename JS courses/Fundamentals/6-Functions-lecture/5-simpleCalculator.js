@@ -1,17 +1,20 @@
 function calculator(num1, num2, operator) {
+  let result;
   switch (operator) {
     case "multiply":
-      let multiply = (num1, num2) => num1 * num2;
-      return multiply(num1, num2);
+      result = (num1, num2) => num1 * num2;
+      break;
     case "divide":
-      let divide = (num1, num2) => num1 / num2;
-      return divide(num1, num2);
+      result = (num1, num2) => num1 / num2;
+      break;
     case "add":
-      let add = (num1, num2) => num1 + num2;
-      return add(num1, num2);
+      result = (num1, num2) => num1 + num2;
+      break;
     case "subtract":
-      let subtract = (num1, num2) => num1 - num2;
-      return subtract(num1, num2);
+      result = (num1, num2) => num1 - num2;
+      break;
   }
+
+  console.log(result(num1, num2));
 }
-calculator(5, 5, "multiply");
+calculator(10, 5, "multiply");
