@@ -1,7 +1,7 @@
 function solve(arr, commands) {
   for (let i = 0; i < commands.length; i++) {
-    let splited = commands[i].split(" ");
-    let command = splited[0];
+    let commandsSplit = commands[i].split(" ");
+    let command = commandsSplit[0];
     if (command === "add") {
       add();
     } else if (command === "addMany") {
@@ -19,45 +19,45 @@ function solve(arr, commands) {
       break;
     }
     function add() {
-      let index = parseInt(splited[1]);
-      let element = parseInt(splited[2]);
+      let index = parseInt(commandsSplit[1]);
+      let element = parseInt(commandsSplit[2]);
       arr.splice(index, 0, element);
     }
     function addMany() {
-      let index = parseInt(splited[1]);
-      for (let j = splited.length - 1; j >= 2; j--) {
-        let element = parseInt(splited[j]);
-        arr.splice(index, 0, element);
-      }
+      let index = parseInt(commandsSplit[1]);
+      let addition = commandsSplit.slice(2).map(Number);
+      arr.splice(index, 0, ...addition);
     }
     function contains() {
-      let element = parseInt(splited[1]);
+      let element = parseInt(commandsSplit[1]);
       console.log(arr.indexOf(element));
     }
     function remove() {
-      let index = parseInt(splited[1]);
+      let index = parseInt(commandsSplit[1]);
       arr.splice(index, 1);
     }
     function shift() {
-      let position = parseInt(splited[1]);
+      let position = parseInt(commandsSplit[1]);
       for (let a = 0; a < position; a++) {
         let first = arr.shift();
         arr.push(first);
       }
     }
     function sumPairs() {
-      arr = arr
-        .map((e, i, arr) =>
-          i < arr.length - 1 ? (arr[i] += arr[i + 1]) : (arr[i] = arr[i])
-        )
-        .filter((e, i) => i % 2 === 0);
+      if (arr.length % 2 !== 0) {
+        arr.push(0);
+      }
+      let newer = [];
+      let sum = 0;
+      for (let i = 0; i < arr.length; i += 2) {
+        sum = arr[i] + arr[i + 1];
+        newer.push(sum);
+      }
+      arr = newer;
     }
     function print() {
       console.log(`[ ${arr.join(", ")} ]`);
     }
   }
 }
-arrayManipulator(
-  [1, 2, 3, 4, 5],
-  ["addMany 5 9 8 7 6 5", "contains 15", "remove 3", "shift 1", "print"]
-);
+solve([2, 2, 4, 2, 4], ["add 1 4", "sumPairs", "print"]);

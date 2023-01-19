@@ -14,8 +14,8 @@ function arrayManipulator(arrays, commands) {
         break;
       case "addMany":
         let index = num1;
-        for (let i = 1; i < curr.length; i++) {
-          arrays.splice(index - i - 1, 0, Number(curr[i]));
+        for (let i = curr.length - 1; i >= 1; i--) {
+          arrays.splice(index, 0, Number(curr[i]));
         }
         break;
       case "contains":
@@ -39,7 +39,7 @@ function arrayManipulator(arrays, commands) {
           sum = arrays[i] + arrays[i + 1];
           newArr.push(sum);
         }
-        arrays = [...newArr];
+        arrays = newArr;
 
         break;
       case "print":
@@ -49,6 +49,6 @@ function arrayManipulator(arrays, commands) {
   }
 }
 arrayManipulator(
-  [1, 2, 3, 4, 5],
-  ["addMany 5 9 8 7 6 5", "contains 15", "remove 3", "shift 1", "print"]
+  [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+  ["sumPairs", "sumPairs", "addMany 0 -1 -2 -3", "print"]
 );
