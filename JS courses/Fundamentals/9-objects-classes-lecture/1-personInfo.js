@@ -5,7 +5,6 @@ function personInfo(firstName, lastName, age) {
     age: age,
   };
 
-  return person;
+  console.log(person);
 }
 personInfo("Peter", "Pan", "20");
-b;
