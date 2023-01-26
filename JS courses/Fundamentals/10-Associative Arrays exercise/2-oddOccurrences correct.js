@@ -2,7 +2,7 @@ function oddOccurrences(input) {
     let output = {};
     let words = input.split(' ').map(x => x.toLowerCase());
     for (const word of words) {
-        if (output[word] === undefined) {
+        if (!output.hasOwnProperty(word)) {
             output[word] = 0;
         } else {
             output[word]++
@@ -10,10 +10,11 @@ function oddOccurrences(input) {
     }
 
     let final = '';
+
     for (let word of words) {
         if (output[word] % 2 === 0) {
             final += `${word} `;
-            delete output[word]
+            delete output[word];
         }
     }
     console.log(final);

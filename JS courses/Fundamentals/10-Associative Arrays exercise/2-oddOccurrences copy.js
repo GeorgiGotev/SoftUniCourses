@@ -10,7 +10,8 @@ function oddOccurrences(input) {
         output[curr].push(i)
     }
 
-    let sorted = Object.entries(output).sort((a, b) => a[1][0] - b[1][0])
+    let sorted = Object.entries(output).sort((a, b) => a[1][0] - b[1][0])  // sort doesn't work, because we don't have it as a solve.
+    // we need just to print result as it show to us.
 
     let final = '';
     for (const key of sorted) {
