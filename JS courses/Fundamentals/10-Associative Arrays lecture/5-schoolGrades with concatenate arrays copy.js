@@ -5,6 +5,7 @@ function schoolGrades(input) {
     let name = currLine.shift();
     let grades = currLine.map((x) => Number(x));
 
+
     if (!studentsObj[name]) {
       studentsObj[name] = [];
     }
