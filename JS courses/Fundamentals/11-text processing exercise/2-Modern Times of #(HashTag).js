@@ -11,9 +11,8 @@ function hashTag(input) {
                 if (char.charCodeAt() < 97 || char.charCodeAt() > 122) {
                     flag = false;
                     break;
-                } else {
-                    wordCopy += result[i];
                 }
+                wordCopy += result[i];
             }
             if (flag) {
                 console.log(wordCopy);
