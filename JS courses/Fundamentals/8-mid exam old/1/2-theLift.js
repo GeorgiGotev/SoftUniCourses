@@ -5,7 +5,6 @@ function theLift(arr) {
     let flag = false;
 
     for (let i = 0; i < wagons.length; i++) {
-
         if (wagons[i] < 4) {
             if (people >= 4 - wagons[i]) {
                 people = people - (4 - wagons[i]);
@@ -28,7 +27,6 @@ function theLift(arr) {
         console.log(`There isn't enough space! ${people} people in a queue!`);
     }
     console.log(wagons.join(' '));
-
 }
 theLift([
     "2",
