@@ -6,21 +6,18 @@ function theLift(arr) {
 
     for (let i = 0; i < wagons.length; i++) {
 
-        let currWagon = wagons[i];
-        if (currWagon < 4) {
-            if (people >= 4 - currWagon) {
-                people = people - (4 - currWagon);
+        if (wagons[i] < 4) {
+            if (people >= 4 - wagons[i]) {
+                people = people - (4 - wagons[i]);
                 wagons[i] = 4
             } else {
-                wagons[i] = people + currWagon;
+                wagons[i] = people + wagons[i];
                 people = 0;
                 if (wagons[i] < 4) {
                     flag = true;
                 }
             }
-        } else {
-            wagons[i] = 4;
-        }
+        } 
     }
 
     if (flag) {
@@ -34,7 +31,7 @@ function theLift(arr) {
 
 }
 theLift([
-    "5",
-    "0 2 0 0"
+    "2",
+    "3 0 0 0"
 ]);
 
