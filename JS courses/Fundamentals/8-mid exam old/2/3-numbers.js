@@ -2,18 +2,15 @@ function numbers(input) {
 
     let numbersArr = input.split(' ').map(Number);
     let sum = 0;
-    for (const number of numbersArr) {
-        sum += number;
-    }
+    numbersArr.forEach(element => sum+=element);
     let avg = sum / numbersArr.length;
 
     let result = [];
-
-    for (const number of numbersArr) {
-        if (number > avg) {
-            result.push(number);
-        }
+numbersArr.forEach(element => {
+    if(element>avg){
+        result.push(element);
     }
+});
     result.sort((a, b) => b - a);
     let output = result.slice(0, 5)
     console.log(output.join(' '));

@@ -6,23 +6,22 @@ function memoryGame(input) {
     let command = input[index];
     while (command !== 'end') {
         counter++;
-        let currI = input[index].split(' ').map(Number);
-        let currNum=numbersArr[currI[0]]
-
-        if (currI[0] < 0 
-            || currI[1] < 0 
-            || currI[0] >= numbersArr.length 
-            || currI[1] >= numbersArr.length 
-            || currI[0] === currI[1]) {
+        let [index1,index2] = input[index].split(' ').map(Number);
+        let num1=numbersArr[index1];
+        if (index1 < 0 
+            || index2 < 0 
+            || index1 >= numbersArr.length 
+            || index2 >= numbersArr.length 
+            || index1 === index2) {
             let newEl = `-${counter}a`;
             numbersArr.splice((numbersArr.length / 2), 0, newEl, newEl);
             console.log(`Invalid input! Adding additional elements to the board`);
         } else {
-            if (numbersArr[currI[0]] === numbersArr[currI[1]]) {
-                console.log(`Congrats! You have found matching elements - ${currNum}!`);
-                let index1=numbersArr.indexOf(currNum)
+            if (numbersArr[index1] === numbersArr[index2]) {
+                console.log(`Congrats! You have found matching elements - ${num1}!`);
+                let index1=numbersArr.indexOf(num1)
                 numbersArr.splice(index1, 1);
-                let index2 = numbersArr.indexOf(currNum);
+                let index2 = numbersArr.indexOf(num1);
                 numbersArr.splice(index2, 1);
             } else {
                 console.log(`Try again!`);
