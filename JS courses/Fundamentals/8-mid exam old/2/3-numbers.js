@@ -3,18 +3,12 @@ function numbers(input) {
     let numbersArr = input.split(' ').map(Number);
     let sum = 0;
     numbersArr.forEach(element => sum+=element);
-    let avg = sum / numbersArr.length;
 
-    let result = [];
-numbersArr.forEach(element => {
-    if(element>avg){
-        result.push(element);
-    }
-});
-    result.sort((a, b) => b - a);
-    let output = result.slice(0, 5)
-    console.log(output.join(' '));
-    if(output.length===0){
+   numbersArr.filter(x=>x>sum / numbersArr.length);
+
+   numbersArr.sort((a, b) => b - a);
+    console.log(numbersArr.slice(0, 5).join(' '));
+    if(numbersArr.length===0){
         console.log('No');
     }
 
