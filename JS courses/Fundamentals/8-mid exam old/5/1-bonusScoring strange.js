@@ -13,6 +13,7 @@ function bonusScoring(input) {
     let sortedScore = finalScore.sort((a, b) => b - a);
 
     console.log(`Max Bonus: ${Math.ceil(sortedScore.slice(0, 1).join(' '))}.`);
+    
     if (numberOfStudents > 0 && totalLectures > 0 && additionalBonus > 0) {
         let sortedAttendance = input.sort((a, b) => b - a);
         console.log(`The student has attended ${sortedAttendance.slice(0, 1).join(' ')} lectures.`);
