@@ -3,8 +3,13 @@ function ladyBugs(input) {
     let bugsPosition = input.shift().split(' ');
     let field = new Array(fields).fill(0);
 
-    bugsPosition.forEach(element => field[element] = 1);
-   
+    bugsPosition.forEach(element => {
+        element = Number(element);
+        if (field[element] === 0) {
+            field[element] = 1;
+        }
+    });
+
     for (let i = 0; i < input.length; i++) {
         let [currPosition, movePosition, newPosition] = input[i].split(' ');
         currPosition = Number(currPosition);
@@ -16,29 +21,32 @@ function ladyBugs(input) {
 
         switch (movePosition) {
             case 'right':
-                for (let r = currPosition; r < field.length; r++) {
-                    if (field[currPosition + newPosition] === 0 && currPosition + newPosition < field.length && currPosition + newPosition >= 0) {
+
+                for (let r = 0; r < field.length; r++) { 
+                    if (field[currPosition + newPosition] === 0) {  
                         field[currPosition + newPosition] = 1;
                         field[currPosition] = 0;
                         break;
                     } else {
                         newPosition += newPosition;
-                        if (currPosition + newPosition >= field.length || currPosition + newPosition <= 0) {
+                        if (field[currPosition + newPosition] === undefined) {
                             field[currPosition] = 0;
                             break;
+
                         }
                     }
                 }
                 break;
             case 'left':
-                for (let l = currPosition; l >= 0; l--) {
-                    if (field[currPosition - newPosition] === 0 && currPosition - newPosition >= 0 && currPosition - newPosition < field.length) {
+
+                for (let l = field.length; l >= 0; l--) {  
+                    if (field[currPosition - newPosition] === 0) {
                         field[currPosition - newPosition] = 1;
                         field[currPosition] = 0;
                         break;
                     } else {
                         newPosition += newPosition;
-                        if (currPosition - newPosition < 0 || currPosition-newPosition>=field.length) {
+                        if (field[currPosition - newPosition] === undefined) {   
                             field[currPosition] = 0;
                             break;
                         }
@@ -49,8 +57,11 @@ function ladyBugs(input) {
     }
     console.log(field.join(' '));
 }
-ladyBugs([5, '3',
-    '3 left 2',
-    '1 left -2']
+ladyBugs([3, '0 1',
+    '0 right 1',
+    '2 right 1']
+
+
+
 
 );
