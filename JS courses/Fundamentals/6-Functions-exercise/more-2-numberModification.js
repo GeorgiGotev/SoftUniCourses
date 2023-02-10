@@ -1,5 +1,7 @@
 function numberModification(number) {
+    
     let toStr = number.toString();
+
     while (!check()) {
         toStr += 9;
     }
