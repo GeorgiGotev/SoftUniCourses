@@ -32,7 +32,7 @@ function treasureHunt(input) {
     for (const item of initialLoot) {
         sum += item.length;
     }
-    if (initialLoot.length > 0) {
+    if (initialLoot.length > 0) }. // redice a,b => a+b.length,0 /initialloot.length
         console.log(`Average treasure gain: ${(sum / initialLoot.length).toFixed(2)} pirate credits.`);
     } else {
         console.log('Failed treasure hunt.');
