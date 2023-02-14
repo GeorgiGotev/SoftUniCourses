@@ -3,7 +3,7 @@ function treasureHunt(input) {
     let command = input.shift();
 
     while (command !== 'Yohoho!') {
-        let action = command.split(' ');
+        let action = command.split(' ');  // [command, ...elements]
         switch (action[0]) {
             case 'Loot':
                 for (let i = 1; i < action.length; i++) {
