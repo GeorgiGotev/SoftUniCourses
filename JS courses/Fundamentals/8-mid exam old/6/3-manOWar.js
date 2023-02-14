@@ -1,8 +1,7 @@
 function manOWar(input) {
     let pirateShip = input.shift().split('>').map(Number);
     let warShip = input.shift().split('>').map(Number);
-    let maxHp = input.shift();
-    maxHp = Number(maxHp);
+    let maxHp = Number(input.shift());
     let isWarshipSunken = false;
     let isPirateSunken = false;
     let command = input.shift();
