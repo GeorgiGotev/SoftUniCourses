@@ -21,19 +21,24 @@ function treasureHunt(input) {
                 }
                 break;
             case 'Steal':
-                action[1] = Number(action[1]);                        ////////////////////????????????
-                let result = initialLoot.splice((-action[1]), action[1]) ////////////////???????????
-                console.log(result.join(', ')); ///////////////????
+                action[1] = Number(action[1]);
+                // if(action[1]>initialLoot.length){
+                //     action[1]=initialLoot.length
+                // }                       // if action[1]>initialLoot.length 
+                let result = initialLoot.splice((-action[1]), action[1]) //=>action[1]=initialLoot.length
+                console.log(result.join(', '));
                 break;
         }
         command = input.shift();
     }
-    let sum = 0;
-    for (const item of initialLoot) {
-        sum += item.length;
-    }
-    if (initialLoot.length > 0) }. // redice a,b => a+b.length,0 /initialloot.length
-        console.log(`Average treasure gain: ${(sum / initialLoot.length).toFixed(2)} pirate credits.`);
+
+    let test = initialLoot.reduce((a, b) => a + b.length, 0) / initialLoot.length;
+    // let sum = 0;
+    // for (const item of initialLoot) {
+    //     sum += item.length;
+    // }
+    if (initialLoot.length > 0) { 
+        console.log(`Average treasure gain: ${(test).toFixed(2)} pirate credits.`);
     } else {
         console.log('Failed treasure hunt.');
     }
