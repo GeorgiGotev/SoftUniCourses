@@ -11,6 +11,7 @@ function TheLift(arr) {
       console.log(`There isn't enough space! ${queue} people in a queue!
 ${cabins.join(' ')}`);
     } else if (queue === 0 && cabins[cabins.length - 1] === 4) {    // няма проверка дали освен последната някоя друга кабинка не е празна
+      // Но минава в джъдж
       console.log(`${cabins.join(' ')}`);
     } else {
       console.log(`The lift has empty spots!
