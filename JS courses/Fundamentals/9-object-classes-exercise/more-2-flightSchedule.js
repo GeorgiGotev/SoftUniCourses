@@ -36,10 +36,10 @@ function flightSchedule(input) {
 
 
 
-    for (const place in objectFlights) {
+    for (const destination in objectFlights) {
 
-        if (objectFlights[place].Status == flightStatus) {
-            console.log(objectFlights[place]);
+        if (objectFlights[destination].Status == flightStatus) {
+            console.log(objectFlights[destination]);
         }
 
     }
