@@ -1,21 +1,51 @@
 function flightSchedule(input) {
-    let flights = input[0];
+    let flights = input.shift();
+    let changedFlights = input.shift();
+    let flightStatus = input.shift();
+
     let objectFlights = {};
+
     for (const flight of flights) {
-        let [name, place] = flight.split(' ');
-        objectFlights[name] = place;
+
+        let line = flight.split(' ')
+        let number = line.shift();
+        let destinationName = [...line];
+        let destination = '';
+        if (destinationName[1] === undefined) {
+            destination = destinationName[0];
+        } else {
+            destination = `${destinationName[0]} ${destinationName[1]}`;
+        }
+
+        objectFlights[number] = {
+            Destination: destination,
+            Status: 'Ready to fly',
+        };
     }
-    let changedFlights = input[1];
+
+
     for (const change of changedFlights) {
-        let [name, status] = change.split(' ');
-        if (objectFlights.hasOwnProperty(name)) {
-            objectFlights[status] = status;
+
+        let [number, currStatus] = change.split(' ');
+
+        if (objectFlights.hasOwnProperty(number)) {
+            objectFlights[number].Status = currStatus;
+
         }
     }
 
-    for (const flights in objectFlights) {
-        console.log(objectFlights[flights]);
+
+
+    for (const place in objectFlights) {
+
+        if (objectFlights[place].Status == flightStatus) {
+            console.log(objectFlights[place]);
+        }
+
     }
+
+
+
 }
 flightSchedule([['WN269 Delaware',
     'FL2269 Oregon',
