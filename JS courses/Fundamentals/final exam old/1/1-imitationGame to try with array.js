@@ -1,5 +1,5 @@
 function imitationGame(input) {
-        // to do same logic with array
+    // to do same logic with array
     let encryptMessage = input.shift();
     let line = input.shift();
 
@@ -8,26 +8,24 @@ function imitationGame(input) {
 
         switch (command) {
             case 'Move':
+                
                 first = Number(first);
                 let forMove = encryptMessage.substring(0, first);
                 let newOne = encryptMessage.replace(forMove, '')
 
                 encryptMessage = newOne + forMove;
-                
+
                 break;
-            case 'Insert':     
+            case 'Insert':
+
                 first = Number(first)
-               
-                let newOnes = encryptMessage.slice(0, first) + second + encryptMessage.slice(first,)
-        
-                encryptMessage = newOnes;
-            
+                encryptMessage = encryptMessage.slice(0, first) + second + encryptMessage.slice(first,)
                 break;
             case 'ChangeAll':
 
-                while(encryptMessage.includes(first)){
-                result = encryptMessage.replace(first, second);
-                encryptMessage = result;
+                while (encryptMessage.includes(first)) {
+
+                    encryptMessage = encryptMessage.replace(first, second);
                 }
                 break;
         }
