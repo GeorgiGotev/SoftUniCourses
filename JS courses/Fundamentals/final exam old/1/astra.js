@@ -1,6 +1,6 @@
 function astra(input) {
 
-    let pattern = /[#\||](?<item>[a-zA-Z\s]+)[#\|](?<expiration>[0-9]+\/[0-9]+[0-9]+\/[0-9]+)[#\||](?<calories>\d{1,4})[#\||]/gm
+    let pattern = /([|#])(?<item>[A-Za-z\s]+)\1(?<expiration>\d{2}\/\d{2}\/\d{2})\1(?<calories>\d{1,5})\1/g;
     let result = [];
     let iterator = input[0].matchAll(pattern);
     let totalCalories = 0;
