@@ -1,10 +1,10 @@
 function astra(input) {
 
-    let pattern = /([|#])(?<item>[A-Za-z\s]+)\1(?<expiration>\d{2}\/\d{2}\/\d{2})\1(?<calories>\d{1,5})\1/g;
+    let pattern = /([#|])(?<item>[a-zA-Z\s]+)\1(?<expiration>[0-9]{2}\/[0-9]{2}\/[0-9]{2})\1(?<calories>\d{1,5})\1/g;
     let result = [];
-    let iterator = input[0].matchAll(pattern);
+    let iterator = input[0].match(pattern);
     let totalCalories = 0;
-
+    console.log(iterator);
     for (const line of iterator) {
         totalCalories += Number(line.groups.calories);
         result.push({ item: line.groups.item, day: line.groups.expiration, cal: line.groups.calories })
