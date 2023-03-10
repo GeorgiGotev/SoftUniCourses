@@ -8,7 +8,7 @@ function hashTag(input) {
             let wordCopy = '';
             for (let i = 0; i < result.length; i++) {
                 const char = result[i].toLowerCase();
-                if (char.charCodeAt() < 97 || char.charCodeAt() > 122) {
+                if (char.charCodeAt(0) < 97 || char.charCodeAt(0) > 122) {
                     flag = false;
                     break;
                 }

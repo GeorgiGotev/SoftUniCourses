@@ -1,7 +1,7 @@
 function revealWords(wordsToReplace, sentence) {
 
     let words = wordsToReplace.split(', ')
-    let sentenceOfStrings = sentence;
+    let sentenceOfStrings = sentence; //сочи към една референция??? и правим копие, тъй като е стринг..
     words.forEach(element => {
         sentenceOfStrings = sentenceOfStrings.replace('*'.repeat(element.length), element);
     });
