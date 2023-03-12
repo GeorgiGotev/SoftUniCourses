@@ -57,8 +57,6 @@ function plantDiscovery(data) {
         } else {
             store[key].plantRating = 0;
         }
-
-        
         
         console.log(`- ${key}; Rarity: ${store[key].plantRarity}; Rating: ${avg.toFixed(2)}`);
 
