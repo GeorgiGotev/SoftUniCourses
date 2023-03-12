@@ -10,7 +10,7 @@ function plantDiscovery(data) {
         store[plantName] = { plantRarity, plantRating: [] };
         plant = data.shift();
     }
-    
+
     while (plant !== 'Exhibition') {
         let [command, plantInfo] = plant.split(': ');
         let [plantName, stats] = plantInfo.split(' - ');
@@ -38,7 +38,9 @@ function plantDiscovery(data) {
                     console.log('error');
                 }
                 break;
-            default: console.log('error'); break;
+            default:
+                    console.log('error');
+                break;
         }
 
         plant = data.shift();
@@ -57,7 +59,7 @@ function plantDiscovery(data) {
         } else {
             store[key].plantRating = 0;
         }
-        
+
         console.log(`- ${key}; Rarity: ${store[key].plantRarity}; Rating: ${avg.toFixed(2)}`);
 
     }
