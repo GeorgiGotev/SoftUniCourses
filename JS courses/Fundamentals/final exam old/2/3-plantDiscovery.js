@@ -59,10 +59,11 @@ function plantDiscovery(data) {
         }
 
         
+        
         console.log(`- ${key}; Rarity: ${store[key].plantRarity}; Rating: ${avg.toFixed(2)}`);
 
     }
-    
+
 }
 plantDiscovery((["3",
     "Arnoldii<->4",
