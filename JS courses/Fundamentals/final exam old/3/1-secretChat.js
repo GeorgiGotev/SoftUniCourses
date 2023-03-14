@@ -18,10 +18,8 @@ function secretChat(input){
                 let startIndexOfMessage=inputMessage.indexOf(cm1);
                 let wordForReverse=inputMessage.substring(startIndexOfMessage,cm1.length+startIndexOfMessage);
                 let result=wordForReverse.split('').reverse().join('');
-                let first=inputMessage.substring(0,startIndexOfMessage)
-                let last =inputMessage.substring(cm1.length+startIndexOfMessage);
-                
-                inputMessage=first + result + last;
+                 inputMessage=inputMessage.replace(wordForReverse,'');
+                inputMessage=inputMessage + result;
                 console.log(inputMessage);
             }else{
                 console.log('error');
@@ -41,7 +39,7 @@ console.log(`You have a new text message: ${inputMessage}`);
 
 }
 secretChat([
-    'Hiware?uiyGeorge',
+    'Hiware?uiy',
     'ChangeAll:|:i:|:o',
     'Reverse:|:?uoy',
     'Reverse:|:jd',
