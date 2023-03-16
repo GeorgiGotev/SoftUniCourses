@@ -15,10 +15,8 @@ function secretChat(input){
                  break;
             case 'Reverse':
             if(inputMessage.includes(cm1)){
-                let startIndexOfMessage=inputMessage.indexOf(cm1);
-                let wordForReverse=inputMessage.substring(startIndexOfMessage,cm1.length+startIndexOfMessage);
-                let result=wordForReverse.split('').reverse().join('');
-                 inputMessage=inputMessage.replace(wordForReverse,'');
+                let result=cm1.split('').reverse().join('');
+                 inputMessage=inputMessage.replace(cm1,'');
                 inputMessage=inputMessage + result;
                 console.log(inputMessage);
             }else{

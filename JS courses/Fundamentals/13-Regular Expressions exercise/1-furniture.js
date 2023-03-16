@@ -1,0 +1,4 @@
+function furniture(){
+
+}
+furniture();
