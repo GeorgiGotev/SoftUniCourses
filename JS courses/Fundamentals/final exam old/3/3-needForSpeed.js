@@ -20,10 +20,11 @@ function needForSpeed(data) {
                 } else {
                     obj[car].km += cm1;
                     obj[car].fuel -= cm2;
-                    console.log(`${car} driven for ${cm1} kilometers. ${cm2} liters of fuel consumed."`);
+                    console.log(`${car} driven for ${cm1} kilometers. ${cm2} liters of fuel consumed.`);
                 }
                 if (obj[car].km >= 100000) {
-                    console.log(`Time to sell the ${obj[car]}!`);
+                    delete obj[car];
+                    console.log(`Time to sell the ${car}!`);
                 }
                 break;
             case 'Refuel':
@@ -38,24 +39,33 @@ function needForSpeed(data) {
                 console.log(`${car} refueled with ${ref} liters`);
                 break;
             case 'Revert':
-
+                if(obj[car].km - cm1 < 10000){
+                    obj[car].km=10000;
+                }else{
+                    obj[car].km= obj[car].km-cm1;
+                    console.log(`${car} mileage decreased by ${cm1} kilometers`);
+                }
                 break;
         }
         line = data.shift();
     }
+    for (const key in obj) {
+        console.log(`${key} -> Mileage: ${obj[key].km} kms, Fuel in the tank: ${obj[key].fuel} lt.`);
+    }
 
 }
 needForSpeed([
-    '3',
-    'Audi A6|38000|62',
-    'Mercedes CLS|11000|35',
-    'Volkswagen Passat CC|45678|5',
-    'Drive : Audi A6 : 543 : 47',
-    'Drive : Mercedes CLS : 94 : 11',
-    'Drive : Volkswagen Passat CC : 69 : 8',
-    'Refuel : Audi A6 : 50',
-    'Revert : Mercedes CLS : 500',
-    'Revert : Audi A6 : 30000',
+    '4',
+    'Lamborghini Veneno|11111|74',
+    'Bugatti Veyron|12345|67',
+    'Koenigsegg CCXR|67890|12',
+    'Aston Martin Valkryie|99900|50',
+    'Drive : Koenigsegg CCXR : 382 : 82',
+    'Drive : Aston Martin Valkryie : 99 : 23',
+    'Drive : Aston Martin Valkryie : 2 : 1',
+    'Refuel : Lamborghini Veneno : 40',
+    'Revert : Bugatti Veyron : 2000',
     'Stop'
-]
+  ]
+  
 );
