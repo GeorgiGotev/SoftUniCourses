@@ -1,10 +1,5 @@
 function solve(a) {
-    let typeOf = typeof a;
-    if (typeOf === 'number') {
-        let area = Math.PI * (a ** 2);
-        console.log(area.toFixed(2));
-    } else {
-        console.log(`We can not calculate the circle area, because we receive a ${typeOf}.`);
-    }
+    let type= typeof a;
+    type === 'number' ? console.log((Math.PI * (a ** 2)).toFixed(2)) : console.log(`We can not calculate the circle area, because we receive a ${type}.`);
 }
-solve('g');
+solve(5);
