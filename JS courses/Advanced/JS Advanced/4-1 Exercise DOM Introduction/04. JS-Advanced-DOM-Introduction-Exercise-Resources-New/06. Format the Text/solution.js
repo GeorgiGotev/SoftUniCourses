@@ -19,6 +19,7 @@ function solve() {
   while(inputArr.length>0){  // better!!!!!!!
     let text = inputArr.splice(0,3); // .map(x=>x + '.'); // or down one;
     let p=document.createElement('p');
+    
     p.textContent=text.join('. ') + '.'.trim();    // or .join('. ') + '.';
     output.appendChild(p);
   }
