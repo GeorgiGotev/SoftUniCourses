@@ -1,22 +1,20 @@
-
-
 function solve() {
 
     let resultInput = document.getElementById('result');
     let inputElement = document.getElementById('input');
 
     let toMenu = document.getElementById('selectMenuTo');
-    let firstOption = document.querySelector('#selectMenuTo option');
-    let binary = document.createElement('option');
-    let hex = document.createElement('option');
+    let firstOption = document.querySelector('#selectMenuTo>option'); // i have a selected first option for drop-down menu
+    let binary = document.createElement('option');// just create second drop-down menu option
+    
 
-    hex.textContent = 'Hexadecimal';
-    hex.value = 'hexadecimal';
-    firstOption.appendChild(hex);
+    firstOption.textContent='Hexadecimal'; // setting text
+    firstOption.value='hexadecimal'; // setting value
+    
 
-    binary.textContent = 'Binary';
-    binary.value = 'binary';
-    toMenu.appendChild(binary);
+    binary.textContent = 'Binary'; // setting text
+    binary.value = 'binary'; // setting value
+    toMenu.appendChild(binary); // append it to the drop-down menu for second option
 
     document.querySelector('button').addEventListener('click', convert)
     function convert() {
