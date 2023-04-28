@@ -13,7 +13,7 @@ function solve() {
          let [name, workersData] = line.split(' - ');
          let workersInfo = workersData && workersData.split(', ');
 
-         if (!result.find(r => r.name === name)) {
+         if (!result.find(r => r.name === name)) { // if restaurant is not in result arr, create it...
             result.push({
                name,
                sumSalary: 0,
@@ -22,32 +22,42 @@ function solve() {
                workers: [],
             });
          }
-         let currRest = result.find(e => e.name === name);
-         for (const worker of workersInfo) {
-            let [workerName, workerSalary] = worker.split(' ');
-            workerSalary = Number(workerSalary);
+         let currRest = result.find(e => e.name === name); // finding curr rest 
 
-            currRest.sumSalary += workerSalary;
+         workersInfo.forEach(worker => {
+            updateRestaurant(currRest, worker); // make a func to update restaurant info from workersData;
+         });
 
-            if (currRest.bestSalary < workerSalary) {
-               currRest.bestSalary = workerSalary;
-            }
-            currRest.workers.push({
-               workerName,
-               workerSalary,
-            })
-         }
          currRest.avgSalary = (currRest.sumSalary / currRest.workers.length).toFixed(2);
       }
 
-      let bestRestName = result.sort((a, b) => b.avgSalary - a.avgSalary)[0];
-      let workersSorted = bestRestName.workers.sort((a, b) => b.workerSalary - a.workerSalary);
-      let buf = '';
+      let bestRestName = result.sort((a, b) => b.avgSalary - a.avgSalary)[0]; //sort restaurants, best is with high avgSalary
+      bestRestName.workers.sort((a, b) => b.workerSalary - a.workerSalary); //sort workers dsc..
+
       bestRest.textContent = `Name: ${bestRestName.name} Average Salary: ${bestRestName.avgSalary} Best Salary: ${bestRestName.workers[0].workerSalary.toFixed(2)}`;
-      for (const worker of bestRestName.workers) {
-         buf += `Name: ${worker.workerName} With Salary: ${worker.workerSalary} `;
+      // best rest is first result, and we have to show it with text content
+      let buf = '';
+      for (const worker of bestRestName.workers) { // loop for every worker, because it is arr of workers with nested objs..
+         buf += `Name: ${worker.workerName} With Salary: ${worker.workerSalary} `; //concatenate this string in buff variable.
       }
-      bestRestWorkers.textContent = buf;
+      bestRestWorkers.textContent = buf; //second result for best workers salary
+
+      function updateRestaurant(curr, workersData) {
+         let [workerName, workerSalary] = workersData.split(' ');
+
+         workerSalary = Number(workerSalary);
+
+         curr.workers.push({   //create array with workers for current restaurant, it saves me in case of income same name of restaurant.
+            workerName,
+            workerSalary,
+         });
+
+         curr.sumSalary += workerSalary;
+
+         if (curr.bestSalary < workerSalary) {
+            curr.bestSalary = workerSalary;
+         }
+      }
    }
 }
 
