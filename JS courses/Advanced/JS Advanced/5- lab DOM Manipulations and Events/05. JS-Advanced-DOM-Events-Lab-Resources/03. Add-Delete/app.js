@@ -1,3 +1,18 @@
+// let inputElement = document.getElementById('newItemText');
+// let buttonElement = document.querySelector('input[type="button"]');
+
+// buttonElement.disabled = true;
+
+// inputElement.addEventListener('keyup', s);
+
+// function s() {
+//     if (inputElement.value === '') {
+//         buttonElement.disabled = true;
+//     } else {
+//         buttonElement.disabled = false;
+//     }
+// }
+
 function addItem() {
     let inputElement = document.getElementById('newItemText');
     let ulElement = document.getElementById('items');
@@ -6,12 +21,18 @@ function addItem() {
     liElement.textContent = inputElement.value;
     ulElement.appendChild(liElement);
 
-    let itemForDelete=document.createElement('a');
-    itemForDelete.href='#';
-    itemForDelete.textContent='[Delete]';
+    let itemForDelete = document.createElement('a');
+    itemForDelete.href = '#';
+    itemForDelete.textContent = '[Delete]';
     liElement.appendChild(itemForDelete);
 
-    itemForDelete.addEventListener('click', (e)=>{
+    itemForDelete.addEventListener('click', (e) => {
         e.currentTarget.parentElement.remove();
     });
+
+    inputElement.value = '';
+
+    // s();
 }
+
+
