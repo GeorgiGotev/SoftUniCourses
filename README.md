@@ -1,4 +1,5 @@
-# DesktopGitHub
+# SoftUni Courses
 
-SoftUni Courses
-Creating with Desktop gitHub
+SoftUni Courses with JavaScript
+
+Storing all problems solved during Software Engineer program by Softuni.
