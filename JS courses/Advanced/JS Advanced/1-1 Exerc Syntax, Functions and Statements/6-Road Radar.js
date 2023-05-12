@@ -1,12 +1,21 @@
 function solve(speed, type) {
     let limit = 0;
     let status;
-    switch (type) {
-        case 'motorway': limit = 130; break;
-        case 'interstate': limit = 90; break;
-        case 'city': limit = 50; break;
-        case 'residential': limit = 20; break;
+    // switch (type) {
+    //     case 'motorway': limit = 130; break;
+    //     case 'interstate': limit = 90; break;
+    //     case 'city': limit = 50; break;
+    //     case 'residential': limit = 20; break;
+    // }
+
+    let typeDictionary={
+        'motorway': 130,
+        'interstate': 90,
+        'city':  50,
+        'residential': 20
     }
+    limit=typeDictionary[type];
+
     if ((speed - limit) <= 20) {
         status = 'speeding';
     } else if ((speed - limit) <= 40) {
