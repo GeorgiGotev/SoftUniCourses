@@ -2,8 +2,8 @@ function solve(arr) {
     let result = [];
     let sorted = arr.sort((a, b) => a - b);
     while (sorted.length) {
-        result.push(sorted.shift());
-        result.push(sorted.pop());
+        result.push(sorted.shift(), sorted.pop());
+        // result.push(sorted.pop());
     }
     return (result);
 }

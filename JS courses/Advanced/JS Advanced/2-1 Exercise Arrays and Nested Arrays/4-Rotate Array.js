@@ -1,4 +1,6 @@
 function solve(arr, rotations) {
+
+    // better to make let newArr=[]; , then to modify 
     for(let i=0;i<rotations;i++){
         let lastItem=arr.pop();
         arr.unshift(lastItem)
