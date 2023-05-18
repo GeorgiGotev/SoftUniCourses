@@ -2,18 +2,14 @@ function solve(matrix) {
 
     let targetSum = matrix[0].reduce((a, b) => a + b, 0);
 
-    for (let i = 1; i < matrix.length; i++) {
-        let rowSum = matrix[i].reduce((a, b) => a + b, 0);
-        if (rowSum !== targetSum) {
-            return false;
-        }
-    };
     for (let i = 0; i < matrix[0].length; i++) {
-        let colSum = 0;
+        let colSum = 0; 
+        let rowSum = matrix[i].reduce((a, b) => a + b, 0);
+
         for (let j = 0; j < matrix.length; j++) {
             colSum += matrix[j][i];
         }
-        if (colSum !== targetSum) {
+        if (colSum !== targetSum || rowSum !== targetSum) {
             return false;
         }
     }

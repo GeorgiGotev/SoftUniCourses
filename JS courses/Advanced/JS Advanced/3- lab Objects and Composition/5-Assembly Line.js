@@ -2,9 +2,9 @@ function createAssemblyLine() {
 
     return {
         hasClima: function (car) {
-            car.temp = 21,
+                car.temp = 21,
                 car.tempSettings = 21,
-                car.adjustTemp = () => {
+                car.adjustTemp = function () {
                     car.temp < car.tempSettings ? car.temp++ : car.temp--;
                 };
         },

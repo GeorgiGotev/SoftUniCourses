@@ -1,39 +1,51 @@
-// // function fromJSONToHTMLTable(input) {
-//     // let students = JSON.parse(input);
-//     // let htmlText = ['<table>'];
-//     // let objNames = students[0];
+// function fromJSONToHTMLTable(input) {
+//     let students = JSON.parse(input);
+//     let htmlText = ['<table>'];
+//     let objNames = students[0];
   
-//     // htmlText.push(makeKeyRow(objNames));
-//     // students.forEach(obj => htmlText.push(makeValueRow(obj)));
-//     // htmlText.push('</table>');
+//     htmlText.push(makeKeyRow(objNames));
+//     students.forEach(obj => htmlText.push(makeValueRow(obj)));
+//     htmlText.push('</table>');
   
-//     // function makeKeyRow(arr) {
-//     //   let keys = [];
-//     //   Object.keys(arr).forEach(key => {
-//     //     keys.push(`<th>${escapeHTML(key)}</th>`);
-//     //   });
-//     //   return ("<tr>" + keys.join('') + "</tr>");
-//     // }
+//     function makeKeyRow(arr) {
+//       let keys = [];
+//       Object.keys(arr).forEach(key => {
+//         keys.push(`<th>${escapeHTML(key)}</th>`);
+//       });
+//       return ("<tr>" + keys.join('') + "</tr>");
+//     }
   
-//     // function makeValueRow(obj) {
-//     //   let rows = [];
-//     //   Object.values(obj).forEach(value => {
-//     //     rows.push(`<td>${escapeHTML(value)}</td>`);
-//     //   });
-//     //   return ("<tr>" + rows.join('') + "</tr>");
-//     // }
+//     function makeValueRow(obj) {
+//       let rows = [];
+//       Object.values(obj).forEach(value => {
+//         rows.push(`<td>${escapeHTML(value)}</td>`);
+//       });
+//       return ("<tr>" + rows.join('') + "</tr>");
+//     }
   
-//     // function escapeHTML(value) {
-//     //   return value
-//     //     .toString()
-//     //     .replace(/&/g, '&amp;')
-//     //     .replace(/</g, '&lt;')
-//     //     .replace(/>/g, '&gt;')
-//     //     .replace(/"/g, '&quot;')
-//     //     .replace(/'/g, '&#39;');
-//     // }
+//     function escapeHTML(value) {
+//       return value
+//         .toString()
+//         .replace(/&/g, '&amp;')
+//         .replace(/</g, '&lt;')
+//         .replace(/>/g, '&gt;')
+//         .replace(/"/g, '&quot;')
+//         .replace(/'/g, '&#39;');
+//     }
   
-//     // return htmlText.join('\r\n');
+//     return (htmlText.join('\r\n'));
+
+// }
+// fromJSONToHTMLTable('[{"Name":"Stamat","Price":5.5,"Grade":2  },{"Name":"Rumen","Price":6, "Grade":4}]');
+
+// window.onload = function () {
+//     let container = document.getElementById('wrapper');
+//     container.text = fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5,"Grade":2  },{"Name":"Rumen","Price":6, "Grade":4}]']);
+  
+//   };
+
+
+
 
 //     function fromJSONToHTMLTable(input){
 //       let table = document.createElement('table');
@@ -63,61 +75,86 @@
 //   };
 
 
-//   // must do it with DOM...
+//   // must do it with DOM...to test, start it with live server from index.html.
 
-function fromJSONToHTMLTable(input) {
-  let wrapper = document.getElementById('wrapper');
-  let table = document.createElement('table');
-  let trTH = document.createElement('tr');
+// function fromJSONToHTMLTable(input) {
+//   let wrapper = document.getElementById('wrapper');
+//   let table = document.createElement('table');
+//   let trTH = document.createElement('tr');
 
-  table.appendChild(trTH);
-  wrapper.appendChild(table);
+//   table.appendChild(trTH);
+//   wrapper.appendChild(table);
 
-  let text = JSON.parse(input);
-  let keysForTH = Object.keys(text[0]);
+//   let text = JSON.parse(input);
+//   let keysForTH = Object.keys(text[0]);
 
-  for (const keyForHead of keysForTH) {
-      let thForPerson = document.createElement('th');
-      thForPerson.textContent = keyForHead;
-      trTH.appendChild(thForPerson)
+//   for (const keyForHead of keysForTH) {
+//       let thForPerson = document.createElement('th');
+//       thForPerson.textContent = keyForHead;
+//       trTH.appendChild(thForPerson)
 
-  }
+//   }
 
-  Object.entries(text).forEach(person => {
-      let trFromPersons = document.createElement('tr');
-      if (person[1].Name) {
-          let tdName = document.createElement('td');
-          tdName.textContent = person[1].Name;
-          trFromPersons.appendChild(tdName);
-      }
+//   Object.entries(text).forEach(person => {
+//       let trFromPersons = document.createElement('tr');
+//       if (person[1].Name) {
+//           let tdName = document.createElement('td');
+//           tdName.textContent = person[1].Name;
+//           trFromPersons.appendChild(tdName);
+//       }
 
-      if (person[1].Price) {
-          let tdPrice = document.createElement('td');
-          tdPrice.textContent = person[1].Price;
-          trFromPersons.appendChild(tdPrice);
-      }
+//       if (person[1].Price) {
+//           let tdPrice = document.createElement('td');
+//           tdPrice.textContent = person[1].Price;
+//           trFromPersons.appendChild(tdPrice);
+//       }
 
-      if (person[1].Grade) {
-          let tdGrade = document.createElement('td');
-          tdGrade.textContent = person[1].Grade;
-          trFromPersons.appendChild(tdGrade);
-      }
+//       if (person[1].Grade) {
+//           let tdGrade = document.createElement('td');
+//           tdGrade.textContent = person[1].Grade;
+//           trFromPersons.appendChild(tdGrade);
+//       }
 
-      table.appendChild(trFromPersons);
+//       table.appendChild(trFromPersons);
       
-  });
-  console.log(wrapper.innerHTML);
+//   });
+//   console.log(wrapper.innerHTML);
+// }
+
+function fromJSONToHTMLTable([json]) {
+    let inputArr = JSON.parse(json);
+    console.log(inputArr);
+    let html = '<table>\n'
+    html += '  <tr>'
+    for (let key of Object.keys(inputArr[0])) {
+        html += `<th>${htmlEscape(key)}</th>`
+    }
+    html += '</tr>\n'
+
+    for (let object of inputArr) {
+        html += '  <tr>'
+        for (let key of Object.keys(object)) {
+            html += `<td>${htmlEscape(object[key] + '')}</td>`
+        }
+        html += '</tr>\n'
+    }
+    html += '</table>'
+
+    return(html)
+
+    function htmlEscape(text) {
+        return text.toString().replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+    }
 }
 
+fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5},{"Name":"Rumen","Price":6}]'])
 
 
 
 
 
 
-
-window.onload = function () {
-  let container = document.getElementById('wrapper');
-  container.text = fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5,"Grade":2  },{"Name":"Rumen","Price":6, "Grade":4}]']);
-
-};

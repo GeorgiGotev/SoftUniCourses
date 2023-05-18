@@ -1,18 +1,36 @@
 function factory(library, orders) {
-
-    let products = [];
-
-    for (const order of orders) {
-        let product=order.template;
+    let result=[]
+    orders.forEach(order => {
+        let product=Object.assign({}, order.template);
         for (const part of order.parts) {
             product[part]=library[part];
         }
-        products.push(product);
-    }
-
-    return products;
-
+        result.push(product);
+    });
+    return result;
 }
+
+// function factory(library, orders) {
+
+//     let products = [];
+
+//     for (const order of orders) {
+//         let product=order.template;
+//         for (const part of order.parts) {
+//             product[part]=library[part];
+//         }
+//         products.push(product);
+//     }
+
+//     return products;
+
+// }
+
+
+
+
+
+
 const library = {
     print: function () {
         console.log(`${this.name} is printing a page`);
@@ -43,5 +61,3 @@ const orders = [
     }
 ];
 const products = factory(library, orders);
-console.log(products);
-;
