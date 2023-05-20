@@ -36,47 +36,90 @@
 //     return ({ mage: mage, fighter: fighter })
 // }
 
+//----------------------------------------
 
-function solve() {
-    class Mage {
-        constructor(name) {
-                this.name = name,
-                this.health = 100,
-                this.mana = 100
-        }
-        cast(spellName) {
-            this.mana--;
-            console.log(`${this.name} cast ${spellName}`);
-        }
-    }
+// function solve() {
+//     class Mage {
+//         constructor(name) {
+//                 this.name = name,
+//                 this.health = 100,
+//                 this.mana = 100
+//         }
+//         cast(spellName) {
+//             this.mana--;
+//             console.log(`${this.name} cast ${spellName}`);
+//         }
+//     }
 
-    class Fighter {
-        constructor(name) {
-                this.name = name,
-                this.health = 100,
-                this.stamina = 100
-        }
-        fight() {
-            this.stamina--;
-            console.log(`${this.name} slashes at the foe!`);
-        }
-    }
+//     class Fighter {
+//         constructor(name) {
+//                 this.name = name,
+//                 this.health = 100,
+//                 this.stamina = 100
+//         }
+//         fight() {
+//             this.stamina--;
+//             console.log(`${this.name} slashes at the foe!`);
+//         }
+//     }
 
-    let obj = {      // make obj with two obj inside... call the function mage and fighter to create new obj from the builded class
-        mage(name) {        
-            let mageObj = new Mage(name);
-            return mageObj;
+//     let obj = {      // make obj with two obj inside... call the function mage and fighter to create new obj from the builded class
+//         mage(name) {        
+//             let mageObj = new Mage(name);
+//             return mageObj;
+//         },
+//         fighter(name) {
+//             let fighterObj = new Fighter(name);
+//             return fighterObj;
+//         }
+//     }
+
+//     return obj;
+// }
+
+//----------------------------------------
+
+function solve(){
+    const mageHero={
+        mageProto: {
+            cast: function (spell){
+                console.log(`${this.name} cast ${spell}`);
+                this.mana-=1;
+            },
         },
-        fighter(name) {
-            let fighterObj = new Fighter(name);
+        mage: function(name){
+            const mageObj={
+                ...this.mageProto,
+                name,
+                health:100,
+                mana:100,
+            }
+            return mageObj;
+        }
+    };
+    const fighterHero={
+        fighterProto: {
+            fight: function (){
+                console.log(`${this.name} slashes at the foe!`);
+                this.stamina--;
+            },
+        },
+        fighter: function(name){
+            const fighterObj={
+                ...this.fighterProto,
+                name,
+                stamina:100,
+                health:100
+            }
             return fighterObj;
         }
-    }
+    };
 
-    return obj;
+
+    const allHeroes={...mageHero,...fighterHero};
+
+    return allHeroes;
 }
-
-
 
 let create = solve();
 const scorcher = create.mage("Scorcher");
