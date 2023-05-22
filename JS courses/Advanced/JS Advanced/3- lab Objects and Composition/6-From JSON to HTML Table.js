@@ -205,7 +205,46 @@
 //     }
 //     console.log(result);
 //   }
-fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5},{"Name":"Rumen","Price":6}]'])
+// fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5},{"Name":"Rumen","Price":6}]'])
+
+
+
+// function fromJSONToHTMLTable(input) {
+//     let students = JSON.parse(input);
+//     let htmlText = ['<table>'];
+//     let objNames = students[0];
+
+//     htmlText.push(makeKeyRow(objNames));
+//     students.forEach(obj => htmlText.push(makeValueRow(obj)));
+//     htmlText.push('</table>');
+
+//     function makeKeyRow(arr) {
+//         let keys = [];
+//         Object.keys(arr).forEach(key => {
+//             keys.push(`<th>${escapeHTML(key)}</th>`);
+//         });
+//         return (`   <tr>${keys.join('')}</tr>`);
+//     }
+
+//     function makeValueRow(obj) {
+//         let rows = [];
+//         Object.values(obj).forEach(value => {
+//             rows.push(`<td>${escapeHTML(value)}</td>`);
+//         });
+//         return (`   <tr>${rows.join('')}</tr>`);
+//     }
+
+//     function escapeHTML(value) {
+//         return value
+//             .toString()
+//             .replace(/&/g, '&amp;')
+//             .replace(/</g, '&lt;')
+//             .replace(/>/g, '&gt;')
+//             .replace(/"/g, '&quot;');
+//     }
+//     return(htmlText.join('\r\n'));
+// }
+
 
 
 
@@ -223,7 +262,7 @@ function fromJSONToHTMLTable(input) {
         Object.keys(arr).forEach(key => {
             keys.push(`<th>${escapeHTML(key)}</th>`);
         });
-        return (`   <tr>${keys.join('')}</tr>`);
+        return ("<tr>" + keys.join('') + "</tr>");
     }
 
     function makeValueRow(obj) {
@@ -231,24 +270,27 @@ function fromJSONToHTMLTable(input) {
         Object.values(obj).forEach(value => {
             rows.push(`<td>${escapeHTML(value)}</td>`);
         });
-        return (`   <tr>${rows.join('')}</tr>`);
+        return ("<tr>" + rows.join('') + "</tr>");
     }
 
-    function escapeHTML(value) {
-        return value
-            .toString()
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;');
+    function escapeHTML(str) {
+        
+        return str.toString().replace(/[<> $"]/g, (s) => {
+            let entityMap = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                "\"": "&quot;",
+                " ": "&nbsp;",
+            };
+            if (entityMap[str]) {
+                return entityMap[str];
+            }
+        });
     }
-    return(htmlText.join('\r\n'));
+
+    console.log(htmlText.join('\n'));
 }
 
-
-
-
-
-
-
+fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5},{"Name":"Rumen","Price":6}]'])
 
