@@ -3,6 +3,7 @@ function search() {
    let inputElement = document.getElementById('searchText');
    let resultElement = document.getElementById('result');
    let counter = 0;
+   
    arrListElements.forEach(element => {
       if (element.textContent.toLowerCase().includes(inputElement.value.toLowerCase())) {
          element.style.textDecoration = 'underline';
