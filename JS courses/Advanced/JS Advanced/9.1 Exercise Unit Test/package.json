@@ -1,10 +1,10 @@
 {
-  "name": "untitled-folder",
+  "name": "9.1-exercise-unit-test",
   "version": "1.0.0",
   "description": "",
   "main": "",
   "scripts": {
-    "test": ""
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
