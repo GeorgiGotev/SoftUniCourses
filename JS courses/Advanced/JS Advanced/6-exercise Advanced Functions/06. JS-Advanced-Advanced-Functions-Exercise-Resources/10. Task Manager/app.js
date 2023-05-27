@@ -41,6 +41,7 @@ function solve() {
         article.appendChild(p2);
 
         if (type === 'OpenTask') {
+            
             const divEl = document.createElement('div');
             divEl.className = 'flex';
             const btn1 = document.createElement('button');
