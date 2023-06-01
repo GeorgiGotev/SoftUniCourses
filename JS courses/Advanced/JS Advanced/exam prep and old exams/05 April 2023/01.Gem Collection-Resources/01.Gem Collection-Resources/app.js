@@ -1,108 +1,127 @@
 window.addEventListener('load', solve);
 
 function solve() {
-    // debugger
-    let inputFields = Array.from(
-        document.querySelectorAll('.inner-wrap input,select')
-    );
-    let addBtn = document.getElementById('add-btn');
-    addBtn.addEventListener('click', addGem);
-    let ul = document.getElementById('preview-list');
-    let collectionField = document.getElementById('collection');
+    let previewListSection = document.querySelector('#preview-list');
+    let addBtn = document.querySelector('#add-btn');
 
-    function addGem() {
-        inputFields.forEach((inputElement) => {
-            if (inputElement.value === '') {
-                return;
+    let name = document.querySelector('#gem-name');
+    let color = document.querySelector('#color');
+    let carats = document.querySelector('#carats');
+    let price = document.querySelector('#price');
+    let type = document.querySelector('#type');
+
+    addBtn.addEventListener('click', () => {
+        if (
+            name.value &&
+            color.value &&
+            carats.value &&
+            price.value &&
+            type.value
+        ) {
+            let liItem = document.createElement('li');
+            liItem.classList = 'gem-info';
+            let articleItem = document.createElement('article');
+            let h4Element = document.createElement('h4');
+            h4Element.textContent = name.value;
+            let colorElement = document.createElement('p');
+            colorElement.textContent = `Color: ${color.value}`;
+            let caratsElement = document.createElement('p');
+            caratsElement.textContent = `Carats: ${carats.value}`;
+            let priceElement = document.createElement('p');
+            priceElement.textContent = `Price: ${price.value} $`;
+            let typeElement = document.createElement('p');
+            typeElement.textContent = `Type: ${type.value}`;
+            articleItem.appendChild(h4Element);
+            articleItem.appendChild(colorElement);
+            articleItem.appendChild(caratsElement);
+            articleItem.appendChild(priceElement);
+            articleItem.appendChild(typeElement);
+            liItem.appendChild(articleItem);
+            let saveToCollectionBtn = document.createElement('button');
+            saveToCollectionBtn.classList = 'save-btn';
+            saveToCollectionBtn.textContent = 'Save to Collection';
+            saveToCollectionBtn.addEventListener('click', saveToCollection);
+
+            function saveToCollection(e) {
+                let newLiItem = document.createElement('li');
+                let pElement = document.createElement('p');
+                pElement.classList = 'collection-item';
+                let parent = e.currentTarget.parentNode;
+                let targetArticle = parent.querySelector('article');
+                pElement.textContent = `${
+                    targetArticle.querySelector(':nth-child(1)').textContent
+                } - Color: ${
+                    targetArticle
+                        .querySelector(':nth-child(2)')
+                        .textContent.split(': ')[1]
+                }/ Carats: ${
+                    targetArticle
+                        .querySelector(':nth-child(3)')
+                        .textContent.split(': ')[1]
+                }/ Price: ${
+                    targetArticle
+                        .querySelector(':nth-child(4)')
+                        .textContent.split(': ')[1]
+                        .split(' $')[0]
+                }$/ Type: ${
+                    targetArticle
+                        .querySelector(':nth-child(5)')
+                        .textContent.split(': ')[1]
+                }`;
+                newLiItem.appendChild(pElement);
+                document.querySelector('#collection').appendChild(newLiItem);
+                addBtn.disabled = false;
+                liItem.remove();
             }
-        });
 
-        createGem(
-            inputFields[0].value,
-            inputFields[1].value,
-            inputFields[2].value,
-            inputFields[3].value,
-            inputFields[4].value
-        );
-        inputFields.forEach((inputElement) => {
-            inputElement.value = '';
-        });
-        addBtn.disabled = true;
-    }
+            liItem.appendChild(saveToCollectionBtn);
+            let editBtn = document.createElement('button');
+            editBtn.classList = 'edit-btn';
+            editBtn.textContent = 'Edit Information';
+            editBtn.addEventListener('click', edit);
 
-    function createGem(name, color, carat, price, type) {
-        let li = document.createElement('li');
-        li.setAttribute('class', 'gem-info');
-        let article = document.createElement('article');
-        let h4 = document.createElement('h4');
-        h4.textContent = name;
-        let p1 = document.createElement('p');
-        p1.textContent = `Color: ${color}`;
-        let p2 = document.createElement('p');
-        p2.textContent = `Carats: ${carat}`;
-        let p3 = document.createElement('p');
-        p3.textContent = `Price: ${price} $`;
-        let p4 = document.createElement('p');
-        p4.textContent = `Type: ${type}`;
+            function edit(e) {
+                addBtn.disabled = false;
+                e.currentTarget.parentNode.remove();
+                let parent = e.currentTarget.parentNode;
+                let targetArticle = parent.querySelector('article');
+                document.querySelector('#gem-name').value =
+                    targetArticle.querySelector(':nth-child(1)').textContent;
+                document.querySelector('#color').value = targetArticle
+                    .querySelector(':nth-child(2)')
+                    .textContent.split(': ')[1];
+                document.querySelector('#carats').value = targetArticle
+                    .querySelector(':nth-child(3)')
+                    .textContent.split(': ')[1];
+                document.querySelector('#price').value = targetArticle
+                    .querySelector(':nth-child(4)')
+                    .textContent.split(': ')[1]
+                    .split(' $')[0];
+                document.querySelector('#type').value = targetArticle
+                    .querySelector(':nth-child(5)')
+                    .textContent.split(': ')[1];
+            }
 
-        article.appendChild(h4);
-        article.appendChild(p1);
-        article.appendChild(p2);
-        article.appendChild(p3);
-        article.appendChild(p4);
+            liItem.appendChild(editBtn);
+            let cancelBtn = document.createElement('button');
+            cancelBtn.classList = 'cancel-btn';
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.addEventListener('click', cancel);
 
-        let btn1 = document.createElement('button');
-        btn1.textContent = 'Save to Collection';
-        btn1.setAttribute('class', 'save-btn');
-        btn1.addEventListener('click', saveFunc);
-        let btn2 = document.createElement('button');
-        btn2.textContent = 'Edit information';
-        btn2.setAttribute('class', 'edit-btn');
-        btn2.addEventListener('click', editFunc);
-        let btn3 = document.createElement('button');
-        btn3.textContent = 'Cancel';
-        btn3.setAttribute('class', 'cancel-btn');
-        btn3.addEventListener('click', cancelFunc);
+            function cancel(e) {
+                e.currentTarget.parentNode.remove();
+                addBtn.disabled = false;
+            }
 
-        li.appendChild(article);
-        li.appendChild(btn1);
-        li.appendChild(btn2);
-        li.appendChild(btn3);
+            liItem.appendChild(cancelBtn);
+            addBtn.disabled = true;
+            previewListSection.appendChild(liItem);
 
-        ul.appendChild(li);
-    }
-    function cancelFunc() {
-        addBtn.disabled = false;
-        let elementForRemove = ul.children;
-        elementForRemove[0].remove();
-    }
-    function saveFunc() {
-        let liCollection = document.createElement('li');
-        let pCollection = document.createElement('p');
-        let forOutput = ul.querySelector('article').children;
-
-        pCollection.setAttribute('class', 'collection-item');
-        pCollection.textContent = `${forOutput[0].textContent} - ${forOutput[1].textContent}/ ${forOutput[2].textContent}/ ${forOutput[3].textContent.slice(0,-2)}$/ ${forOutput[4].textContent}`;
-
-        liCollection.appendChild(pCollection);
-        collectionField.appendChild(liCollection);
-    }
-    function editFunc() {
-       let listToEdit=ul.querySelector('article').children;
-            inputFields[0].value=listToEdit[0].textContent
-            inputFields[1].value=listToEdit[1].textContent.split('Color: ')[1];
-            inputFields[2].value=listToEdit[2].textContent.split('Carats: ')[1];
-            inputFields[3].value=listToEdit[3].textContent.split('Price: ')[1].slice(0,-2);
-            inputFields[4].value=listToEdit[4].textContent.split('Type: ')[1];
-        let elementForRemove = ul.children;
-        // console.log(elementForRemove);
-        elementForRemove[0].remove();
-        addBtn.disabled = false;
-    }
+            name.value = '';
+            color.value = '';
+            carats.value = '';
+            price.value = '';
+            type.value = '';
+        }
+    });
 }
-
-
-
-
-
-   
