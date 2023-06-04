@@ -13,17 +13,9 @@ function solve() {
 
     function ticketPreview(e) {
         e.preventDefault();
-        // if (
-        //     inputFields[0].value === '' ||
-        //     inputFields[1].value === '' ||
-        //     inputFields[2].value === '' ||
-        //     inputFields[3].value === '' ||
-        //     inputFields[4].value === ''
-        // ) {
-        //     return;
-        // }
-        let check=inputFields.some(element => element.value==='');
-        if(check){
+      
+        let checkEmpty=inputFields.some(element => element.value==='');
+        if(checkEmpty){
             return
         }
             
