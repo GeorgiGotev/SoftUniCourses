@@ -1,129 +1,129 @@
 window.addEventListener('load', solve);
 
 function solve() {
-    let inputFieldsArr = Array.from(
-        document.querySelectorAll('.container-text input')
-    );
-    let nextBtn = document.getElementById('next-btn');
-    let ulListForAttach = document.querySelector('.info-list');
-    let ulConfirm=document.querySelector('.confirm-list');
-    nextBtn.addEventListener('click', goToReservationInfo);
-    function goToReservationInfo(e) {
+    let firstNameElement = document.getElementById('first-name')
+    let lastNameElement = document.getElementById('last-name')
+    let dateInElement = document.getElementById('date-in')
+    let dateOutElement = document.getElementById('date-out')
+    let peopleCountElement = document.getElementById('people-count')
+    let nextBtn = document.getElementById('next-btn')
+    let infoListElement = document.querySelector('.info-list')
+ 
+    nextBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        let firstName = inputFieldsArr[0].value;
-        let lastName = inputFieldsArr[1].value;
-        let checkIn = inputFieldsArr[2].value;
-        let checkOut = inputFieldsArr[3].value;
-        let numberOfGuests = inputFieldsArr[4].value;
-
-        if (
-            inputFieldsArr.some((x) => x.value === '') ||
-            new Date(checkIn) >= new Date(checkOut)
-        ) {
+        if(firstNameElement.value && lastNameElement.value && dateInElement.value && dateOutElement.value && peopleCountElement.value && new Date(dateInElement.value) < new Date(dateOutElement.value)){
+            
+            let liItem = document.createElement('li');
+            liItem.classList = 'reservation-content'
+            
+            let articleItem = document.createElement('article');
+ 
+            let h3Item = document.createElement('h3');
+            h3Item.textContent = `Name: ${firstNameElement.value} ${lastNameElement.value}`;
+ 
+            let fromDatePItem = document.createElement('p');
+            fromDatePItem.textContent = `From date: ${dateInElement.value}`
+ 
+            let toDatePItem = document.createElement('p');
+            toDatePItem.textContent = `To date: ${dateOutElement.value}`;
+ 
+            let peopleCountItem = document.createElement('p');
+            peopleCountItem.textContent = `For ${peopleCountElement.value} people`;
+ 
+            let editBtn = document.createElement('button');
+            editBtn.classList = 'edit-btn';
+            editBtn.textContent = 'Edit';
+ 
+            
+            let continueBtn = document.createElement('button');
+            continueBtn.classList = 'continue-btn';
+            continueBtn.textContent = 'Continue';
+ 
+        
+            articleItem.appendChild(h3Item);
+            articleItem.appendChild(fromDatePItem);
+            articleItem.appendChild(toDatePItem);
+            articleItem.appendChild(peopleCountItem);
+ 
+            liItem.appendChild(articleItem);
+            liItem.appendChild(editBtn);
+            liItem.appendChild(continueBtn);
+            infoListElement.appendChild(liItem);
+            
+            let firstName = firstNameElement.value;
+            let lastName = lastNameElement.value;
+            let dateIn = dateInElement.value;
+            let dateOut = dateOutElement.value;
+            let peopleCount = peopleCountElement.value;
+            firstNameElement.value = '';
+            lastNameElement.value = '';
+            dateInElement.value = '';
+            dateOutElement.value = '';
+            peopleCountElement.value = '';
+            nextBtn.disabled = true;
+ 
+            editBtn.addEventListener('click', () => {
+                firstNameElement.value = firstName;
+                lastNameElement.value = lastName;
+                dateInElement.value = dateIn;
+                dateOutElement.value = dateOut;
+                peopleCountElement.value = peopleCount;
+                nextBtn.disabled = false;
+                liItem.remove();
+            })
+ 
+            continueBtn.addEventListener('click', () => {
+                let elementConfirm = document.createElement('li')
+                elementConfirm.classList = 'reservation-content';
+ 
+                let articleElementContinue = document.createElement('article');
+                articleElementContinue = articleItem;
+                
+                elementConfirm.appendChild(articleElementContinue);
+ 
+                let confirmListElement = document.querySelector('.confirm-list');
+ 
+                confirmListElement.appendChild(elementConfirm);
+ 
+                let reserVationContentElement = document.querySelector('.reservation-content');
+                reserVationContentElement.remove()
+ 
+                let buttons = confirmListElement.getElementsByTagName('button');
+                for (const button of buttons) {
+                    button.remove();
+                }
+ 
+                let confirmBtn = document.createElement('button')
+                confirmBtn.classList = 'confirm-btn';
+                confirmBtn.textContent = 'Confirm'
+                confirmBtn.addEventListener('click', (e) => {
+                    e.target.parentNode.remove()
+                    nextBtn.disabled = false;
+                    let verificationElement = document.getElementById('verification');
+                    let h1Element = document.createElement('h1');
+                    h1Element.classList = 'reservation-confirmed';
+                    h1Element.textContent = 'Confirmed.'
+                    verificationElement.appendChild(h1Element)
+                })
+ 
+                let cancelBtn = document.createElement('button');
+                cancelBtn.classList = 'cancel-btn';
+                cancelBtn.textContent = 'Cancel';
+                cancelBtn.addEventListener('click', (e) => {
+                    e.target.parentNode.remove()
+                    nextBtn.disabled = false;
+                    let verificationElement = document.getElementById('verification');
+                    let h1Element = document.createElement('h1');
+                    h1Element.classList = 'reservation-cancelled';
+                    h1Element.textContent = 'Cancelled.'
+                    verificationElement.appendChild(h1Element)
+                })
+ 
+                elementConfirm.appendChild(confirmBtn);
+                elementConfirm.appendChild(cancelBtn);
+            })
+        } else {
             return;
         }
-        createReservation(
-            firstName,
-            lastName,
-            checkIn,
-            checkOut,
-            numberOfGuests
-        );
-
-        function createReservation(
-            firstName,
-            lastName,
-            checkIn,
-            checkOut,
-            ppl
-        ) {
-            let li = document.createElement('li');
-            li.setAttribute('class', 'reservation-content');
-            let article = document.createElement('article');
-
-            let h3 = document.createElement('h3');
-            h3.textContent = `Name: ${firstName} ${lastName}`;
-            let p1 = document.createElement('p');
-            p1.textContent = `From date: ${checkIn}`;
-            let p2 = document.createElement('p');
-            p2.textContent = `To date: ${checkOut}`;
-            let p3 = document.createElement('p');
-
-            p3.textContent = `For ${ppl} people`;
-
-            article.appendChild(h3);
-            article.appendChild(p1);
-            article.appendChild(p2);
-            article.appendChild(p3);
-
-            li.appendChild(article);
-            ulListForAttach.appendChild(li);
-
-            let btn1 = document.createElement('button');
-            btn1.textContent = 'Edit';
-            btn1.setAttribute('class', 'edit-btn');
-
-            btn1.addEventListener('click', edit);
-
-            function edit(e) {
-                let parent = e.target.parentElement;
-                inputFieldsArr[0].value=firstName;
-                inputFieldsArr[1].value=lastName;
-                inputFieldsArr[2].value=checkIn;
-                inputFieldsArr[3].value=checkOut;
-                inputFieldsArr[4].value=ppl;
-
-               parent.remove();
-               nextBtn.disabled=false;
-            }
-
-            let btn2 = document.createElement('button');
-            btn2.textContent = 'Continue';
-            btn2.setAttribute('class', 'continue-btn');
-            btn2.addEventListener('click', confirmFunc);
-            function confirmFunc(e){
-                ulConfirm.appendChild(li)
-                
-                btn1.textContent='Confirm';
-                btn1.setAttribute('class', 'confirm-btn');
-
-                btn1.addEventListener('click', finishOrder);
-
-                function finishOrder(e){
-                    nextBtn.disabled=false;
-                    let parent=e.target.parentElement;
-                    let h1=document.getElementById('verification');
-                    h1.setAttribute('class', 'reservation-confirmed');
-                    h1.textContent='Confirmed.'
-                    inputFieldsArr.forEach((element) => {
-                        element.value = '';
-                    });
-
-                    parent.remove();
-                }
-
-                btn2.textContent='Cancel';
-                btn2.setAttribute('class','cancel-btn');
-                btn2.addEventListener('click', backToStart);
-                function backToStart(e){
-                    nextBtn.disabled=false;
-                    let parent=e.target.parentElement;
-                    let h1=document.getElementById('verification');
-                    h1.setAttribute('class', 'reservation-cancelled');
-                    h1.textContent='Cancelled.'
-
-
-                    parent.remove();
-                }
-            }
-
-            li.appendChild(btn1);
-            li.appendChild(btn2);
-
-            inputFieldsArr.forEach((element) => {
-                element.value = '';
-            });
-            nextBtn.disabled=true;
-        }
-    }
+    })
 }
