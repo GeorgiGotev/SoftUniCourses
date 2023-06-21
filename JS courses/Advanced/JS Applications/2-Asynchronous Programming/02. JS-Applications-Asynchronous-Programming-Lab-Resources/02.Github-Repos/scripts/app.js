@@ -21,8 +21,11 @@ function loadRepos() {
     		});
     	}catch(err){
     		err='Not Found!'
-    		alert(err);
+			//or alert(err);
+			let li = document.createElement('li');
+			li.textContent=err;
     		reposField.replaceChildren()
+			reposField.appendChild(li)
     	}
     }
 	// reposField.replaceChildren()
