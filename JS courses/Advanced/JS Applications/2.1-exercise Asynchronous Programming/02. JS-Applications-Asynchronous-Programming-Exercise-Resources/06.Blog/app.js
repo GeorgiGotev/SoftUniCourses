@@ -4,36 +4,30 @@ function attachEvents() {
     let viewBtn = document.getElementById('btnViewPost');
     let h1 = document.getElementById('post-title');
     let p = document.getElementById('post-body');
-
-    let allDates;
-
-    let postUrl = `http://localhost:3030/jsonstore/blog/posts`;
-    let commentsUrl = `http://localhost:3030/jsonstore/blog/comments`;
+    let ul = document.getElementById('post-comments');
+    let allInfo;
 
     loadBtn.addEventListener('click', loadFunc);
     async function loadFunc(e) {
-        let res = await fetch(postUrl);
+        let res = await fetch(`http://localhost:3030/jsonstore/blog/posts`);
         let data = await res.json();
-        allDates = data;
+        allInfo = data;
         posts.replaceChildren();
 
         Object.entries(data).forEach((element) => {
             let option = document.createElement('option');
             option.value = element[0];
             option.textContent = element[1].title;
-            // option.dataset.body = element[1].body;
             posts.appendChild(option);
         });
     }
     viewBtn.addEventListener('click', viewFunc);
     async function viewFunc(e) {
-         let ul = document.getElementById('post-comments');
-
         let selectedPostId = document.getElementById('posts').value;
-        let res = await fetch(commentsUrl);
+        let res = await fetch(`http://localhost:3030/jsonstore/blog/comments`);
         let data = await res.json();
-        h1.textContent = allDates[selectedPostId].title;
-        p.textContent = allDates[selectedPostId].body;
+        h1.textContent = allInfo[selectedPostId].title;
+        p.textContent = allInfo[selectedPostId].body;
 
         ul.replaceChildren();
         Object.values(data).forEach((element) => {
@@ -46,5 +40,4 @@ function attachEvents() {
         });
     }
 }
-
 attachEvents();
