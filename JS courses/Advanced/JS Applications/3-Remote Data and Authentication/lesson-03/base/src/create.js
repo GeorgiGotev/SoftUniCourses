@@ -16,7 +16,8 @@ async function onSubmit(data) {
 
     const token = sessionStorage.getItem('authToken');
     if (token == null) {
-            window.location.pathname = '/lesson-03/finished/index.html';
+        alert('You need to log in first')
+        window.location.pathname = '/lesson-03/finished/index.html';
     }
 
     try {
@@ -31,7 +32,7 @@ async function onSubmit(data) {
         
         if (response.status == 200) {
             window.location.pathname = '/lesson-03/finished/index.html';
-
+            
         } else {
             throw new Error(await response.json());
         }

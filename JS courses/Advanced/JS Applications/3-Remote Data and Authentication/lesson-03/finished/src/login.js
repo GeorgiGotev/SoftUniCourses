@@ -23,8 +23,9 @@ async function onSubmit(data) {
         const data = await response.json();
         if (response.status == 200) {
             sessionStorage.setItem('authToken', data.accessToken);
-            window.location.pathname = 'index.html';
+            window.location.pathname = '/lesson-03/finished/index.html';
         } else {
+            alert('Wrong pass or email')
             throw new Error(data.message);
         }
     } catch (err) {
