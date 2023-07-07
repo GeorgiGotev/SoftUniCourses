@@ -1,5 +1,5 @@
 {
-  "name": "03.softterest",
+  "name": "02.movies-76",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,19 @@
   },
   "scripts": {
     "test": "mocha tests",
-    "start": "http-server -a localhost -p 3000 -P http://localhost:3000?"
+    "dev": "lite-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.3.7",
-    "http-server": "^14.1.1",
+    "lite": "^4.0.5",
     "mocha": "^10.2.0",
-    "playwright-chromium": "^1.35.1"
+    "page": "^1.11.6",
+    "playwright-chromium": "^1.35.1",
+    "server": "^1.0.38"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
   }
 }
