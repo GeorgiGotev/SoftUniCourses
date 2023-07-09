@@ -1,11 +1,8 @@
 {
-  "name": "03.softterest",
+  "name": "02.http-status-cats",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "main": "app.js",
   "scripts": {
     "test": "mocha tests",
     "start": "http-server -a localhost -p 3000 -P http://localhost:3000"
@@ -15,6 +12,8 @@
   "dependencies": {
     "chai": "^4.3.7",
     "http-server": "^14.1.1",
+    "lit-html": "^2.7.5",
+    "lite-server": "^2.6.1",
     "mocha": "^10.2.0",
     "playwright-chromium": "^1.35.1"
   }
