@@ -11,6 +11,8 @@ let template = (townsList) => html`
 
 let root = document.getElementById('root');
 
+
+
 function onSubmit(e) {
     e.preventDefault();
     let formData = new FormData(form);
