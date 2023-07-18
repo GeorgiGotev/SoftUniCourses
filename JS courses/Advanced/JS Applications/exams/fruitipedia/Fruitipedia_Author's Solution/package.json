@@ -1,7 +1,7 @@
 {
-  "name": "cosmetic-kingdom",
+  "name": "fruitipedia",
   "version": "1.0.0",
-  "description": "Cismetic Kingdom Single Page Application",
+  "description": "Fruitipedia Single Page Application",
   "main": "index.html",
   "scripts": {
     "test": "mocha tests",
@@ -10,13 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit-html":"2.7.5",
-    "page":"1.11.6"
+    "lit-html": "1.3.0",
+    "page": "1.11.6"
   },
   "devDependencies": {
-    "http-server":"14.1.1",
-    "playwright-chromium":"1.36.1",
-    "mocha":"10.2.0",
-    "chai":"4.3.7"
+    "http-server": "0.12.3",
+    "playwright-chromium": "1.9.2",
+    "mocha": "8.3.2",
+    "chai": "4.3.4"
   }
 }

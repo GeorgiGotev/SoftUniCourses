@@ -3,8 +3,8 @@ const { expect } = require("chai");
 
 const host = "http://localhost:3000"; // Application host (NOT service host - that can be anything)
 const interval = 600;
-const DEBUG = true;
-const slowMo = 500;
+const DEBUG = false;
+const slowMo = 1500;
 
 const mockData = require("./mock-data.json");
 
@@ -12,15 +12,13 @@ const endpoints = {
   register: "/users/register",
   login: "/users/login",
   logout: "/users/logout",
-  catalog: "/data/products?sortBy=_createdOn%20desc",
-  create: "/data/products",
-  bought: "/data/bought",
-  details: (id) => `/data/products/${id}`,
-  delete: (id) => `/data/products/${id}`,
-  total: (productId) =>
-    `/data/bought?where=productId%3D%22${productId}%22&distinct=_ownerId&count`,
-  own: (productId, userId) =>
-    `/data/bought?where=productId%3D%22${productId}%22%20and%20_ownerId%3D%22${userId}%22&count`,
+  catalog: "/data/fruits?sortBy=_createdOn%20desc",
+  create: "/data/fruits",
+  search: (query) => `/data/fruits?where=name%20LIKE%20%22${query}%22`,
+  details: (id) => `/data/fruits/${id}`,
+  delete: (id) => `/data/fruits/${id}`,
+  own: (fruitId, userId) =>
+  `/data/fruits?where=fruitId%3D%22${fruitId}%22%20and%20_ownerId%3D%22${userId}%22&count`,
 };
 
 let browser;
@@ -33,7 +31,7 @@ describe("E2E tests", function () {
   before(
     async () =>
       (browser = await chromium.launch(
-        DEBUG ? { headless: false, slowMo } : {}
+    DEBUG ? { headless: false, slowMo } : {}
       ))
   );
   after(async () => await browser.close());
@@ -67,7 +65,7 @@ describe("E2E tests", function () {
       expect(isCalled()).to.be.false;
     });
 
-    it("Register makes correct API call [ 2.5 Points ]", async () => {
+    it("Register makes correct API call [ 5 Points ]", async () => {
       const data = mockData.users[0];
       const { post } = await handle(endpoints.register);
       const { onRequest } = post(data);
@@ -112,7 +110,7 @@ describe("E2E tests", function () {
       expect(isCalled()).to.be.false;
     });
 
-    it("Login makes correct API call [ 2.5 Points ]", async () => {
+    it("Login makes correct API call [ 5 Points ]", async () => {
       const data = mockData.users[0];
       const { post } = await handle(endpoints.login);
       const { onRequest } = post(data);
@@ -137,7 +135,7 @@ describe("E2E tests", function () {
       expect(postData.password).to.equal(data.password);
     });
 
-    it("Logout makes correct API call [ 2.5 Points ]", async () => {
+    it("Logout makes correct API call [ 5 Points ]", async () => {
       const data = mockData.users[0];
       const { post } = await handle(endpoints.login);
       const { get } = await handle(endpoints.logout);
@@ -183,9 +181,11 @@ describe("E2E tests", function () {
 
       //Test for navigation
       await page.waitForTimeout(interval);
-      expect(await page.isVisible("text=Products")).to.be.true;
-      expect(await page.isVisible("text=Add Product")).to.be.true;
+      expect(await page.isVisible("text=Fruits")).to.be.true;
+      expect(await page.isVisible("text=Add Fruit")).to.be.true;
       expect(await page.isVisible("text=Logout")).to.be.true;
+      expect(await page.isVisible("text=Search")).to.be.true;
+
 
       expect(await page.isVisible("text=Login")).to.be.false;
       expect(await page.isVisible("text=Register")).to.be.false;
@@ -196,11 +196,11 @@ describe("E2E tests", function () {
       await page.waitForTimeout(interval);
 
       expect(
-        await page.isVisible("nav >> text=Products"),
+        await page.isVisible("nav >> text=Fruits"),
         "Dashboard is not visible"
       ).to.be.true;
       expect(
-        await page.isVisible("nav >> text=Add Product"),
+        await page.isVisible("nav >> text=Add Fruit"),
         "Create is visible"
       ).to.be.false;
       expect(await page.isVisible("nav >> text=Logout"), "Logout is visible").to
@@ -216,60 +216,58 @@ describe("E2E tests", function () {
   });
 
   describe("Home Page [ 10 Points ]", () => {
-    it("Show home page [ 2.5 Points ]", async () => {
+    it("Show home page [ 5 Points ]", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      expect(await page.isVisible("text=Looking for the best beauty products?")).to.be.true;
+      expect(await page.isVisible("text=Learn More About Your Favorite Fruits")).to.be.true;
     });
 
-    it("Show home page [ 2.5 Points ]", async () => {
+    it("Show home page [ 5 Points ]", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
       expect(
-        await page.isVisible("text=You are in the right place!")
+        await page.isVisible("text=Learn More About Your Favorite Fruits")
       ).to.be.true;
     });
   });
 
-  describe("Products Page [ 15 Points ]", () => {
-    it("Show Products page - welcome message [ 2.5 Points ]", async () => {
+  describe("Fruits Page [ 15 Points ]", () => {
+    it("Show Fruits page - welcome message [ 2.5 Points ]", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      await page.click("nav >> text=Products");
+      await page.click("nav >> text=Fruits");
       await page.waitForTimeout(interval);
-      expect(await page.isVisible("text=Products")).to.be.true;
+      expect(await page.isVisible("text=Fruits")).to.be.true;
     });
 
-    it("Check Products page with 0 offers [ 2.5 Points ]", async () => {
+    it("Check Fruits page with 0 fruits [ 2.5 Points ]", async () => {
       const { get } = await handle(endpoints.catalog);
       get([]);
 
       await page.goto(host);
       await page.waitForTimeout(interval);
-      await page.click("nav >> text=Products");
+      await page.click("nav >> text=Fruits");
       await page.waitForTimeout(interval);
 
-     
-      expect(await page.isVisible("text=Products")).to.be.true;
-      expect(await page.isVisible("text=No products yet.")).to.be.true;
+      expect(await page.isVisible("text=No fruit info yet.")).to.be.true;
       
     });
 
-    it("Check products page with 2 offers [ 2.5 Points ]", async () => {
+    it("Check fruits page with 2 offers [ 2.5 Points ]", async () => {
       const { get } = await handle(endpoints.catalog);
       get(mockData.catalog.slice(0, 2));
       const data = mockData.catalog.slice(0, 2);
 
       await page.goto(host);
       await page.waitForTimeout(interval);
-      await page.click("nav >> text=Products");
+      await page.click("nav >> text=Fruits");
       await page.waitForTimeout(interval);
 
       await page.waitForSelector("#dashboard");
-      const names = await page.$$eval(".product .title", (t) =>
+      const names = await page.$$eval(".fruit .title", (t) =>
         t.map((s) => s.textContent)
       );
 
@@ -278,16 +276,16 @@ describe("E2E tests", function () {
       expect(names[1]).to.contains(`${data[1].name}`);
     });
 
-    it("Show details [ 2.5 Points ]", async () => {
+    it("Show More Info [ 2.5 Points ]", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
-      await page.click("nav >> text=Products");
+      await page.click("nav >> text=Fruits");
       await page.waitForTimeout(interval);
 
-      expect(await page.isVisible('text="Details"')).to.be.true;
+      expect(await page.isVisible('text="More Info"')).to.be.true;
     });
 
-    it.only("Check product page Info [ 2.5 Points ]", async () => {
+    it("Check fruit page Info [ 5 Points ]", async () => {
       const { get } = await handle(endpoints.catalog);
       get(mockData.catalog.slice(0, 1));
       const data = mockData.catalog.slice(0, 1);
@@ -295,19 +293,19 @@ describe("E2E tests", function () {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      await page.click("nav >> text=Products");
+      await page.click("nav >> text=Fruits");
       await page.waitForTimeout(interval);
 
       await page.waitForSelector("#dashboard");
-      const names = await page.$$eval(".product .title", (t) =>
+      const names = await page.$$eval(".fruit .title", (t) =>
         t.map((s) => s.textContent)
       );
-      const prices = await page.$$eval(".product p .price", (t) =>
+      const description = await page.$$eval(".fruit .description", (t) =>
         t.map((s) => s.textContent)
       );
 
       expect(names).to.contains(`${data[0].name}`);
-      expect(prices).to.contains(`${data[0].price}`);
+      expect(description[0]).to.contains(`${data[0].description}`);
     });
   });
 
@@ -326,11 +324,11 @@ describe("E2E tests", function () {
       await page.waitForTimeout(interval);
     });
 
-    it("Create does NOT work with empty fields [ 2.5 Points ]", async () => {
+    it("Create does NOT work with empty fields [ 5 Points ]", async () => {
       const { post } = await handle(endpoints.create);
       const isCalled = post().isHandled;
 
-      await page.click("text=Add Product");
+      await page.click("text=Add Fruit");
       await page.waitForTimeout(interval);
       await page.waitForSelector("form");
 
@@ -341,20 +339,19 @@ describe("E2E tests", function () {
       expect(isCalled()).to.be.false;
     });
 
-    it("Create makes correct API call for logged in user [ 2.5 Points ]", async () => {
+    it("Create makes correct API call for logged in user [ 10 Points ]", async () => {
       const data = mockData.catalog[0];
       const { post } = await handle(endpoints.create);
       const { onRequest } = post(data);
 
-      await page.click("text=Add Product");
+      await page.click("text=Add Fruit");
       await page.waitForTimeout(interval);
 
       await page.waitForSelector("form");
       await page.fill('[name="name"]', data.name);
       await page.fill('[name="imageUrl"]', data.imageUrl);
-      await page.fill('[name="category"]', data.category);
       await page.fill('[name="description"]', data.description);
-      await page.fill('[name="price"]', data.price);
+      await page.fill('[name="nutrition"]', data.nutrition);
 
       const [request] = await Promise.all([
         onRequest(),
@@ -365,121 +362,113 @@ describe("E2E tests", function () {
 
       expect(postData.name).to.equal(data.name);
       expect(postData.imageUrl).to.equal(data.imageUrl);
-      expect(postData.category).to.equal(data.category);
       expect(postData.description).to.equal(data.description);
-      expect(postData.price).to.equal(data.price);
+      expect(postData.nutrition).to.equal(data.nutrition);
     });
 
-    it("Check details information [ 2.5 Points ]", async () => {
+    it("Check More Info information [ 5 Points ]", async () => {
       const data = mockData.catalog[1];
       const user = mockData.users[0];
       const { get } = await handle(endpoints.details(data._id));
       get(data);
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
 
       await page.waitForTimeout(interval);
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
       own(0);
-      total(5);
+      
 
       await page.waitForTimeout(interval);
 
       await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
 
       await page.waitForTimeout(interval);
 
       const name = await page.$$eval("#details-wrapper #details-title", (t) =>
         t.map((s) => s.textContent)
       );
-      const category = await page.$$eval(
-        "#details-wrapper p #categories",
-        (t) => t.map((s) => s.textContent)
-      );
-      const price = await page.$$eval(
-        "#details-wrapper p #price-number",
+     
+      const nutrition = await page.$$eval(
+        "#details-wrapper #info-wrapper #details-description #details-nutrition",
         (t) => t.map((s) => s.textContent)
       );
       const description = await page.$$eval(
-        "#details-wrapper #info-wrapper #details-description span",
-        (t) => t.map((s) => s.textContent)
+        "#details-wrapper #info-wrapper #details-description p",
+        (t) => t.map((s) => s.textContent.trim())
       );
 
       expect(name).to.contains(data.name);
-      expect(category).to.contains(data.category);
-      expect(price).to.contains(data.price);
+      expect(nutrition[0]).to.contains(data.nutrition);
       expect(description).to.contains(data.description);
     });
 
     it("Non-author does NOT see delete and edit buttons [ 2.5 Points ]", async () => {
-      const data = mockData.catalog[2];
+      const data = mockData.catalog[1];
       const user = mockData.users[0];
       const { get } = await handle(endpoints.details(data._id));
       get(data);
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
       await page.waitForTimeout(interval);
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
       own(0);
-      total(5);
+  
 
       await page.waitForSelector("#dashboard");
       await page.waitForTimeout(interval);
 
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
 
       expect(await page.isVisible('text="Delete"')).to.be.false;
       expect(await page.isVisible('text="Edit"')).to.be.false;
     });
 
     it("Author see delete and edit buttons [ 2.5 Points ]", async () => {
-      const data = mockData.catalog[1];
+      const data = mockData.catalog[2];
       const user = mockData.users[0];
       const { get } = await handle(endpoints.details(data._id));
       get(data);
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
       await page.waitForTimeout(interval);
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
       own(0);
-      total(5);
-
-      await page.waitForTimeout(interval);
+  
 
       await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.waitForTimeout(interval);
 
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
       await page.waitForTimeout(interval);
 
       expect(await page.isVisible('text="Delete"')).to.be.true;
       expect(await page.isVisible('text="Edit"')).to.be.true;
+
     });
 
-    it("Edit should populate form with correct data [ 2.5 Points ]", async () => {
-      const data = mockData.catalog[1];
+    it("Edit should populate form with correct data [ 5 Points ]", async () => {
+      const data = mockData.catalog[2];
       const user = mockData.users[0];
       const { get } = await handle(endpoints.details(data._id));
       get(data);
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
       await page.waitForTimeout(interval);
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
+
       own(0);
-      total(5);
+
 
       await page.waitForTimeout(interval);
 
       await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
 
       await page.click("text=Edit");
       await page.waitForTimeout(interval);
@@ -496,30 +485,28 @@ describe("E2E tests", function () {
 
       expect(inputs[0]).to.contains(data.name);
       expect(inputs[1]).to.contains(data.imageUrl);
-      expect(inputs[2]).to.contains(data.category);
       expect(textareas[0]).to.contains(data.description);
-      expect(inputs[3]).to.contains(data.price);
+      expect(textareas[1]).to.contains(data.nutrition);
+
     });
 
-    it("Edit does NOT work with empty fields [ 2.5 Points ]", async () => {
-      const data = mockData.catalog[0];
+    it("Edit does NOT work with empty fields [ 5 Points ]", async () => {
+      const data = mockData.catalog[2];
       const user = mockData.users[0];
       const { get, put } = await handle(endpoints.delete(data._id));
       get(data);
       const { isHandled } = put();
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
       await page.waitForTimeout(interval);
 
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
       own(0);
-      total(4);
 
       await page.waitForTimeout(interval);
       await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
 
       await page.click("text=Edit");
       await page.waitForTimeout(interval);
@@ -528,9 +515,8 @@ describe("E2E tests", function () {
 
       await page.fill('[name="name"]', "");
       await page.fill('[name="imageUrl"]', "");
-      await page.fill('[name="category"]', "");
       await page.fill('[name="description"]', "");
-      await page.fill('[name="price"]', "");
+      await page.fill('[name="nutrition"]', "");
 
       await page.click('[type="submit"]');
       await page.waitForTimeout(interval);
@@ -538,8 +524,9 @@ describe("E2E tests", function () {
       expect(isHandled()).to.be.false;
     });
 
-    it("Edit makes correct API call for logged in user [ 2.5 Points ]", async () => {
-      const data = mockData.catalog[0];
+    it("Edit makes correct API call for logged in user [ 5 Points ]", async () => {
+
+      const data = mockData.catalog[2];
       const user = mockData.users[0];
 
       const { get, put } = await handle(endpoints.delete(data._id));
@@ -547,17 +534,16 @@ describe("E2E tests", function () {
       const { onRequest } = put(data);
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
 
       await page.waitForTimeout(interval);
+
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
-      own(0);
-      total(5);
+       own(0);
 
       await page.waitForTimeout(interval);
       await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
 
       await page.click("text=Edit");
       await page.waitForTimeout(interval);
@@ -565,8 +551,7 @@ describe("E2E tests", function () {
       await page.waitForSelector("form");
 
       await page.fill('[name="name"]', data.name + "edit");
-      await page.fill('[name="category"]', data.category + "edit");
-      await page.fill('[name="price"]', data.price + "edit");
+      await page.fill('[name="nutrition"]', data.nutrition + "edit");
 
       const [request] = await Promise.all([
         onRequest(),
@@ -576,12 +561,11 @@ describe("E2E tests", function () {
       const postData = JSON.parse(request.postData());
 
       expect(postData.name).to.contains(data.name + "edit");
-      expect(postData.category).to.contains(data.category + "edit");
-      expect(postData.price).to.contains(data.price + "edit");
+      expect(postData.nutrition).to.contains(data.nutrition + "edit");
     });
 
-    it("Delete makes correct API call for logged in user [ 2.5 Points ]", async () => {
-      const data = mockData.catalog[0];
+    it("Delete makes correct API call for logged in user [ 10 Points ]", async () => {
+      const data = mockData.catalog[2];
       const user = mockData.users[0];
 
       const { get, del } = await handle(endpoints.delete(data._id));
@@ -589,16 +573,13 @@ describe("E2E tests", function () {
       const { onResponse, isHandled } = del();
 
       await page.waitForTimeout(interval);
-      await page.click("text=Products");
+      await page.click("text=Fruits");
       await page.waitForTimeout(interval);
 
       const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
       own(0);
-      total(5);
-
       await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+      await page.click(`.fruit:has-text("${data.name}") >> .details-btn`);
 
       await page.click("text=Delete");
 
@@ -608,188 +589,178 @@ describe("E2E tests", function () {
       expect(isHandled()).to.be.true;
     });
   });
+  describe('BONUS:Search Page [ 15 Points ]', async () => {
 
-  describe("BONUS : Buy functionality  [ 15 Points ]", async () => {
-    it("Buy button is NOT visible for guest users [ 2.5 Points ]", async () => {
-      await page.goto(host);
-      await page.waitForTimeout(interval);
+    it('Show no matches for Guest [ 2.5 Points ]', async () => {
+        const { get } = await handle(endpoints.search('Tomato'));
+        get([]);
 
-      const data = mockData.catalog[2];
-      const { get } = await handle(endpoints.details(data._id));
-      get(data);
+        await page.goto(host);
+        await page.waitForTimeout(interval);
 
-      await page.waitForTimeout(interval);
-      await page.click("nav >> text=Products");
-      await page.waitForTimeout(interval);
+        await page.click('nav >> text=Search');
+        await page.waitForTimeout(interval);
 
-      await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
+        await page.fill('[name="search"]', 'Tomato');
+        await page.click('button >> text="Search"');
+        await page.waitForTimeout(interval);
 
-      await page.waitForTimeout(interval);
-
-      expect(await page.isVisible("#buy-btn")).to.be.false;
+        expect(await page.isVisible('text=No result.')).to.be.true;
     });
 
-    it("Buy button is visible for the non-creator user [ 2.5 Points ]", async () => {
-      // Login user
-      const user = mockData.users[0];
-      const data = mockData.catalog[2];
+    it('Show results with 2 fruits for Guest [ 2.5 Points ]', async () => {
+        const { get } = await handle(endpoints.search('kiwi'));
+        get(mockData.catalog.slice(0, 2));
+        
+        await page.goto(host);
+        await page.waitForTimeout(interval);
 
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=Login");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-      await page.fill('[name="email"]', user.email);
-      await page.fill('[name="password"]', user.password);
-      await page.click('[type="submit"]');
+        await page.click('nav >> text=Search');
+        await page.waitForTimeout(interval);
 
-      await page.waitForTimeout(interval);
-      await page.click("text=Products");
+        await page.fill('[name="search"]', 'kiwi');
+        await page.click('button >> text="Search"');
+        await page.waitForTimeout(interval);
 
-      await page.waitForTimeout(interval);
-      const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
-      own(0);
-      total(5);
-
-      await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
-      await page.waitForTimeout(interval);
-
-      expect(await page.isVisible("#buy-btn")).to.be.true;
-    });
-
-    it("Buy button is NOT visible for the creator [ 2.5 Points ]", async () => {
-      // Login user
-      const user = mockData.users[0];
-      const data = mockData.catalog[0];
-
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=Login");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-      await page.fill('[name="email"]', user.email);
-      await page.fill('[name="password"]', user.password);
-      await page.click('[type="submit"]');
-
-      await page.waitForTimeout(interval);
-      await page.click("text=Products");
-      await page.waitForTimeout(interval);
-
-      const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
-      own(0);
-      total(5);
-
-      await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
-
-      expect(await page.isVisible("#buy-btn")).to.be.false;
-    });
-
-    it("Buy button should be hidden(not visible) after a click on it [ 2.5 Points ]", async () => {
-      // Login user
-      const user = mockData.users[0];
-      const data = mockData.catalog[2];
-
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=Login");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-      await page.fill('[name="email"]', user.email);
-      await page.fill('[name="password"]', user.password);
-      await page.click('[type="submit"]');
-
-      await page.waitForTimeout(interval);
-      await page.click("text=Products");
-      await page.waitForTimeout(interval);
-
-      const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
-      const { post } = await handle(endpoints.bought, {
-        post: mockData.bought[2],
-      });
-      const { onRequest } = post(mockData.bought[2]);
-      own(0);
-      total(5);
-
-      await page.waitForTimeout(interval);
-
-      await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
-      await page.waitForTimeout(interval);
-      expect(await page.isVisible("#buy-btn")).to.be.true;
-      own(1);
-      total(6);
-      await page.waitForTimeout(interval);
-
-      const [request] = await Promise.all([
-        onRequest,
-        page.click("#buy-btn"),
-      ]);
-
-      await page.waitForTimeout(interval);
-
-      expect(await page.isVisible("#buy-btn")).to.be.false;
-    });
-
-    it("Buy button should increase total buys by 1 after a click on it [ 2.5 Points ]", async () => {
-      // Login user
-      const user = mockData.users[0];
-      const data = mockData.catalog[2];
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=Login");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-      await page.fill('[name="email"]', user.email);
-      await page.fill('[name="password"]', user.password);
-      await page.click('[type="submit"]');
-
-      await page.waitForTimeout(interval);
-      await page.click("text=Products");
-      await page.waitForTimeout(interval);
-
-      const { get: own } = await handle(endpoints.own(data._id, user._id));
-      const { get: total } = await handle(endpoints.total(data._id));
-      const { post } = await handle(endpoints.bought, {
-        post: mockData.bought[2],
-      });
-      const { onRequest } = post(mockData.bought[2]);
-      await page.waitForTimeout(interval);
-      own(0);
-      total(5);
-
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#dashboard");
-      await page.click(`.product:has-text("${data.name}") >> .details-btn`);
-      await page.waitForTimeout(interval);
-
-      let buys = await page.$$eval("#buys", (t) =>
+        const names = await page.$$eval(".fruit .title", (t) =>
         t.map((s) => s.textContent)
       );
-      expect(buys[0]).to.contains("5");
-      own(1);
-      total(6);
-      await page.waitForTimeout(interval);
 
-      const [request] = await Promise.all([
-        onRequest(),
-        page.click("#buy-btn"),
-      ]);
-
-      await page.waitForTimeout(interval);
-
-      buys = await page.$$eval("#buys", (t) =>
-        t.map((s) => s.textContent)
-      );
-      expect(buys[0]).to.contains("6");
-      await page.waitForTimeout(interval);
+      expect(names.length).to.equal(2);
+        expect(names[0]).to.contains(`${mockData.catalog[0].name}`);
+        expect(names[1]).to.contains(`${mockData.catalog[1].name}`);
     });
-  });
+
+    it('Show More info button for Guest [ 2.5 Points ]', async () => {
+        const { get } = await handle(endpoints.search('a'));
+        get(mockData.catalog.slice(0, 1));
+        
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+
+        await page.click('nav >> text=Search');
+        await page.waitForTimeout(interval);
+
+        await page.fill('[name="search"]', 'a');
+        await page.click('button >> text="Search"');
+        await page.waitForTimeout(interval);
+
+        const names = await page.$$eval(".fruit .title", (t) =>
+        t.map((s) => s.textContent));
+
+        expect(names.length).to.equal(1);
+        expect(names[0]).to.contains(`${mockData.catalog[0].name}`);
+
+        expect(await page.isVisible('text="More Info"')).to.be.true;
+    });
+    
+    it('Show no matches for Users [ 2.5 Points ]', async () => {
+        // Login user
+        const data = mockData.users[0];
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+        await page.click('text=Login');
+        await page.waitForTimeout(interval);
+        await page.waitForSelector('form');
+
+        await page.fill('[name="email"]', data.email);
+        await page.fill('[name="password"]', data.password);
+
+        await page.click('[type="submit"]');
+
+        const { get } = await handle(endpoints.search('Tomato'));
+        get([]);
+
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+
+        await page.click('nav >> text=Search');
+        await page.waitForTimeout(interval);
+
+        await page.fill('[name="search"]', 'Tomato');
+        await page.click('button >> text="Search"');
+        await page.waitForTimeout(interval);
+
+        expect(await page.isVisible('text=No result.')).to.be.true;
+    });
+
+    it('Show results with 2 fruit for Users [ 2.5 Points ]', async () => {
+        // Login user
+        const data = mockData.users[0];
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+        await page.click('text=Login');
+        await page.waitForTimeout(interval);
+        await page.waitForSelector('form');
+
+        await page.fill('[name="email"]', data.email);
+        await page.fill('[name="password"]', data.password);
+
+        await page.click('[type="submit"]');
+
+        const { get } = await handle(endpoints.search('a'));
+        get(mockData.catalog.slice(0, 2));
+
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+
+        await page.click('nav >> text=Search');
+        await page.waitForTimeout(interval);
+
+        await page.fill('[name="search"]', 'a');
+        await page.click('button >> text="Search"');
+        await page.waitForTimeout(interval);
+
+        const names = await page.$$eval(".fruit .title", (t) =>
+        t.map((s) => s.textContent));
+
+        expect(names.length).to.equal(2);
+        expect(names[0]).to.contains(`${mockData.catalog[0].name}`);
+        expect(names[1]).to.contains(`${mockData.catalog[1].name}`);
+
+  
+    });
+
+    it('More Info info button for User [ 2.5 Points ]', async () => {
+        // Login user
+        const data = mockData.users[0];
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+        await page.click('text=Login');
+        await page.waitForTimeout(interval);
+        await page.waitForSelector('form');
+
+        await page.fill('[name="email"]', data.email);
+        await page.fill('[name="password"]', data.password);
+
+        await page.click('[type="submit"]');
+
+        const { get } = await handle(endpoints.search('banana'));
+        get(mockData.catalog.slice(0, 1));
+
+        await page.goto(host);
+        await page.waitForTimeout(interval);
+
+        await page.click('nav >> text=Search');
+        await page.waitForTimeout(interval);
+
+        await page.fill('[name="search"]', 'banana');
+        await page.click('button >> text="Search"');
+        await page.waitForTimeout(interval);
+
+        const names = await page.$$eval(".fruit .title", (t) =>
+        t.map((s) => s.textContent));
+
+        expect(names.length).to.equal(1);
+        expect(names[0]).to.contains(`${mockData.catalog[0].name}`);
+
+        expect(await page.isVisible('text="More Info"')).to.be.true;
+
+
+    });
+
+});
+  
 });
 
 async function setupContext(context) {
@@ -817,10 +788,6 @@ async function setupContext(context) {
     { get: mockData.catalog.slice(0, 2) },
     context
   );
-
-  await handleContext(endpoints.total("1001"), { get: 6 }, context);
-  await handleContext(endpoints.total("1002"), { get: 4 }, context);
-  await handleContext(endpoints.total("1003"), { get: 7 }, context);
 
   await handleContext(endpoints.own("1001", "0001"), { get: 1 }, context);
   await handleContext(endpoints.own("1002", "0001"), { get: 0 }, context);
