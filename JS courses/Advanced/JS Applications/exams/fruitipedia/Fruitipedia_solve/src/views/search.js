@@ -2,7 +2,8 @@ import { searchFruit } from '../api/data.js';
 import { html } from '../lib.js';
 import { createSubmitHandler } from '../util.js';
 
-const searchTemplate = (fruits = [], onSearch) => html`<section id="search">
+const searchTemplate = (fruits = [], onSearch) => html`
+<section id="search">
     <div class="form">
         <h2>Search</h2>
         <form @submit=${onSearch} class="search-form">
@@ -11,9 +12,12 @@ const searchTemplate = (fruits = [], onSearch) => html`<section id="search">
         </form>
     </div>
     <h4>Results:</h4>
-    <div class="search-result">
-        ${fruits.length == 0 ? html`<p class="no-result">No result.</p>` : html`${fruits.map(fruitCardTemplate)}`}
-    </div>
+
+    ${fruits.length == 0
+        ? html`<p class="no-result">No result.</p>`
+        : html`<div class="search-result">
+              ${fruits.map(fruitCardTemplate)}
+          </div>`}
 </section>`;
 
 const fruitCardTemplate = (fruit) => html`<div class="fruit">

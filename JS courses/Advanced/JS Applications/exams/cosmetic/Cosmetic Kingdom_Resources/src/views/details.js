@@ -76,7 +76,7 @@ export async function detailsView(ctx) {
     }
     async function onBought() {
         await buy({ productId:id });
-        ctx.page.redirect(`/details/${id}`)
         document.getElementById('buy-btn').style.display = 'none';
+        ctx.page.redirect(`/details/${id}`)
     }
 }

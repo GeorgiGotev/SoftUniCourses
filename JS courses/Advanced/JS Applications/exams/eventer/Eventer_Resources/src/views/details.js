@@ -1,10 +1,22 @@
-
-
-import { deleteById, getById, goingTo, goingToNum, isGoingTo } from '../api/data.js';
+import {
+    deleteById,
+    getById,
+    goingTo,
+    goingToNum,
+    isGoingTo,
+} from '../api/data.js';
 import { html } from '../lib.js';
 import { getUserData } from '../util.js';
 
-const detailsTemplate = (isOwner, isClicked, event, onDelete, onGoing, goingCount) => html`
+const detailsTemplate = (
+    isLoggedIn,
+    isOwner,
+    isClicked,
+    event,
+    onDelete,
+    onGoing,
+    goingCount
+) => html`
     <section id="details">
         <div id="details-wrapper">
             <img id="details-img" src=${event.imageUrl} />
@@ -21,17 +33,25 @@ const detailsTemplate = (isOwner, isClicked, event, onDelete, onGoing, goingCoun
 
             <h3>Going: <span id="go">${goingCount}</span> times.</h3>
             <div id="action-buttons">
-            ${isOwner
-                ? html`
-                      <a href="/edit/${event._id}" id="edit-btn">Edit</a>
-                      <a
-                          @click=${onDelete}
+                ${isOwner
+                    ? html`
+                          <a href="/edit/${event._id}" id="edit-btn">Edit</a>
+                          <a
+                              @click=${onDelete}
+                              href="javascript:void(0)"
+                              id="delete-btn"
+                              >Delete</a
+                          >
+                      `
+                    : null}
+                ${isLoggedIn && !isOwner && !isClicked
+                    ? html`<a
+                          @click=${onGoing}
                           href="javascript:void(0)"
-                          id="delete-btn"
-                          >Delete</a
-                      > `
-                : null}
-            ${!isOwner && !isClicked ? html`<a @click=${onGoing} href="" id="go-btn">Going</a>` : null}
+                          id="go-btn"
+                          >Going</a
+                      >`
+                    : null}
             </div>
         </div>
     </section>
@@ -39,14 +59,27 @@ const detailsTemplate = (isOwner, isClicked, event, onDelete, onGoing, goingCoun
 
 export async function detailsView(ctx) {
     const id = ctx.params.id;
+    let isClicked = null;
+    const isLoggedIn = getUserData();
     const event = await getById(id);
-    const user=getUserData();
+    const user = getUserData();
+    let goingCount=await goingToNum(id);
     const isOwner = user && ctx.user._id == event._ownerId;
-    const goingCount = await goingToNum(id);
-    const isClicked = await isGoingTo(event._id, user._id)
-    
+    if (user) {
+        isClicked = await isGoingTo(event._id, user._id);
+    }
 
-    ctx.render(detailsTemplate(isOwner, isClicked, event, onDelete, onGoing, goingCount));
+    ctx.render(
+        detailsTemplate(
+            isLoggedIn,
+            isOwner,
+            isClicked,
+            event,
+            onDelete,
+            onGoing,
+            goingCount
+        )
+    );
 
     async function onDelete() {
         const choice = confirm('Are you sure?');
@@ -58,7 +91,10 @@ export async function detailsView(ctx) {
         }
     }
     async function onGoing() {
-        await goingTo({eventId:id});
         document.getElementById('go-btn').style.display = 'none';
-      }
+        await goingTo({ eventId: id });
+         goingCount = await goingToNum(id);
+
+        // ctx.page.redirect(`/details/${event._id}`);
+    }
 }
