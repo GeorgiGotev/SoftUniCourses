@@ -10,7 +10,6 @@ import { editView } from './views/edit.js';
 import { homeView } from './views/home.js';
 import { loginView } from './views/login.js';
 import { registerView } from './views/register.js';
-// import { searchView } from './views/search.js';
 
 
 //get main element to render inside //without navigation only main!
@@ -23,12 +22,11 @@ document.getElementById('logoutBtn').addEventListener('click', onLogout);
 page(decorateContext);
 page('/', homeView);
 page('/catalog', catalogView);
-page('/register', registerView);
-page('/login', loginView);
 page('/catalog/:id', detailsView);
 page('/edit/:id', editView);
 page('/create', createView);
-// page('/search', searchView);
+page('/login', loginView);
+page('/register', registerView);
 
 //updateNav
 updateNav();
