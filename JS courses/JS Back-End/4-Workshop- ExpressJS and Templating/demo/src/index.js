@@ -1,23 +1,19 @@
-const express= require ('express');
-const handlebars= require('express-handlebars');
-const path=require('path')
+const express = require('express');
+const expressConfig = require('./config/express');
+const handlebarsConfig=require('./config/handlebars');
+const homeController=require('./controllers/homeController');
+const cubeController=require('./controllers/cubeController');
 
-const app=express();
+const PORT = 3000;
 
+const app = express();
 
-app.engine('hbs', handlebars.engine({
-    extname: 'hbs'
-}))
-app.set('view engine', 'hbs');
-app.set('views', 'src/views');
-
-
-const PORT=3000;
-
-app.use(express.static('./src/public'))
-
-app.get('/', (req,res)=>{
-    res.render('index')
+expressConfig(app);
+handlebarsConfig(app);
+app.use(homeController);
+app.use('/cubes',cubeController);
+app.get('*', (req,res)=>{
+    res.render('404');
 })
 
-app.listen(PORT, ()=> console.log(`server is running on port ${PORT}...`))
+app.listen(PORT, () => console.log(`server is running on port ${PORT}...`));
