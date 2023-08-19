@@ -1,12 +1,18 @@
 const express = require('express');
 const expressConfig = require('./config/express');
 const handlebarsConfig=require('./config/handlebars');
+const dbConnect=require('./config/db');
 const homeController=require('./controllers/homeController');
 const cubeController=require('./controllers/cubeController');
 
 const PORT = 3000;
 
 const app = express();
+
+dbConnect()
+.then(()=>console.log('DB is started'))
+.catch(err=>{console.log('DB error:', err);   
+});
 
 expressConfig(app);
 handlebarsConfig(app);

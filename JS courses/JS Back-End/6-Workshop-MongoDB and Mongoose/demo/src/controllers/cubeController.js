@@ -10,10 +10,12 @@ router.post('/create',async (req, res) => {
     res.redirect('/');
 });
 
-router.get('/:cubeId/details',(req,res)=>{
+router.get('/:cubeId/details',async(req,res)=>{
     const id=req.params.cubeId;
-    let currCube= cubeService.getById(id);
-    res.render('details',currCube)
+
+    let currCube=await  cubeService.getById(id).lean();
+    
+    res.render('details',{currCube})
 })
 
 module.exports = router;
