@@ -5,8 +5,8 @@ router.get('/create', (req, res) => {
     res.render('create');
 });
 
-router.post('/create',async (req, res) => {
-   await cubeService.create(req.body);
+router.post('/create', (req, res) => {
+    cubeService.create(req.body);
     res.redirect('/');
 });
 
