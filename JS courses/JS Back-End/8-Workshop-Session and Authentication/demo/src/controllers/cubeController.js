@@ -4,6 +4,7 @@ const accessoryService = require('../service/accessoryService');
 const Cube = require('../models/Cube');
 
 router.get('/create', (req, res) => {
+    console.log(req.user);
     res.render('create');
 });
 

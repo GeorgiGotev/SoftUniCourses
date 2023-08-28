@@ -1,28 +1,28 @@
-const router=require('express').Router();
-const userService=require('../service/userService');
+const router = require('express').Router();
+const userService = require('../service/userService');
 
-router.get('/register',(req,res)=>{
+router.get('/register', (req, res) => {
     res.render('users/register');
 });
 
-router.post('/register',async (req,res)=>{
-    const {username, password, repeatPassword}= req.body;
-    await userService.register({username, password, repeatPassword});
+router.post('/register', async (req, res) => {
+    const { username, password, repeatPassword } = req.body;
+    await userService.register({ username, password, repeatPassword });
 
     res.redirect('/users/login');
 });
 
-router.get('/login', (req,res)=>{
+router.get('/login', (req, res) => {
     res.render('users/login');
-})
+});
 
-router.post('/login',async (req,res)=>{
-    const {username, password}= req.body;
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
 
-   const user= await userService.login(username,password);
+    const token = await userService.login(username, password);
 
-    res.redirect('/')
-})
+    res.cookie('auth', token, { httpOnly: true });
+    res.redirect('/');
+});
 
-
-module.exports=router
+module.exports = router;
