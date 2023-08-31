@@ -2,6 +2,8 @@ const router = require('express').Router();
 const cubeService = require('../service/cubeService');
 const accessoryService = require('../service/accessoryService');
 const Cube = require('../models/Cube');
+const getViewOptions=require('../util/viewHelpers');
+
 
 router.get('/create', (req, res) => {
     res.render('cube/create');
@@ -22,10 +24,10 @@ router.post('/create', async (req, res) => {
 
 router.get('/:cubeId/details', async (req, res) => {
     const id = req.params.cubeId;
-
-    let currCube = await cubeService.getById(id).lean();
-
-    res.render('cube/details', { currCube });
+    
+    const currCube = await cubeService.getById(id).lean();
+    const isOwner=currCube.owner===req.user._id;
+    res.render('cube/details', { currCube,isOwner });
 });
 
 router.get('/:cubeId/attach-accessory', async (req, res) => {
@@ -48,8 +50,9 @@ router.post('/:cubeId/attach-accessory', async (req, res) => {
 
 router.get('/:cubeId/delete', async (req, res) => {
     const cube = await cubeService.getById(req.params.cubeId).lean();
+    const options=getViewOptions(cube.difficultyLevel);
 
-    res.render('cube/delete', { cube });
+    res.render('cube/delete', { cube, options });
 });
 
 router.post('/:cubeId/delete', async (req, res) => {
@@ -58,9 +61,12 @@ router.post('/:cubeId/delete', async (req, res) => {
     res.redirect('/');
 });
 
+
+
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeService.getById(req.params.cubeId).lean();
-    res.render('cube/edit', { cube });
+    const options=getViewOptions(cube.difficultyLevel);
+    res.render('cube/edit', { cube,options });
 });
 
 router.post('/:cubeId/edit', async(req,res)=>{
