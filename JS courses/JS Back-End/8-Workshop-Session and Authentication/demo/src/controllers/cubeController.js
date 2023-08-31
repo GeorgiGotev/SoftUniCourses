@@ -26,7 +26,8 @@ router.get('/:cubeId/details', async (req, res) => {
     const id = req.params.cubeId;
     
     const currCube = await cubeService.getById(id).lean();
-    const isOwner=currCube.owner===req.user._id;
+    const isOwner=currCube.owner?.toString()===req.user._id;
+
     res.render('cube/details', { currCube,isOwner });
 });
 

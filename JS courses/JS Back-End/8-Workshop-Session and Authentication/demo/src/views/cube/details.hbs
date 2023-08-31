@@ -7,8 +7,10 @@
         <p><span>Difficulty level:</span> {{currCube.difficultyLevel}}</p>
         <a class="btn" href="/">Back</a>
         <a class="btn" href="/cubes/{{currCube._id}}/attach-accessory">Attach</a>
+        {{#if isOwner}}
         <a class="btn" href="/cubes/{{currCube._id}}/edit">Edit</a>
         <a class="btn" href="/cubes/{{currCube._id}}/delete">Delete</a>
+        {{/if}}
       </div>
       <h2>Accessories</h2>
             <div class="accessories">
