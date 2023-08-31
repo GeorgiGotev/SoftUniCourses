@@ -3,9 +3,20 @@ const cubeService = require('../service/cubeService');
 const accessoryService = require('../service/accessoryService');
 const Cube = require('../models/Cube');
 const getViewOptions=require('../util/viewHelpers');
+const {isAuth}=require('../middlewares/authMiddleware');
 
+router.get('/:cubeId/details', async (req, res) => {
+    const id = req.params.cubeId;
+    
+    const currCube = await cubeService.getById(id).lean();
+    const isOwner=currCube.owner?.toString()===req.user?._id;
+    
+    res.render('cube/details', { currCube, isOwner });
+});
 
-router.get('/create', (req, res) => {
+router.use(isAuth)
+
+router.get('/create',(req, res) => {
     res.render('cube/create');
 });
 
@@ -22,14 +33,7 @@ router.post('/create', async (req, res) => {
     res.redirect('/');
 });
 
-router.get('/:cubeId/details', async (req, res) => {
-    const id = req.params.cubeId;
-    
-    const currCube = await cubeService.getById(id).lean();
-    const isOwner=currCube.owner?.toString()===req.user._id;
 
-    res.render('cube/details', { currCube,isOwner });
-});
 
 router.get('/:cubeId/attach-accessory', async (req, res) => {
     const cube = await cubeService.getById(req.params.cubeId).lean();
