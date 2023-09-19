@@ -14,7 +14,7 @@ router.get('/:cubeId/details', async (req, res) => {
     res.render('cube/details', { currCube, isOwner });
 });
 
-router.use(isAuth)
+router.use(isAuth) // guard .. is auth? User?
 
 router.get('/create',(req, res) => {
     res.render('cube/create');
@@ -70,6 +70,9 @@ router.post('/:cubeId/delete', async (req, res) => {
 
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeService.getById(req.params.cubeId).lean();
+    if(cube.owner.toString()!==req.user._id){  // guard for user owner 
+        return res.redirect('/404')
+    }
     const options=getViewOptions(cube.difficultyLevel);
     res.render('cube/edit', { cube,options });
 });

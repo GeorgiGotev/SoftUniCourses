@@ -21,7 +21,7 @@ exports.auth = async (req, res, next) => {
 };
 
 
-exports.isAuth=(req,res,next)=>{
+exports.isAuth=(req,res,next)=>{ //guard for isAuth?
     if(!req.user){
         return res.redirect('/users/login')
     }
