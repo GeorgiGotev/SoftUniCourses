@@ -33,6 +33,12 @@
 
                 </ul>
             </header>
+            {{#each errorMessages}}
+            <div id="notifications">
+                <p id="notification-massage">{{this}}</p>
+            </div>
+            {{/each}}
+
             {{{body}}}
         </div>
         <footer>@Cubicle: Exercise for Express.js and Handlebars</footer>
