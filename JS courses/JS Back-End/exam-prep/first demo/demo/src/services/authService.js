@@ -19,12 +19,14 @@ exports.register = async (username, email, password, repeatPassword) => {
     });
 
     if (existingUser) {
-        throw new Error('Username exists');
+        throw new Error('Username/Email exists');
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
 
     await User.create({ username, email, password: hashPassword });
+
+    return this.login(email, password);
 };
 
 exports.login = async (email, password) => {
