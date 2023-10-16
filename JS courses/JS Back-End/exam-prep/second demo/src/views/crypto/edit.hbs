@@ -22,11 +22,7 @@
                     <textarea name="description"
                         id="description">{{crypto.description}}</textarea>
                     <label>Payment method:</label>
-                    <select id="payment" name="paymentMethod">
-                        {{#each methods}}
-                        <option value="{{value}}" {{#if isSelected}} selected {{/if}}>{{label}}</option>
-                        {{/each}}
-                    </select>
+                    {{>payment}}
                     <input type="submit" id="btn" value="EDIT"></input>
                 </form>
             </div>

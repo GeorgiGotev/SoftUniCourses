@@ -19,18 +19,18 @@ exports.buy = async (userId, cryptoId) => {
 };
 
 exports.edit = (cryptoId, cryptoData) =>
-    Crypto.findByIdAndUpdate(cryptoId, cryptoData);
+    Crypto.findByIdAndUpdate(cryptoId, cryptoData, { runValidators: true});
 
 exports.delete = (cryptoId) => Crypto.findByIdAndDelete(cryptoId);
 
 exports.search = async (name, paymentMethod) => {
     let crypto = await this.getAll();
     if (name) {
-        crypto = crypto.filter((x) => x.name.toLowerCase() == name);
+        crypto = crypto.filter((x) => x.name.toLowerCase().includes(name.toLowerCase()));
     }
 
     if (paymentMethod) {
-        crypto = crypto.filter((x) => x == paymentMethod);
+        crypto = crypto.filter((x) => x.paymentMethod == paymentMethod);
     }
-    return crypto
+    return crypto;
 };

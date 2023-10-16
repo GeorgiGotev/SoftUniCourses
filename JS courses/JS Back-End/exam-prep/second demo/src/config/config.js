@@ -7,3 +7,13 @@ exports.paymentMethods = {
     'debit-card': 'Debit Card',
     'paypal': 'PayPal',
 };
+
+exports.getPaymentMethodsView=(current)=>{
+    const methods = Object.keys(this.paymentMethods).map((key) => ({
+        value: key,
+        label: this.paymentMethods[key],
+        isSelected: current == key,
+    }));
+
+    return methods;
+}
