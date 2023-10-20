@@ -1,0 +1,1 @@
+const Crypto = require('../models/Crypto');  // change name
