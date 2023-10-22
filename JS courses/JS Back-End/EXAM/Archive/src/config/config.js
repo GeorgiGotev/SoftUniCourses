@@ -1,0 +1,2 @@
+exports.SECRET =
+    '81159d5232c3311cd621c517e0abcf20e09acf073a0136cc59b3bd784985f243';
