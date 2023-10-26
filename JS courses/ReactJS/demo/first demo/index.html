@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+        <link rel="icon" type="image" href="./public/images/img_drying_3.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Лиофилизация</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+        />
+
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+        <!-- fonts style -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="css/responsive.css" rel="stylesheet" />
+
+        <script>
+            // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+            // Australia.
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 11,
+                    center: {
+                        lat: 40.645037,
+                        lng: -73.880224,
+                    },
+                });
+
+                var image = 'images/maps-and-flags.png';
+                var beachMarker = new google.maps.Marker({
+                    position: {
+                        lat: 40.645037,
+                        lng: -73.880224,
+                    },
+                    map: map,
+                    icon: image,
+                });
+            }
+        </script>
+        <!-- google map js -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
+        <!-- end google map js -->
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
+</html>
