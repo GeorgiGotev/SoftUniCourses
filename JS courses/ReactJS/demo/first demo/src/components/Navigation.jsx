@@ -25,9 +25,9 @@ export default function Navigation(props) {
                 <div className="d-flex ml-auto flex-column flex-lg-row align-items-center">
                     <ul className="navbar-nav  ">
                         <li className="nav-item active">
-                            <a className="nav-link" href="index.html">
+                            <Link className="nav-link" to='/'>
                                 Home <span className="sr-only">(current)</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="fruit.html">
@@ -42,7 +42,7 @@ export default function Navigation(props) {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={'/contacts'}>
+                            <Link className="nav-link" to='/contacts'>
                                 Contact us
                             </Link>
                         </li>
