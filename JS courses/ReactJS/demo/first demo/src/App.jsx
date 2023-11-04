@@ -13,11 +13,10 @@ function App() {
             <Navigation />
             <Routes>
                 <Route path="/contacts" element={<ContactUs />}></Route>
+                
                 <Route path="/" element={<Home />}></Route>
             </Routes>
             <Footer />
-
-
         </>
     );
 }
