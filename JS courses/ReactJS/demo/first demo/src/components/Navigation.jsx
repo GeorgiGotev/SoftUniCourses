@@ -46,17 +46,32 @@ export default function Navigation(props) {
                                 Contact us
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/contacts'>
+                                Login
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/contacts'>
+                                Register
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/contacts'>
+                                Logout
+                            </Link>
+                        </li>
                     </ul>
-                    <form className="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                    {/* <form className="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                         <button
                             className="btn  my-2 my-sm-0 nav_search-btn"
                             type="submit"
                         />
-                    </form>
+                    </form> */}
                 </div>
-                <div className="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center">
+                {/* <div className="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center">
                     <a href="">Get A quote</a>
-                </div>
+                </div> */}
             </div>
         </nav>
     );

@@ -1,7 +1,5 @@
 import ContactUs from './components/ContactUs';
 import Footer from './components/footer';
-
-import Header from './components/Header';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
 
