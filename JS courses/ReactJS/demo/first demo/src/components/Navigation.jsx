@@ -48,6 +48,11 @@ export default function Navigation(props) {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to='/contacts'>
+                                Add product
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/contacts'>
                                 Login
                             </Link>
                         </li>
