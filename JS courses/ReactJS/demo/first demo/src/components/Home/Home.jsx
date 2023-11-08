@@ -1,9 +1,9 @@
-import Fruits from '../components/Fruits';
-import OurService from '../components/OurService';
-import SiteMap from '../components/SiteMap';
-import TestyFruits from '../components/TastyFruits';
-import ContactUs from './ContactUs';
-import Headers from './Header';
+import Fruits from '../Catalog/Fruits';
+import OurService from '../OurService';
+import SiteMap from '../SiteMap';
+import TestyFruits from '../Catalog/TastyFruits';
+import ContactUs from '../ContactUs';
+import Headers from '../Header/Header';
 
 export default function Home(props){
     return(
