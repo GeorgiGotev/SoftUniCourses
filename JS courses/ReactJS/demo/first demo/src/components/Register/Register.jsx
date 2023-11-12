@@ -4,38 +4,59 @@ import { useContext } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export default function Register(props) {
+export default function Register() {
+
+    const { onRegisterSubmit } = useContext(AuthContext);
+    const { values, changeHandler, onSubmit } = useForm({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    }, onRegisterSubmit);
+
     return (
         <section className="contact_section layout_padding">
             <div className="container">
                 <h2 className="font-weight-bold">Register</h2>
                 <div className="row">
                     <div className="col-md-8 mr-auto">
-                        <form action="">
+                        <form action="POST" onSubmit={onSubmit}>
                             <div className="contact_form-container">
                                 <div>
                                     <div>
                                         <input
                                             type="text"
+                                            name="username"
                                             placeholder="Username"
+                                            value={values.username}
+                                            onChange={changeHandler}
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            type="text"
+                                            type="email"
+                                            name="email"
                                             placeholder="Email"
+                                            value={values.email}
+                                            onChange={changeHandler}
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            type="text"
+                                            type="password"
+                                            name="password"
                                             placeholder="Password"
+                                            value={values.password}
+                                            onChange={changeHandler}
                                         />
                                     </div>
                                     <div>
                                         <input
-                                            type="text"
+                                            type="password"
+                                            name="confirmPassword"
                                             placeholder="Repeat-password"
+                                            value={values.confirmPassword}
+                                            onChange={changeHandler}
                                         />
                                     </div>
 
