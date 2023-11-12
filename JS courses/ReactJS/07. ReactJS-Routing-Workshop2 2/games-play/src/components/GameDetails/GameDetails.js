@@ -8,10 +8,12 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 import { AddComment } from './AddComment/AddComment';
 import { gameReducer } from '../../reducers/gameReducer';
+import { useGameContext } from '../../contexts/GameContext';
 
 export const GameDetails = () => {
     const { gameId } = useParams();
     const { userId, isAuthenticated, userEmail } = useAuthContext();
+    const { deleteGame } = useGameContext();
     const [game, dispatch] = useReducer(gameReducer, {});
     const gameService = useService(gameServiceFactory)
     const navigate = useNavigate();
@@ -43,11 +45,16 @@ export const GameDetails = () => {
     const isOwner = game._ownerId === userId;
 
     const onDeleteClick = async () => {
-        await gameService.delete(game._id);
+        // eslint-disable-next-line no-restricted-globals
+        const result = confirm(`Are you sure you want to delete ${game.title}`);
 
-        // TODO: delete from state
+        if (result) {
+            await gameService.delete(game._id);
 
-        navigate('/catalog');
+            deleteGame(game._id);
+
+            navigate('/catalog');
+        }
     };
 
     return (
