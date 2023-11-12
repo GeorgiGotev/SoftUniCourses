@@ -5,11 +5,11 @@ import TestyFruits from '../Catalog/TastyFruits';
 import ContactUs from '../ContactUs';
 import Headers from '../Header/Header';
 
-export default function Home(props){
-    return(
+export default function Home(props) {
+    return (
         <>
-        <Headers/>
-        <OurService />
+            <Headers />
+            <OurService />
             <Fruits />
             <TestyFruits />
             <ContactUs />
