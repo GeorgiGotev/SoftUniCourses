@@ -16,9 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy:hosting": "firebase deploy --only hosting",
-    "deploy": "npm run build && npm run deploy:hosting"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

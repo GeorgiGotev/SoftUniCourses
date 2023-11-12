@@ -1,26 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import LatestGame from './LatestGame';
-
 export const Home = () => {
-    const [latestGames, setLatestGames] = useState([]);
-
-    useEffect(() => {
-        fetch(`http://localhost:3030/data/games`)
-            .then(res => res.json())
-            .then(result => {
-                setLatestGames(result.map(x => ({ ...x, rating: 0 })));
-            });
-    }, []);
-
-    const onLikeClick = useCallback((gameId) => {
-        setLatestGames(state => state.map(x => x._id === gameId ? { ...x, rating: x.rating + 1 } : x));
-    }, [])
-
-    const result = useMemo(() => {
-        // Slow calculation
-        return 42;
-    }, []);
-
     return (
         <section id="welcome-world">
 
@@ -31,11 +9,48 @@ export const Home = () => {
             <img src="./images/four_slider_img01.png" alt="hero" />
 
             <div id="home-page">
-                <h1>Latest Games - {result}</h1>
+                <h1>Latest Games</h1>
 
-                {latestGames.map(game => <LatestGame key={game._id} {...game} onLikeClick={onLikeClick} />)}
+                {/* <!-- Display div: with information about every game (if any) --> */}
+                <div className="game">
+                    <div className="image-wrap">
+                        <img src="./images/CoverFire.png" />
+                    </div>
+                    <h3>Cover Fire</h3>
+                    <div className="rating">
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </div>
+                    <div className="data-buttons">
+                        <a href="#" className="btn details-btn">Details</a>
+                    </div>
+                </div>
+                <div className="game">
+                    <div className="image-wrap">
+                        <img src="./images/ZombieLang.png" />
+                    </div>
+                    <h3>Zombie Lang</h3>
+                    <div className="rating">
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </div>
+                    <div className="data-buttons">
+                        <a href="#" className="btn details-btn">Details</a>
+                    </div>
+                </div>
+                <div className="game">
+                    <div className="image-wrap">
+                        <img src="./images/MineCraft.png" />
+                    </div>
+                    <h3>MineCraft</h3>
+                    <div className="rating">
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </div>
+                    <div className="data-buttons">
+                        <a href="#" className="btn details-btn">Details</a>
+                    </div>
+                </div>
 
-                {latestGames.length === 0 && <p className="no-articles">No games yet</p>}
+                {/* <!-- Display paragraph: If there is no games  --> */}
+                <p className="no-articles">No games yet</p>
             </div>
         </section>
     );
