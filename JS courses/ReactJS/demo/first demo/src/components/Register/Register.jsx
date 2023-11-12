@@ -1,3 +1,9 @@
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { useForm } from '../../hooks/useForm';
+import { AuthContext } from '../../contexts/AuthContext';
+
 export default function Register(props) {
     return (
         <section className="contact_section layout_padding">
@@ -36,6 +42,10 @@ export default function Register(props) {
                                     <div className="mt-5">
                                         <button type="submit">send</button>
                                     </div>
+                                    <span>
+                                        If you have profile click{' '}
+                                        <Link to="/login">here</Link>
+                                    </span>
                                 </div>
                             </div>
                         </form>

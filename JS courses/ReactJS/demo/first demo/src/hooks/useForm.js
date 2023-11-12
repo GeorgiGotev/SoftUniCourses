@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 export const useForm = (initialValues, onSubmitHandler) => {
+
     const [values, setValues] = useState(initialValues);
 
     const changeHandler = (e) => {
@@ -16,7 +17,6 @@ export const useForm = (initialValues, onSubmitHandler) => {
     };
 
     const changeValues = (newValues) => {
-        // TODO: Validate newValues shape (like initialValues)
         
         setValues(newValues);
     };

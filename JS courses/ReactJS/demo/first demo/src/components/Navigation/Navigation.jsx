@@ -1,6 +1,11 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { AuthContext } from '../../contexts/AuthContext';
+
 export default function Navigation(props) {
+    const { isAuthenticated } = useContext(AuthContext);
+
     return (
         <nav className="navbar navbar-expand-lg custom_nav-container pt-3">
             <a className="navbar-brand" href="index.html">
@@ -25,7 +30,7 @@ export default function Navigation(props) {
                 <div className="d-flex ml-auto flex-column flex-lg-row align-items-center">
                     <ul className="navbar-nav  ">
                         <li className="nav-item active">
-                            <Link className="nav-link" to='/'>
+                            <Link className="nav-link" to="/">
                                 Home <span className="sr-only">(current)</span>
                             </Link>
                         </li>
@@ -42,30 +47,40 @@ export default function Navigation(props) {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to='/contacts'>
+                            <Link className="nav-link" to="/contacts">
                                 Contact us
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/contacts'>
-                                Add product
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/login'>
-                                Login
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/register'>
-                                Register
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/contacts'>
-                                Logout
-                            </Link>
-                        </li>
+
+                        {isAuthenticated && (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/contacts">
+                                        Add product
+                                    </Link>
+                                </li>
+
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/logout">
+                                        Logout
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+                        {!isAuthenticated && (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">
+                                        Login
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/register">
+                                        Register
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                     {/* <form className="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                         <button

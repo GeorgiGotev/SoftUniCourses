@@ -20,7 +20,7 @@ export const AuthProvider = ({
 
             setAuth(result);
 
-            navigate('/catalog');
+            navigate('/');
         } catch (error) {
             console.log('There is a problem');
         }
