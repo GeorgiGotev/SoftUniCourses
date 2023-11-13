@@ -8,10 +8,10 @@ export default function Navigation(props) {
 
     return (
         <nav className="navbar navbar-expand-lg custom_nav-container pt-3">
-            <a className="navbar-brand" href="index.html">
+            <Link className="navbar-brand" to="/">
                 <img src="images/logo.png" alt="" />
-                <span>Tropiko</span>
-            </a>
+                <span>freeze dried</span>
+            </Link>
             <button
                 className="navbar-toggler"
                 type="button"
@@ -35,10 +35,10 @@ export default function Navigation(props) {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="fruit.html">
+                            <Link className="nav-link" to="/catalog">
                                 {' '}
                                 Fruits
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="service.html">

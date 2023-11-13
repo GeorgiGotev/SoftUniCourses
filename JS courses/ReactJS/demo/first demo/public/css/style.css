@@ -2,6 +2,8 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #000000;
     background-color: #ffffff;
+    min-height: 100vh;
+    position: relative;
 }
 
 .layout_padding {
@@ -473,11 +475,9 @@ a:focus {
     background-color: #efeded;
     padding: 20px 0;
     font-family: 'Roboto', sans-serif;
-    position: fixed;
-    /* margin-top: auto; */
+    margin-top: auto;
     bottom: 0;
-    /* position: relative;
-    bottom: 0; */
+    position: absolute;
 }
 
 .footer_section p {

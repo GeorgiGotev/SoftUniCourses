@@ -1525,7 +1525,8 @@
             '1840a313-225c-416a-817a-9954d4609f7c': {
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
                 name: 'Apple',
-                imageUrl: '/images/fact 1.png',
+                imageUrl:
+                    'https://freezedried.bg/wp-content/uploads/2022/11/zelena_yabalka.webp',
                 description:
                     "Uncover the intriguing tale of the shortest war in history!The Anglo-Zanzibar War of 1896 lasted a mere 38 minutes,making it an astonishingly brief conflict that's sure to leaveyou amazed by the brevity of battle.",
                 moreInfo:
@@ -1535,7 +1536,7 @@
             '126777f5-3277-42ad-b874-76d043b069cb': {
                 _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
                 name: 'Banana',
-                imageUrl: '/images/fact 2.jpg',
+                imageUrl: 'https://5.imimg.com/data5/SELLER/Default/2021/6/QN/CU/QE/74581666/dehydrated-banana-powder-500x500-500x500.jpg',
                 description:
                     "Did you know that the Earth's oceans contain enough salt to cover all the continents in a layer 500 feet thick? Dive into the depths of this salty fact and explore the wonders of our planet's aquatic wonders.",
                 moreInfo:
@@ -1545,7 +1546,7 @@
             '136777f5-3277-42ad-b874-76d043b069cb': {
                 _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
                 name: 'Strawberries',
-                imageUrl: '/images/fact 3.jpg',
+                imageUrl: 'https://www.medikonda.com/cdn/shop/products/Strawberry-Powder_3744239f-8580-497c-a725-e2af4b147394_600x.jpg?v=1671204791',
                 description:
                     'Prepare to be astounded by the power of hummingbirds!These tiny marvels can flap their wings up to 80 times per second,enabling them to hover, fly backward, and even upside down.Discover more about these delightful creatures and theirextraordinary abilities.',
                 moreInfo:
