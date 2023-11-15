@@ -349,3 +349,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+JS courses/ReactJS/3-Components Deep Dive/03. ReactJS-Components-Deep-Dive/components-deep-dive-demo/
+JS courses/ReactJS/3-Components Deep Dive/03. ReactJS-Components-Deep-Dive/todo-list/client/
