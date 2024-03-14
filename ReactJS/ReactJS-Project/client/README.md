@@ -6,3 +6,9 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+<!-- npm run build - to make changes in dist folder -->
+<!-- npm run dev - to host it locally in dev -->
+<!-- firebase serve -  to check locally if everything is correct -->
+<!-- firebase deploy - just to show last version online -->
