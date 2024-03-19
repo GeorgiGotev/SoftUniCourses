@@ -46,7 +46,7 @@ function App() {
                     </ul>
                     <a className="navbar-brand m-auto" href="#">
                         <img
-                            src="./src/assets/imgs/logo.svg"
+                            src="https://firebasestorage.googleapis.com/v0/b/food-hunt-93.appspot.com/o/logo.svg?alt=media&token=49a42cca-7ef6-4675-85f1-091ea0929da0"
                             className="brand-img"
                             alt=""
                         />
