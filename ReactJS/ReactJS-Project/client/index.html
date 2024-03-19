@@ -1,13 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite + React</title>
+
+        <link
+            rel="stylesheet"
+            href="./src/assets/vendors/themify-icons/css/themify-icons.css"
+        />
+
+        <link
+            rel="stylesheet"
+            href="./src/assets/vendors/animate/animate.css"
+        />
+
+        <!-- Bootstrap + FoodHut main styles -->
+        <link rel="stylesheet" href="./src/assets/css/foodhut.css" />
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="./src/main.jsx"></script>
+        <script src="./src/assets/vendors/jquery/jquery-3.4.1.js"></script>
+        <script src="./src/assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+        <!-- bootstrap affix -->
+        <script src="./src/assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+        <!-- wow.js -->
+        <script src="./src/assets/vendors/wow/wow.js"></script>
+
+        <!-- google maps -->
+        <script
+            async
+            defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap"
+        ></script>
+
+        <!-- FoodHut js -->
+        <script src="./src/assets/js/foodhut.js"></script>
+    </body>
 </html>
