@@ -1,4 +1,7 @@
+
 function App() {
+  
+
     return (
         <>
             {/* Navbar */}
@@ -46,7 +49,7 @@ function App() {
                     </ul>
                     <a className="navbar-brand m-auto" href="#">
                         <img
-                            src="https://firebasestorage.googleapis.com/v0/b/food-hunt-93.appspot.com/o/logo.svg?alt=media&token=49a42cca-7ef6-4675-85f1-091ea0929da0"
+                            src="./imgs/logo.svg"
                             className="brand-img"
                             alt=""
                         />
@@ -157,7 +160,7 @@ function App() {
             <div className="gallary row">
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-1.jpg"
+                        src="./imgs/gallary-1.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -167,7 +170,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-2.jpg"
+                        src="./imgs/gallary-2.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -177,7 +180,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-3.jpg"
+                        src="./imgs/gallary-3.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -187,7 +190,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-4.jpg"
+                        src="./imgs/gallary-4.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -197,7 +200,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-5.jpg"
+                        src="./imgs/gallary-5.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -207,7 +210,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-6.jpg"
+                        src="./imgs/gallary-6.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -217,7 +220,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-7.jpg"
+                        src="./imgs/gallary-7.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -227,7 +230,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-8.jpg"
+                        src="./imgs/gallary-8.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -237,7 +240,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-9.jpg"
+                        src="./imgs/gallary-9.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -247,7 +250,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-10.jpg"
+                        src="./imgs/gallary-10.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -257,7 +260,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-11.jpg"
+                        src="./imgs/gallary-11.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -267,7 +270,7 @@ function App() {
                 </div>
                 <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src="./src/assets/imgs/gallary-12.jpg"
+                        src="./imgs/gallary-12.jpg"
                         alt="template by DevCRID http://www.devcrud.com/"
                         className="gallary-img"
                     />
@@ -381,7 +384,7 @@ function App() {
                             <div className="col-md-4">
                                 <div className="card bg-transparent border my-3 my-md-0">
                                     <img
-                                        src="./src/assets/imgs/blog-1.jpg"
+                                        src="./imgs/blog-1.jpg"
                                         alt="template by DevCRID http://www.devcrud.com/"
                                         className="rounded-0 card-img-top mg-responsive"
                                     />
@@ -410,7 +413,7 @@ function App() {
                             <div className="col-md-4">
                                 <div className="card bg-transparent border my-3 my-md-0">
                                     <img
-                                        src="./src/assets/imgs/blog-2.jpg"
+                                        src="./imgs/blog-2.jpg"
                                         alt="template by DevCRID http://www.devcrud.com/"
                                         className="rounded-0 card-img-top mg-responsive"
                                     />
@@ -439,7 +442,7 @@ function App() {
                             <div className="col-md-4">
                                 <div className="card bg-transparent border my-3 my-md-0">
                                     <img
-                                        src="./src/assets/imgs/blog-3.jpg"
+                                        src="./imgs/blog-3.jpg"
                                         alt="template by DevCRID http://www.devcrud.com/"
                                         className="rounded-0 card-img-top mg-responsive"
                                     />
@@ -477,7 +480,7 @@ function App() {
                             <div className="col-md-4 my-3 my-md-0">
                                 <div className="card bg-transparent border">
                                     <img
-                                        src="./src/assets/imgs/blog-4.jpg"
+                                        src="./imgs/blog-4.jpg"
                                         alt="template by DevCRID http://www.devcrud.com/"
                                         className="rounded-0 card-img-top mg-responsive"
                                     />
@@ -506,7 +509,7 @@ function App() {
                             <div className="col-md-4 my-3 my-md-0">
                                 <div className="card bg-transparent border">
                                     <img
-                                        src="./src/assets/imgs/blog-5.jpg"
+                                        src="./imgs/blog-5.jpg"
                                         alt="template by DevCRID http://www.devcrud.com/"
                                         className="rounded-0 card-img-top mg-responsive"
                                     />
@@ -535,7 +538,7 @@ function App() {
                             <div className="col-md-4 my-3 my-md-0">
                                 <div className="card bg-transparent border">
                                     <img
-                                        src="./src/assets/imgs/blog-6.jpg"
+                                        src="./imgs/blog-6.jpg"
                                         alt="template by DevCRID http://www.devcrud.com/"
                                         className="rounded-0 card-img-top mg-responsive"
                                     />
