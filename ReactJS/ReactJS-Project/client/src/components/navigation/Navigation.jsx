@@ -33,19 +33,19 @@ export default function Navigation() {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#about">
-                            About
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#gallary">
                             Recipes
                         </a>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="#book-table">
-                        Contact us
-                    </a>
-                </li>
+                        <a className="nav-link" href="#gallary">
+                            About
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#book-table">
+                            Contact
+                        </a>
+                    </li>
                 </ul>
                 <a className="navbar-brand m-auto" href="#">
                     <img src="./imgs/logo.svg" className="brand-img" alt="" />
