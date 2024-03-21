@@ -16,7 +16,7 @@ function App() {
                         Always fresh &amp; Delightful
                     </h2>
                     <a className="btn btn-lg btn-primary" href="#gallary">
-                        View Our gallary
+                        View Our recipes
                     </a>
                 </div>
             </header>
