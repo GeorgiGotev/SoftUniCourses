@@ -1,8 +1,10 @@
-// import { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../contexts/AuthContext';
 
-export default function Navigation() {
-    // const { isAuthenticated } = useContext(AuthContext);
+export default function Navigation({ signOutHandler }) {
+
+    const { authInfo } = useContext(AuthContext);
 
     return (
         <nav
@@ -39,25 +41,37 @@ export default function Navigation() {
                         </Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/add">
+                            Add Recipe
+                        </Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" to="/profile">
-                            Profile<span className="sr-only">(current)</span>
+                            My Profile<span className="sr-only">(current)</span>
                         </Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">
-                            Login
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/register">
-                            Register
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#contact">
-                            Logout
-                        </a>
-                    </li>
+                    {authInfo ? (
+                        <>
+                            <li className="nav-item" onClick={signOutHandler}>
+                                <Link className="nav-link" to="/logout">
+                                    Logout
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login">
+                                    Login
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/register">
+                                    Register
+                                </Link>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
         </nav>

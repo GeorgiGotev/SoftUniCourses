@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.login{
+.recipe{
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
@@ -92,7 +92,7 @@
   color: #EF3B3A;
 }
 
-.headerLogin{
+.headerRecipe{
   height: 100vh;
   max-height: 900px;
   background: url("../../../imgs/BIG_SMOKE_120320_063.jpg") no-repeat center center fixed;
