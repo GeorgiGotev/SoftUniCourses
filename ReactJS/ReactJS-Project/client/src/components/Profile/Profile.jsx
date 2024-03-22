@@ -20,7 +20,7 @@ export default function Profile (){
             </div>
             <section className="fruit_section">
                 <div className="container">
-                    <h2 className="custom_heading">Own list of Fruits</h2>
+                    <h2 className="custom_heading">Own list of Recipes</h2>
                     {/* <p className="custom_heading-text">
                     There are many variations of passages of Lorem Ipsum
                     available, but the majority have

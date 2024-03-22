@@ -3,6 +3,7 @@ import style from '../Register/Register.module.css';
 export default function Register() {
     return (
         <>
+        <header className={style.headerRegister}>
             <div className={`${style.login} ${style.page}`}>
                     <form className={`${style.register} ${style.form}`}>
                         <input type="text" placeholder="name" />
@@ -14,6 +15,7 @@ export default function Register() {
                         </p>
                     </form>
             </div>
+            </header>
         </>
     );
 }

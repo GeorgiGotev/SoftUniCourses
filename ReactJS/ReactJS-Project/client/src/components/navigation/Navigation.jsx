@@ -1,5 +1,5 @@
 // import { useContext } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
     // const { isAuthenticated } = useContext(AuthContext);
@@ -25,47 +25,33 @@ export default function Navigation() {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
             >
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#home">
-                            Home
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#about">
-                            Recipes
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#gallary">
-                            About
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#book-table">
-                            Contact
-                        </a>
-                    </li>
-                </ul>
-                <a className="navbar-brand m-auto" href="#">
+                <ul className="navbar-nav"></ul>
+
+                <Link className="navbar-brand m-auto" to="/">
                     <img src="./imgs/logo.svg" className="brand-img" alt="" />
                     <span className="brand-txt">Food Hunt</span>
-                </a>
+                </Link>
+
                 <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/gallery">
+                            Recipes
+                        </Link>
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#blog">
                             Profile<span className="sr-only">(current)</span>
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#testmonial">
+                        <Link className="nav-link" to="/login">
                             Login
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#contact">
+                        <Link className="nav-link" to="/register">
                             Register
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#contact">
