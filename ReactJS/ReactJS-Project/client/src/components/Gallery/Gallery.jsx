@@ -1,3 +1,5 @@
+import style from '../Gallery/Gallery.module.css'
+
 export default function Gallery() {
     return (
         <>
@@ -5,7 +7,7 @@ export default function Gallery() {
             id="gallary"
             className="text-center bg-dark text-light has-height-md middle-items wow fadeIn"
         >
-            <h2 className="section-title">OUR MENU</h2>
+            <h2 className={`${style.space}`}>OUR MENU</h2>
         </div>
         <div className="gallary row">
         <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">

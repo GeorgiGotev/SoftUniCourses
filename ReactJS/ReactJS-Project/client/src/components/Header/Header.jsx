@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
     return (
         <header id="home" className="header">
@@ -6,9 +8,9 @@ export default function Header() {
                 <h2 className="display-4 mb-5">
                     Always fresh &amp; Delightful
                 </h2>
-                <a className="btn btn-lg btn-primary" href="#gallary">
+                <Link className="btn btn-lg btn-primary" to="/gallery">
                     View Our recipes
-                </a>
+                </Link>
             </div>
         </header>
     );

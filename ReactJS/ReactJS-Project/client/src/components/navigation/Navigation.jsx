@@ -39,9 +39,9 @@ export default function Navigation() {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#blog">
+                        <Link className="nav-link" to="/profile">
                             Profile<span className="sr-only">(current)</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/login">
