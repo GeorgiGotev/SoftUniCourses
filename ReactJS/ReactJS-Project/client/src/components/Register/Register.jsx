@@ -1,36 +1,43 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from "react";
 import style from '../Register/Register.module.css';
 
-import useForm from '../../hooks/useForm';
 
-export default function Register({ registerSubmitHandler }) {
-    const { values, changeHandler, submitHandler } = useForm(
-        registerSubmitHandler,
-        {
-            email: '',
-            password: '',
-            rePassword: '',
-        }
-    );
+import AuthContext from "../../contexts/AuthContext";
+import useForm from "../../hooks/useForm";
+
+const RegisterFormKeys = {
+    Email: 'email',
+    Password: 'password',
+    ConfirmPassword: 'rePassword',
+};
+
+
+export default function Register() {
+    const { registerSubmitHandler } = useContext(AuthContext);
+    const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
+        [RegisterFormKeys.Email]: '',
+        [RegisterFormKeys.Password]: '',
+        [RegisterFormKeys.ConfirmPassword]: '',
+    });
 
     return (
         <>
             <header className={style.headerRegister}>
                 <div className={`${style.login} ${style.page}`}>
                     <form
-                        onSubmit={submitHandler}
+                        onSubmit={onSubmit}
                         className={`${style.register} ${style.form}`}
                     >
-                        <label htmlFor="username">Username</label>
-                        <input type="text" name="name" placeholder="username" />
-                        <label htmlFor="username">Email</label>
+                        {/* <label htmlFor="username">Username</label>
+                        <input type="text" name="name" placeholder="username" /> */}
+                        <label htmlFor="email">Email</label>
                         <input
                             type="email"
                             name="email"
                             id="email"
-                            value={values['email']}
-                            onChange={changeHandler}
+                            value={values[RegisterFormKeys.Email]}
+                            onChange={onChange}
                             placeholder="name@abv.bg"
                         />
                         <label htmlFor="password">Password</label>
@@ -38,8 +45,8 @@ export default function Register({ registerSubmitHandler }) {
                             type="password"
                             name="password"
                             id="password"
-                            value={values['password']}
-                            onChange={changeHandler}
+                            value={values[RegisterFormKeys.Password]}
+                            onChange={onChange}
                             placeholder="*********"
                         />
 
@@ -49,8 +56,8 @@ export default function Register({ registerSubmitHandler }) {
                             type="password"
                             name="rePassword"
                             id='rePassword'
-                            value={values['rePassword']}
-                            onChange={changeHandler}
+                            value={values[RegisterFormKeys.ConfirmPassword]}
+                            onChange={onChange}
                             placeholder="*********"
                         />
 

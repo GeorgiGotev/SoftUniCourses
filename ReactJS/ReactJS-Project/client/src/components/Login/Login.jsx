@@ -1,16 +1,21 @@
 import { Link } from 'react-router-dom';
 import style from '../Login/Login.module.css';
 import useForm from '../../hooks/useForm';
-import { useState } from 'react';
+import { useContext } from 'react';
+import AuthContext from '../../contexts/AuthContext.jsx';
 
-export default function Login({ loginSubmitHandler }) {
-    const { values, changeHandler, submitHandler } = useForm(
-        loginSubmitHandler,
-        {
-            email: '',
-            password: '',
-        }
-    );
+const LoginFormKyes = {
+    Email: 'email',
+    Password: 'password',
+};
+
+
+export default function Login() {
+    const { loginSubmitHandler } = useContext(AuthContext);
+    const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
+        [LoginFormKyes.Email]: '',
+        [LoginFormKyes.Password]: '',
+    });
 
     return (
         <>
@@ -18,24 +23,24 @@ export default function Login({ loginSubmitHandler }) {
                 {/* <img className={style.img} src="../../../public/imgs/main.jpg" alt="" /> */}
                 <div className={`${style.login} ${style.page}`}>
                     <form
-                        onSubmit={submitHandler}
+                        onSubmit={onSubmit}
                         className={`${style.login} ${style.form}`}
                     >
-                        <label htmlFor="username">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
                             type="email"
-                            name="email"
-                            onChange={changeHandler}
-                            value={values['email']}
+                            name={LoginFormKyes.Email}
+                            onChange={onChange}
+                            value={values[LoginFormKyes.Email]}
                             placeholder="name@abv.bg"
                         />
 
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
-                            name="password"
-                            onChange={changeHandler}
-                            value={values['password']}
+                            name={LoginFormKyes.Password}
+                            onChange={onChange}
+                            value={values[LoginFormKyes.Password]}
                             placeholder="********"
                         />
                         <button>login</button>

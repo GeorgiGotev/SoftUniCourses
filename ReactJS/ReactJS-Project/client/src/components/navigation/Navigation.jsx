@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../contexts/AuthContext';
 
 export default function Navigation({ signOutHandler }) {
-
-    const { authInfo } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext);
 
     return (
         <nav
@@ -40,18 +39,20 @@ export default function Navigation({ signOutHandler }) {
                             Recipes
                         </Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/add">
-                            Add Recipe
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/profile">
-                            My Profile<span className="sr-only">(current)</span>
-                        </Link>
-                    </li>
-                    {authInfo ? (
+
+                    {isAuthenticated ? (
                         <>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/add">
+                                    Add Recipe
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/profile">
+                                    My Profile
+                                    <span className="sr-only">(current)</span>
+                                </Link>
+                            </li>
                             <li className="nav-item" onClick={signOutHandler}>
                                 <Link className="nav-link" to="/logout">
                                     Logout
