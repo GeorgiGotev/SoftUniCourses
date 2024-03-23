@@ -21,17 +21,17 @@ export const AuthProvider = ({
 
         localStorage.setItem('auth', user);
 
-        navigate("/");
+        navigate("/gallery");
     };
 
     const registerSubmitHandler = async (values) => {
-        const result = await authService.register(values);
+        const user = await authService.register(values);
 
-        setAuth(result);
+        setAuth(user);
 
-        localStorage.setItem('auth', result);
+        localStorage.setItem('auth', user);
 
-        navigate("/");
+        navigate("/gallery");
     };
 
     const logoutHandler = () => {
@@ -45,6 +45,7 @@ export const AuthProvider = ({
         registerSubmitHandler,
         logoutHandler,
         email: auth.email,
+        id: auth.uid,
         isAuthenticated: !!auth.email,
     };
 

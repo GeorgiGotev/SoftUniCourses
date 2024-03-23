@@ -3,7 +3,7 @@ import { useContext } from "react";
 import style from '../Register/Register.module.css';
 
 
-import AuthContext from "../../contexts/AuthContext";
+import AuthContext from "../../contexts/authContext";
 import useForm from "../../hooks/useForm";
 
 const RegisterFormKeys = {
@@ -29,8 +29,8 @@ export default function Register() {
                         onSubmit={onSubmit}
                         className={`${style.register} ${style.form}`}
                     >
-                        {/* <label htmlFor="username">Username</label>
-                        <input type="text" name="name" placeholder="username" /> */}
+                        <label htmlFor="username">Username</label>
+                        <input type="username" name="username" placeholder="username" />
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"

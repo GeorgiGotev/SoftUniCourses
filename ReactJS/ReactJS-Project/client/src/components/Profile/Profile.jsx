@@ -1,7 +1,10 @@
 import styles from '../Profile/Profile.module.css'
+import AuthContext from '../../contexts/authContext.jsx';
+import { useContext } from 'react';
 
 
 export default function Profile (){
+    const { email } = useContext(AuthContext);
     return(
         <>
             <div className={styles.card}>
@@ -14,7 +17,7 @@ export default function Profile (){
                 <div className={styles.container}>
                 <p>Profile Information</p>
                     <h4>
-                        <b>email here</b>
+                        <b>{email}</b>
                     </h4>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/authContext';
 
 import Footer from './components/Footer/Footer';
 import Gallery from './components/Gallery/Gallery';
