@@ -1,11 +1,13 @@
 import {
-    getAuth,
+    // getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
 } from 'firebase/auth';
 
-import { auth } from '../lib/firebase'
+import { authenticated as auth } from '../lib/firebase'
+// const authenticated = getAuth();
+
 
 export const register = async (values) => {
     // if (values.password !== values.rePassword) {

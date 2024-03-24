@@ -2,10 +2,12 @@ import { useState } from 'react';
 
 export default function usePersistedState(key, defaultValue) {
     const [state, setState] = useState(() => {
-        const persistedState = localStorage.getItem(key);
+        const persistedStateSerialized = localStorage.getItem(key);
 
-        if (persistedState) {
-            return JSON.parse(persistedState);
+        if (persistedStateSerialized) {
+            const persistedState = JSON.parse(persistedStateSerialized);
+
+            return persistedState;
         }
 
         return defaultValue;

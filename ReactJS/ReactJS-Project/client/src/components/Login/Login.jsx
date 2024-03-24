@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import style from '../Login/Login.module.css';
 import useForm from '../../hooks/useForm';
 import { useContext } from 'react';
-import AuthContext from '../../contexts/authContext.jsx';
-
+import AuthContext from '../../contexts/AuthContext';
 const LoginFormKyes = {
     Email: 'email',
     Password: 'password',

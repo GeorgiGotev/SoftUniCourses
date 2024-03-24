@@ -1,23 +1,26 @@
-import styles from '../Profile/Profile.module.css'
-import AuthContext from '../../contexts/authContext.jsx';
+import styles from '../Profile/Profile.module.css';
+import AuthContext from '../../contexts/AuthContext';
 import { useContext } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 
-export default function Profile (){
-    const { email } = useContext(AuthContext);
-    return(
+export default function Profile() {
+    const { user } = useContext(AuthContext);
+
+    console.log(user);
+    
+    return (
         <>
             <div className={styles.card}>
-                
                 <img
                     src="imgs/images.png"
                     alt="Avatar"
                     style={{ width: '10%' }}
                 />
                 <div className={styles.container}>
-                <p>Profile Information</p>
+                    <p>Profile Information</p>
                     <h4>
-                        <b>{email}</b>
+                        <b>{user.email}</b>
                     </h4>
                 </div>
             </div>
@@ -39,5 +42,5 @@ export default function Profile (){
                 </div>
             </section>
         </>
-    )
+    );
 }
