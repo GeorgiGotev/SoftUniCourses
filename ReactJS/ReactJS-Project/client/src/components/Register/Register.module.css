@@ -100,6 +100,18 @@
   min-height: 750px;
 }
   
+.inputFields {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+.errorMessage {
+color:red;
+font: 0.5 em;
+margin: 0 0 10px
+}
 
 
 

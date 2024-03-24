@@ -13,7 +13,11 @@ export default function useForm(submitHandler, initialValues) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-
+        Object.values(values).forEach(x=>{
+            if(x===""){
+                throw new Error ('fill everything')
+            }
+        })
         submitHandler(values);
     };
 

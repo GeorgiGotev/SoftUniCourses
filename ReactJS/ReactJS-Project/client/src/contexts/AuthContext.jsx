@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../services/authService';
@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
     // const currentUser = useAuth();
 
     const [auth, setAuth] = usePersistedState('auth', {});
+    const [error, setError] = useState(null);
 
     const loginSubmitHandler = async (values) => {
 
@@ -24,10 +25,17 @@ export const AuthProvider = ({ children }) => {
 
     const registerSubmitHandler = async (values) => {
 
-        const user = await authService.register(values);
+        try{
+            const user = await authService.register(values);
 
-        setAuth(user);
-        navigate('/gallery');
+            setAuth(user);
+            navigate('/gallery');
+        }catch (err) {
+            setError(err.message);
+            // setTimeout(() => {
+            //   setError(null);
+            // }, 2000);
+        }
     };
 
     const logoutHandler = () => {

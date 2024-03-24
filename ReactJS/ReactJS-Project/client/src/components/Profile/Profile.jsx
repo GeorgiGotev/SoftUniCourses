@@ -7,7 +7,6 @@ import { useAuth } from '../../hooks/useAuth';
 export default function Profile() {
     const { user } = useContext(AuthContext);
 
-    console.log(user);
     
     return (
         <>
