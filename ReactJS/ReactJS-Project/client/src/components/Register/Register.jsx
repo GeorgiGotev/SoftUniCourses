@@ -12,10 +12,9 @@ const RegisterFormKeys = {
 };
 
 export default function Register() {
-
     const [errors, setErrors] = useState({});
 
-    const { registerSubmitHandler } = useContext(AuthContext);
+    const { registerSubmitHandler, error } = useContext(AuthContext);
     const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
         [RegisterFormKeys.Email]: '',
         [RegisterFormKeys.Password]: '',
@@ -56,7 +55,6 @@ export default function Register() {
             }
         }
     };
-    
 
     return (
         <>
@@ -66,12 +64,12 @@ export default function Register() {
                         onSubmit={onSubmit}
                         className={`${style.register} ${style.form}`}
                     >
-                        <label htmlFor="username">Username</label>
+                        {/* <label htmlFor="username">Username</label>
                         <input
                             type="username"
                             name="username"
                             placeholder="username"
-                        />
+                        /> */}
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -113,13 +111,18 @@ export default function Register() {
                                 {errors.rePassword}
                             </p>
                         )}
-                            <button disabled={Object.values(errors).some(x => x !== '')} className={style.btnContainer}>
-                                create
-                            </button>
-                            <p className={style.message}>
-                                Already registered?{' '}
-                                <Link to="/login">Sign In</Link>
-                            </p>
+                        {error && <p className={style.errorMessage}>{error}</p>}
+                        <button
+                            disabled={Object.values(errors).some(
+                                (x) => x !== ''
+                            )}
+                        >
+                            create
+                        </button>
+                        <p className={style.message}>
+                            Already registered? <Link to="/login">Sign In</Link>
+                        </p>
+                        <div>Please note that all fields are mandatory!</div>
                     </form>
                 </div>
             </header>

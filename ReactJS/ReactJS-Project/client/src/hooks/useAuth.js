@@ -7,8 +7,8 @@ export function useAuth() {
     const [currentUser, setCurrentUser] = useState();
   
     useEffect(() => {
-      const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
-      return unsub;
+      const getUser = onAuthStateChanged(auth, user => setCurrentUser(user));
+      return getUser;
     }, [])
   
     return currentUser;

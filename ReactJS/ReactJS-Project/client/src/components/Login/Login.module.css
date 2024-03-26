@@ -100,6 +100,11 @@
   min-height: 750px;
 }
   
+.errorMessage {
+  color:red;
+  font: 0.5 em;
+  margin: 0 0 10px
+  }
 
 
 

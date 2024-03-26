@@ -1,7 +1,6 @@
 import styles from '../Profile/Profile.module.css';
 import AuthContext from '../../contexts/AuthContext';
 import { useContext } from 'react';
-import { useAuth } from '../../hooks/useAuth';
 
 
 export default function Profile() {

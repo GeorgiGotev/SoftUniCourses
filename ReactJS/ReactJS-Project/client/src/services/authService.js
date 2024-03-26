@@ -5,15 +5,20 @@ import {
     signOut,
 } from 'firebase/auth';
 
-import { authenticated as auth } from '../lib/firebase'
+import { authenticated as auth } from '../lib/firebase';
+// todo: catch errors
 
 export const register = async (values) => {
+    if (values.email === '') {
+        throw new Error('Email is mandatory');
+    }
     if (values.password !== values.rePassword) {
         throw new Error("Passwords don't match");
     }
     if (values.password.length < 6) {
         throw new Error('Password must be at least 6 characters.');
     }
+
     const res = await createUserWithEmailAndPassword(
         auth,
         values.email,

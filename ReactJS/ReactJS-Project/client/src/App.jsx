@@ -12,6 +12,8 @@ import AddRecipe from './components/AddRecipe/AddRecipe';
 import Logout from './components/Logout/Logout';
 import { NotFound } from './components/NotFound/NotFound';
 
+//todo: add route guards and error handler notify after navbar, maybe like a new div...
+
 function App() {
     return (
         <AuthProvider>

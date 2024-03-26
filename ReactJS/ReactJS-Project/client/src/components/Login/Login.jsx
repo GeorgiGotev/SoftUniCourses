@@ -1,49 +1,69 @@
 import { Link } from 'react-router-dom';
-import style from '../Login/Login.module.css';
+import styles from '../Login/Login.module.css';
 import useForm from '../../hooks/useForm';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-const LoginFormKyes = {
+const LoginFormKeys = {
     Email: 'email',
     Password: 'password',
 };
 
-
 export default function Login() {
-    const { loginSubmitHandler } = useContext(AuthContext);
+    const { loginSubmitHandler, error } = useContext(AuthContext);
     const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
-        [LoginFormKyes.Email]: '',
-        [LoginFormKyes.Password]: '',
+        [LoginFormKeys.Email]: '',
+        [LoginFormKeys.Password]: '',
     });
+
+    const [passwordError, setPasswordError] = useState('');
+
+    const passwordValidator = () => {
+        if (values.password.length < 6) {
+            setPasswordError('Password should be at least 6 characters');
+        } else {
+            setPasswordError('');
+        }
+    };
 
     return (
         <>
-            <header className={style.headerLogin}>
+            <header className={styles.headerLogin}>
                 {/* <img className={style.img} src="../../../public/imgs/main.jpg" alt="" /> */}
-                <div className={`${style.login} ${style.page}`}>
+                <div className={`${styles.login} ${styles.page}`}>
                     <form
                         onSubmit={onSubmit}
-                        className={`${style.login} ${style.form}`}
+                        className={`${styles.login} ${styles.form}`}
                     >
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
-                            name={LoginFormKyes.Email}
+                            name={LoginFormKeys.Email}
                             onChange={onChange}
-                            value={values[LoginFormKyes.Email]}
+                            value={values[LoginFormKeys.Email]}
                             placeholder="name@abv.bg"
                         />
 
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
-                            name={LoginFormKyes.Password}
+                            name={LoginFormKeys.Password}
                             onChange={onChange}
-                            value={values[LoginFormKyes.Password]}
+                            value={values[LoginFormKeys.Password]}
+                            onBlur={passwordValidator}
                             placeholder="********"
                         />
-                        <button>login</button>
-                        <p className={style.message}>
+                        {setPasswordError && (
+                            <p className={styles.errorMessage}>
+                                {passwordError}
+                            </p>
+                        )}
+
+                        {error && (
+                            <p className={styles.errorMessage}>{error}</p>
+                        )}
+
+                        <button disabled={passwordError}>login</button>
+                        <p className={styles.message}>
                             Not registered?{' '}
                             <Link to="/register">Create an account</Link>
                         </p>

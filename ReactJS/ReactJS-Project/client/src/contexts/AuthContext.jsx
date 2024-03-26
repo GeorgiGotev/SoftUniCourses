@@ -16,25 +16,30 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     const loginSubmitHandler = async (values) => {
+        try {
+            const user = await authService.login(values);
 
-        const user = await authService.login(values);
-
-        setAuth(user);        
-        navigate('/gallery');
+            setAuth(user);
+            navigate('/gallery');
+        } catch (err) {
+            setError(err.message);
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
+        }
     };
 
     const registerSubmitHandler = async (values) => {
-
-        try{
+        try {
             const user = await authService.register(values);
 
             setAuth(user);
             navigate('/gallery');
-        }catch (err) {
+        } catch (err) {
             setError(err.message);
-            // setTimeout(() => {
-            //   setError(null);
-            // }, 2000);
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
         }
     };
 
@@ -51,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         id: auth.uid,
         user: auth,
         isAuthenticated: !!auth.email,
+        error,
     };
 
     return (
