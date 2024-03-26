@@ -44,8 +44,15 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logoutHandler = () => {
-        authService.logout();
-        setAuth({});
+        try {
+            authService.logout();
+            setAuth({});
+        } catch (err) {
+            setError(err.message);
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
+        }
     };
 
     const values = {

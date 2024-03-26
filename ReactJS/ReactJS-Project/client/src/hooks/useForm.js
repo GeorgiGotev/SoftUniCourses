@@ -13,19 +13,8 @@ export default function useForm(submitHandler, initialValues) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        Object.values(values).forEach((x) => {
-            try {
-                if (x === '') {
-                    throw new Error('fill everything');
-                }
-                submitHandler(values);
-            } catch (err) {
-                setError(err.message);
-                setTimeout(() => {
-                    setError(null);
-                }, 2000);
-            }
-        });
+
+        submitHandler(values);
     };
 
     return {
