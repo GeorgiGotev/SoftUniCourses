@@ -1,7 +1,9 @@
+import styles from "../Footer/Footer.module.css"
+
 export default function Footer() {
     return (
         <>
-            <div className="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
+            {/* <div className="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn"> */}
                 {/* <div className="row">
                     <div className="col-sm-4">
                         <h3>EMAIL US</h3>
@@ -18,13 +20,14 @@ export default function Footer() {
                         </p>
                     </div>
                 </div> */}
-            </div>
-            <div className="bg-dark text-light text-center border-top wow fadeIn">
+            {/* </div> */}
+            <footer className={styles.footerSection}>
+            {/* <div className="bg-dark text-light text-center border-top wow fadeIn"> */}
                 <p className="mb-0 py-3 text-muted small">
-                    © Copyright Made with <i className="ti-heart text-danger" />{' '}
-                    By <a href="http://devcrud.com">DevCRUD</a>
+                    © Copyright by Georgi Gotev
                 </p>
-            </div>
+            {/* </div> */}
+            </footer>
         </>
     );
 }

@@ -20,8 +20,15 @@ export const getAll = async () => {
 
     const res = await getDocs(recipeRef);
     const data = res.docs.map((x) => ({
-        data: x.data(),
-        id: x.id,
+        data: {...x.data(), id: x.id}
     }));
     return data;
 };
+
+export const getOne = async (offerId) => {
+    const recipeData = doc(db, "recipes", recipeId);
+
+    const res = await getDoc(recipeData);
+
+    return res.data();
+}

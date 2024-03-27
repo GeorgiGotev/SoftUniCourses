@@ -26,10 +26,8 @@ export default function Profile() {
                     </h4>
                 </div>
             </div>
-            <section>
                 <div
-                    id="gallery"
-                    className="text-center bg-dark text-light has-height-md middle-items wow fadeIn"
+                    className={styles.gallery1}
                 >
                     <h2 className={`${styles.space}`}>Own Recipes</h2>
                 </div>
@@ -43,7 +41,6 @@ export default function Profile() {
                         <h2>No recipes yet</h2>
                     </div>
                 )}
-            </section>
         </>
     );
 }

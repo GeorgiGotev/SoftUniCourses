@@ -8,7 +8,7 @@ export default function Header() {
                 <h2 className="display-4 mb-5">
                     Always fresh &amp; Delightful
                 </h2>
-                <Link className="btn btn-lg btn-primary" to="/gallery">
+                <Link className="btn btn-lg btn-primary" to="/recipes">
                     View Our recipes
                 </Link>
             </div>

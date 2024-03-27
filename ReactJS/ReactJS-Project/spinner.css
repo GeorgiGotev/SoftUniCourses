@@ -1,17 +1,3 @@
-
-
-.space {
-    margin-top: 90px;
-}
-
-
-.customHeading1 {
-	text-align: center;
-}
-.dsa{
-  margin: auto;
-}
-
 .spinner {
     position: absolute;
     top: calc(50% - 32px);
@@ -21,8 +7,8 @@
   .spinner:after {
     content: '';
     display: block;
-    width: 64px;
-    height: 64px;
+    width: 200px;
+    height: 200px;
     margin: 8px;
     border-radius: 50%;
     border: 6px solid teal;

@@ -1,0 +1,14 @@
+.footerSection {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+    color: grey;
+    text-align: center;
+     /* margin-top: 20px; */
+  }
+  .footerSection>p{
+    text-align: center;
+    font-size: 15px;
+  }

@@ -12,6 +12,7 @@ import Navigation from './components/navigation/Navigation';
 import Home from './components/Home/Home';
 import AddRecipe from './components/AddRecipe/AddRecipe';
 import Logout from './components/Logout/Logout';
+import RecipeDetails from './components/Recipes/RecipeDetails/RecipeDetails';
 import { NotFound } from './components/NotFound/NotFound';
 
 //todo: add route guards and error handler notify after navbar, maybe like a new div...
@@ -26,8 +27,9 @@ function App() {
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/register" element={<Register />}></Route>
                     <Route path="/profile" element={<Profile />}></Route>
-                    <Route path="/recipes" element={<Recipes />}></Route>
                     <Route path="/add" element={<AddRecipe />}></Route>
+                    <Route path="/recipes" element={<Recipes />}></Route>
+                    <Route path="/recipes/:recipeId" element={<RecipeDetails />}></Route>
                     <Route path="/logout" element={<Logout />} />
                     <Route path="*" element={<NotFound />}></Route>
                 </Routes>

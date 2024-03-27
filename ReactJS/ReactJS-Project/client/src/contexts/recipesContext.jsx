@@ -2,7 +2,6 @@ import { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as recipesService from '../services/recipesService';
-// import { useAuth } from '../hooks/useAuth';
 import AuthContext from './authContext/';
 
 const RecipesContext = createContext();
@@ -14,6 +13,7 @@ export const RecipesProvider = ({ children }) => {
     const [recipes, setRecipes] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null);
+    
 
     useEffect(() => {
         setIsLoading(true)
@@ -36,12 +36,13 @@ export const RecipesProvider = ({ children }) => {
         //     return;
         // }
         try {
-            const newRecipeData = await recipesService.create({ ...values, ownerId: id, bought: false });
+            const recipeCreate = { ...values, ownerId: id, bought: false }
+            const newRecipeData= await recipesService.create(recipeCreate);
             
             setRecipes((state) => [...state, newRecipeData]);
             
         } catch (err) {
-            console.log(err);
+            console.log(err.message);
             // setError(err.message);
             // setTimeout(() => {
             //     setError(null);

@@ -5,10 +5,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 200px;
+    margin-top: 200px;
     padding: 20px;
 }
-
+.gallery1{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
 p {
     color: gray;
 }

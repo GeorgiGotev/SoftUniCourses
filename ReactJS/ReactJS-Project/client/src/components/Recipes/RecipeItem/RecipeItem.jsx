@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import styles from './RecipeItem.module.css'
 
 export default function RecipeItem({
-    data,
+    data
 }){
 
     return(  
@@ -11,10 +12,10 @@ export default function RecipeItem({
                         alt={data?.name}
                         className="gallary-img"
                     />
-                    <a href="#" className="gallary-overlay">
+                    <Link to={`/recipes/${data?.id}`} className="gallary-overlay">
                         <h2 className={styles.foodName}>{`${data?.name}`}</h2>
                         {/* <i className="gallary-icon ti-plus" /> */}
-                    </a>
+                    </Link>
                 </div>
     );
 }
