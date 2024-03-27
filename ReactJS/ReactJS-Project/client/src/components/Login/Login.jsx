@@ -14,7 +14,6 @@ export default function Login() {
         [LoginFormKeys.Email]: '',
         [LoginFormKeys.Password]: '',
     });
-
     const [passwordError, setPasswordError] = useState('');
 
     const passwordValidator = () => {
@@ -36,6 +35,7 @@ export default function Login() {
                     >
                         <label htmlFor="email">Email</label>
                         <input
+                            id="email"
                             type="email"
                             name={LoginFormKeys.Email}
                             onChange={onChange}
@@ -46,11 +46,12 @@ export default function Login() {
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
+                            id="password"
                             name={LoginFormKeys.Password}
                             onChange={onChange}
                             value={values[LoginFormKeys.Password]}
                             onBlur={passwordValidator}
-                            placeholder="********"
+                            placeholder="*********"
                         />
                         {setPasswordError && (
                             <p className={styles.errorMessage}>

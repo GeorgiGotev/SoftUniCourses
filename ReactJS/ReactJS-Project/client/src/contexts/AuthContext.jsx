@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
             const user = await authService.login(values);
 
             setAuth(user);
-            navigate('/gallery');
+            navigate('/recipes');
         } catch (err) {
             setError(err.message);
             setTimeout(() => {

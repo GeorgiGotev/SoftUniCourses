@@ -1,12 +1,16 @@
 import styles from '../Profile/Profile.module.css';
 import AuthContext from '../../contexts/AuthContext';
+import RecipesContext from '../../contexts/recipesContext';
 import { useContext } from 'react';
-
+import RecipeItem from '../Recipes/RecipeItem/RecipeItem';
 
 export default function Profile() {
-    const { user } = useContext(AuthContext);
+    const { user, id } = useContext(AuthContext);
+    const { recipes } = useContext(RecipesContext);
 
-    
+    let ownRecipes = recipes.filter((x) => x.data?.ownerId === id);
+    console.log(ownRecipes);
+
     return (
         <>
             <div className={styles.card}>
@@ -22,23 +26,26 @@ export default function Profile() {
                     </h4>
                 </div>
             </div>
-            <section className="fruit_section">
-                <div className="container">
-                    <h2 className="custom_heading">Own list of Recipes</h2>
-                    {/* <p className="custom_heading-text">
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have
-                </p> */}
-                    {/* {ownFruits.map((x) => (
-                        <Fruit key={x._id} {...x} />
-                    ))}
-                    {ownFruits.length === 0 && (
-                        <div>
-                            <h2 className="custom_heading">No fruits yet</h2>
-                        </div>
-                    )} */}
+            <section>
+                <div
+                    id="gallery"
+                    className="text-center bg-dark text-light has-height-md middle-items wow fadeIn"
+                >
+                    <h2 className={`${styles.space}`}>Own Recipes</h2>
                 </div>
+                <div className="gallary row">
+                    {ownRecipes.map((x) => (
+                        <RecipeItem key={x._id} {...x} />
+                    ))}
+                </div>
+                {ownRecipes.length === 0 && (
+                    <div className={styles.customHeading1}>
+                        <h2>No recipes yet</h2>
+                    </div>
+                )}
             </section>
         </>
     );
 }
+
+    

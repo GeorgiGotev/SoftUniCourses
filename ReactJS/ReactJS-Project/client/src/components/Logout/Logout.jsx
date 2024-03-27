@@ -14,7 +14,7 @@ export default function Logout() {
     useEffect(() => {
         logoutHandler() 
         navigate('/') 
-    },);
+    },[logoutHandler]);
 
     return null;
 }

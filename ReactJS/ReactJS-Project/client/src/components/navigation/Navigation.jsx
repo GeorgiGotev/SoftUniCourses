@@ -36,7 +36,7 @@ export default function Navigation({ signOutHandler }) {
 
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/gallery">
+                        <Link className="nav-link" to="/recipes">
                             Recipes
                         </Link>
                     </li>
