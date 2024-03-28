@@ -1,11 +1,13 @@
 .footerSection {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-top: 1px solid grey;
     background-color: grey;
-    color: grey;
-    text-align: center;
+    flex: auto;
+    bottom: 0; 
+    left: 0; 
+    z-index: 10;
      /* margin-top: 20px; */
   }
   .footerSection>p{

@@ -11,8 +11,8 @@ import { db } from '../lib/firebase';
 
 
 
-export const create = async (data) => {
-    await addDoc(collection(db, 'recipes'), data);
+export const create = async(data) => {
+    const datar= await addDoc(collection(db, 'recipes'), data)
 };
 
 export const getAll = async () => {
@@ -32,3 +32,5 @@ export const getOne = async (offerId) => {
 
     return res.data();
 }
+
+

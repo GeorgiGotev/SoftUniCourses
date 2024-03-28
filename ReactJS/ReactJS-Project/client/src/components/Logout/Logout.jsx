@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import {useAuthContext} from '../../contexts/AuthContext';
 // import * as authService from '../../services/authService';
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
     const navigate = useNavigate();
-    const { logoutHandler } = useContext(AuthContext);
+    const { logoutHandler } = useAuthContext();
 
     useEffect(() => {
         logoutHandler() 

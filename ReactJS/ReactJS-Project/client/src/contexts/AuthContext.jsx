@@ -1,11 +1,11 @@
-import { createContext, useState } from 'react';
+import { createContext,useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../services/authService';
 import usePersistedState from '../hooks/useLocalStorage';
 // import { useAuth } from '../hooks/useAuth';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
@@ -71,6 +71,8 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-AuthContext.displayName = 'AuthContext';
+export const useAuthContext = () => {
+    const context = useContext(AuthContext);
 
-export default AuthContext;
+    return context;
+}

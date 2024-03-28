@@ -1,70 +1,45 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import * as recipesService from '../services/recipesService';
-import AuthContext from './authContext/';
+import { useAuthContext } from './AuthContext';
 
-const RecipesContext = createContext();
+export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
-    const { id } = useContext(AuthContext);
+    const { id } = useAuthContext();
     const navigate = useNavigate();
-
     const [recipes, setRecipes] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null);
-    
 
     useEffect(() => {
-        setIsLoading(true)
-        try {
-            recipesService.getAll().then((res) => {
-                setRecipes(res);
-            }).finally(()=> setIsLoading(false));
-        } catch (err) {
-            console.log(err);
-        }
+        recipesService.getAll().then((result) => {
+            setRecipes(result);
+        });
     }, []);
 
-    const onCreateRecipe = async (values) => {
-        // const emptyFields = Object.values(values).some((x) => x == '');
-        // if (emptyFields) {
-        //     setError('All fields are mandatory!');
-        //     setTimeout(() => {
-        //         setError(null);
-        //     }, 2000);
-        //     return;
-        // }
-        try {
-            const recipeCreate = { ...values, ownerId: id, bought: false }
-            const newRecipeData= await recipesService.create(recipeCreate);
-            
-            setRecipes((state) => [...state, newRecipeData]);
-            
-        } catch (err) {
-            console.log(err.message);
-            // setError(err.message);
-            // setTimeout(() => {
-            //     setError(null);
-            // }, 2000);
-        }
-        
+    const onCreateRecipe = async (data) => {
+        const newRecipe = await recipesService.create({
+            ...data,
+            ownerId: id,
+            bought: false,
+        });
+
         navigate('/recipes');
     };
 
-    const values = {
+    const contextValues = {
         onCreateRecipe,
-        recipes: recipes,
-        isLoading: isLoading,
+        recipes,
     };
 
     return (
-        <RecipesContext.Provider value={values}>
+        <RecipesContext.Provider value={contextValues}>
             {children}
         </RecipesContext.Provider>
     );
 };
 
-RecipesContext.displayName = 'RecipeContext';
+export const useRecipesContext = () => {
+    const context = useContext(RecipesContext);
 
-export default RecipesContext;
+    return context;
+};
