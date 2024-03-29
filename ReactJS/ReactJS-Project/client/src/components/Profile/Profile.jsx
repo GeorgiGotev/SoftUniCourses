@@ -14,10 +14,12 @@ export default function Profile() {
     useEffect(() => {
         setIsLoading(true);
         try {
+            // add new service to get only recipes for this user, this is not good to take all recipes because they could me 1000 or more....
             recipesService
                 .getAll()
                 .then((res) => {
-                    setRecipes(res);
+                    let ownRecipes = res.filter((x) => x?.data?.ownerId === id)
+                    setRecipes(ownRecipes);
                 })
                 .finally(() => setIsLoading(false));
         } catch (err) {
@@ -25,7 +27,7 @@ export default function Profile() {
         }
     }, []);
 
-    let ownRecipes = recipes.filter((x) => x?.data?.ownerId === id);
+    
     return (
         <>
             <div className={styles.card}>
@@ -46,11 +48,11 @@ export default function Profile() {
             </div>
             <div className="gallary row">
                 {isLoading && <Spinner/>}
-                {ownRecipes.map((x) => (
+                {recipes.map((x) => (
                     <RecipeItem key={x.data?.id} {...x} />
                 ))}
             </div>
-            {!isLoading && ownRecipes.length === 0 && (
+            {!isLoading && recipes.length === 0 && (
                 <div className={styles.customHeading1}>
                     <h2>No recipes yet</h2>
                 </div>

@@ -11,20 +11,20 @@ import * as recipesService from '../../services/recipesService';
 export default function Recipes() {
     const [isLoading, setIsLoading] = useState(false);
     const [recipes, setRecipes] = useState([]);
-
     useEffect(() => {
         setIsLoading(true);
         try {
             recipesService
-                .getAll()
-                .then((res) => {
-                    setRecipes(res);
-                })
-                .finally(() => setIsLoading(false));
+            .getAll()
+            .then((res) => {
+                setRecipes(res);
+            })
+            .finally(() => setIsLoading(false));
         } catch (err) {
             console.log(err);
         }
     }, []);
+    // console.log(recipes[0]?.data.id);
 
     return (
         <>

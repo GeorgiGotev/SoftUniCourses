@@ -8,13 +8,14 @@ export const RecipesContext = createContext();
 export const RecipesProvider = ({ children }) => {
     const { id } = useAuthContext();
     const navigate = useNavigate();
-    const [recipes, setRecipes] = useState([]);
+    // const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-        recipesService.getAll().then((result) => {
-            setRecipes(result);
-        });
-    }, []);
+    // useEffect(() => {
+    //     recipesService.getAll().then((result) => {
+    //         setRecipes(result);
+    //     });
+    // }, []);
+    // console.log(recipes);
 
     const onCreateRecipe = async (data) => {
         const newRecipe = await recipesService.create({
@@ -22,13 +23,14 @@ export const RecipesProvider = ({ children }) => {
             ownerId: id,
             bought: false,
         });
-
+        //if i find how to set state with correct data, then will be possible to handle all project with one useEffect and recipeContext
+        // setRecipes((state) => [...state, newRecipe]);
         navigate('/recipes');
     };
 
     const contextValues = {
         onCreateRecipe,
-        recipes,
+        // recipes,
     };
 
     return (

@@ -8,12 +8,12 @@ export default function RecipeItem({
     return(  
         <div className="col-sm-6 col-lg-3 gallary-item wow fadeIn">
                     <img
-                        src={data?.imageUrl}
-                        alt={data?.name}
+                        src={data.imageUrl}
+                        alt={data.name}
                         className="gallary-img"
                     />
-                    <Link to={`/recipes/${data?.id}`} className="gallary-overlay">
-                        <h2 className={styles.foodName}>{`${data?.name}`}</h2>
+                    <Link to={`/recipes/${data.id}`} className="gallary-overlay">
+                        <h2 className={styles.foodName}>{`${data.name}`}</h2>
                         {/* <i className="gallary-icon ti-plus" /> */}
                     </Link>
                 </div>
