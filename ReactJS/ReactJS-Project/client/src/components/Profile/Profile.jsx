@@ -16,17 +16,17 @@ export default function Profile() {
         try {
             // add new service to get only recipes for this user, this is not good to take all recipes because they could me 1000 or more....
             recipesService
-                .getAll()
+                .getOwn(id)
                 .then((res) => {
-                    let ownRecipes = res.filter((x) => x?.data?.ownerId === id)
-                    setRecipes(ownRecipes);
+                    // let ownRecipes = res.filter((x) => x?.data?.ownerId === id)
+                    setRecipes(res);
                 })
                 .finally(() => setIsLoading(false));
         } catch (err) {
             console.log(err);
         }
     }, []);
-
+    console.log(recipes);
     
     return (
         <>
