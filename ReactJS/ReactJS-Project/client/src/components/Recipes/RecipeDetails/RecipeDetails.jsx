@@ -9,10 +9,12 @@ import Spinner from '../../Spinner';
 
 export default function RecipeDetails() {
     const { recipeId } = useParams();
+    const { user, isAuthenticated } = useAuthContext();
+    const {} = useRecipesContext;
+
     const [recipes, setRecipes] = useState(false);
     const [liked, setLiked] = useState(false);
-    const { user } = useAuthContext();
-    const {} = useRecipesContext;
+    const [isOwner, setIsOwner] = useState(false);
 
     useEffect(() => {
         recipeService.getOne(recipeId).then((result) => {
@@ -20,8 +22,11 @@ export default function RecipeDetails() {
                 setLiked(true);
             }
             setRecipes(result);
+            if (result.ownerId === user.uid) {
+                setIsOwner(true);
+            }
         });
-    }, []);
+    }, [recipeId]);
 
     const onLikeHandler = async () => {
         try {
@@ -35,11 +40,10 @@ export default function RecipeDetails() {
     return (
         <section className={styles.detailsContainer}>
             <div className="col-md-4">
-                
-                    {!recipes? (
-                        <Spinner />
-                    ) : (
-                        <>
+                {!recipes ? (
+                    <Spinner />
+                ) : (
+                    <>
                         <div className="card bg-transparent border my-3 my-md-0">
                             <img
                                 src={recipes.imageUrl}
@@ -54,33 +58,53 @@ export default function RecipeDetails() {
                                 <p className="text-white">
                                     {recipes.preparation}.{' '}
                                 </p>
-                                <h2 className="text-center mb-4">
-                                    <a
-                                        className={`badge badge-primary ${styles.btnDetails}`}
-                                        href="#"
-                                    >
-                                        Edit
-                                    </a>
-                                    <a
-                                        className={`badge badge-primary ${styles.btnDetails}`}
-                                        href="#"
-                                    >
-                                        Delete
-                                    </a>
-                                    {!liked && (
-                                        <Link
-                                            onClick={onLikeHandler}
-                                            className={`badge badge-primary ${styles.btnDetails}`}
-                                            to={`/recipes/${recipeId}`}
-                                        >
-                                            Like
-                                        </Link>
-                                    )}
-                                </h2>
+                                {isAuthenticated && (
+                                    <h2 className="text-center mb-4">
+                                        {isOwner && (
+                                            <>
+                                                <a
+                                                    className={`badge badge-primary ${styles.btnDetails}`}
+                                                    href="#"
+                                                >
+                                                    Edit
+                                                </a>
+                                                <a
+                                                    className={`badge badge-primary ${styles.btnDetails}`}
+                                                    href="#"
+                                                >
+                                                    Delete
+                                                </a>
+                                            </>
+                                        )}
+                                        {!isOwner && !liked && (
+                                            <Link
+                                                onClick={onLikeHandler}
+                                                className={`badge badge-primary ${styles.btnDetails}`}
+                                                to={`/recipes/${recipeId}`}
+                                            >
+                                                Like
+                                            </Link>
+                                        )}
+                                        {liked && (
+                                            <>
+                                                <p>
+                                                    It is already in favorite!
+                                                </p>
+                                                <Link
+                                                onClick={onLikeHandler}
+                                                className={`badge badge-primary ${styles.btnDetails}`}
+                                                to={`/recipes/${recipeId}`}
+                                            >
+                                                Favorite
+                                            </Link>
+                                            </>
+                                        )}
+                                    </h2>
+                                )}
                             </div>
-                            </div>
-                        </>
-                    )}
+                        </div>
+                    </>
+                )}
             </div>
         </section>
     );
