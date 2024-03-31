@@ -45,9 +45,27 @@ export const getOwn = async (userId) => {
     return data;
 };
 
-export const getLiked = async (recipeId, liked, userId) => {
+export const onLike = async (recipeId, liked, userId) => {
     const docRef = doc(db, 'recipes', recipeId);
     await updateDoc(docRef, {
         liked: [...liked, userId],
     });
+};
+
+export const getLikedByUser = async (userId) => {
+    const q = query(
+        collection(db, 'recipes'),
+        where('liked', 'array-contains', userId)
+    );
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs.map((x) => ({
+        data: { ...x.data(), id: x.id },
+    }));
+    return data;
+};
+
+export const editOffer = async (recipeId, data) => {
+    const res = await setDoc(doc(db, 'recipes', recipeId), data);
+
+    return res;
 };

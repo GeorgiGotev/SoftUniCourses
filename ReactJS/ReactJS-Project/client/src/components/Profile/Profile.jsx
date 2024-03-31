@@ -3,14 +3,15 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { useRecipesContext } from '../../contexts/recipesContext';
 import { useContext, useState, useEffect } from 'react';
 import RecipeItem from '../Recipes/RecipeItem/RecipeItem';
-import * as recipesService from '../../services/recipesService'
+import * as recipesService from '../../services/recipesService';
 import Spinner from '../Spinner';
 export default function Profile() {
     const { user, id } = useAuthContext();
-    
+
     const [isLoading, setIsLoading] = useState(false);
     const [recipes, setRecipes] = useState([]);
-    
+    const [likedRecipes, setLikedRecipes] = useState([]);
+
     useEffect(() => {
         setIsLoading(true);
         try {
@@ -22,12 +23,15 @@ export default function Profile() {
                     setRecipes(res);
                 })
                 .finally(() => setIsLoading(false));
+
+            recipesService
+                .getLikedByUser(id)
+                .then((res) => setLikedRecipes(res));
         } catch (err) {
             console.log(err);
         }
     }, []);
-    console.log(recipes);
-    
+
     return (
         <>
             <div className={styles.card}>
@@ -48,7 +52,7 @@ export default function Profile() {
                 <h2 className={`${styles.space}`}>Own Recipes</h2>
             </div>
             <div className="gallary row">
-                {isLoading && <Spinner/>}
+                {isLoading && <Spinner />}
                 {recipes.map((x) => (
                     <RecipeItem key={x.data?.id} {...x} />
                 ))}

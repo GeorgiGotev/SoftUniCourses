@@ -30,7 +30,7 @@ export default function RecipeDetails() {
 
     const onLikeHandler = async () => {
         try {
-            await recipeService.getLiked(recipeId, recipes.liked, user.uid);
+            await recipeService.onLike(recipeId, recipes.liked, user.uid);
             setLiked(true);
         } catch (err) {
             console.log(err);
@@ -62,18 +62,18 @@ export default function RecipeDetails() {
                                     <h2 className="text-center mb-4">
                                         {isOwner && (
                                             <>
-                                                <a
+                                                <Link
                                                     className={`badge badge-primary ${styles.btnDetails}`}
-                                                    href="#"
+                                                    to={`/recipes/${recipeId}/edit`}
                                                 >
                                                     Edit
-                                                </a>
-                                                <a
+                                                </Link>
+                                                <Link
                                                     className={`badge badge-primary ${styles.btnDetails}`}
-                                                    href="#"
+                                                    to={`/recipes/${recipeId}/delete`}
                                                 >
                                                     Delete
-                                                </a>
+                                                </Link>
                                             </>
                                         )}
                                         {!isOwner && !liked && (

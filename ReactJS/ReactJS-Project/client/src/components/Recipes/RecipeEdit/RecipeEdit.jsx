@@ -1,15 +1,42 @@
-import style from '../AddRecipe/AddRecipe.module.css';
-import useForm from '../../hooks/useForm';
-import { useRecipesContext } from '../../contexts/recipesContext';
+import style from './RecipeEdit.module.css';
+import useForm from '../../../hooks/useForm';
+import { useNavigate, useParams } from 'react-router-dom';
+import * as recipesService from '../../../services/recipesService';
+import { useEffect, useState } from 'react';
 
-export default function AddRecipe() {
-    const { onCreateRecipe } = useRecipesContext();
-    const { values, onChange, onSubmit } = useForm(onCreateRecipe, {
-        name: '',
-        imageUrl: '',
-        ingredients: '',
-        preparation: '',
-    });
+export default function RecipeEdit() {
+    const navigate = useNavigate();
+    const { recipeId } = useParams();
+    const [editRecipe, setEditRecipe] = useState({});
+
+    const onEditRecipe = async (editRecipe) => {
+        console.log(editRecipe);
+        await recipesService.editOffer(recipeId, {
+            ...editRecipe,
+            liked: [...editRecipe.liked],
+            ownerId: editRecipe.ownerId,
+            id: recipeId,
+        });
+        navigate(`/recipes/${recipeId}`);
+    };
+
+    const { values, onChange, onSubmit, onChangeValues } = useForm(
+        onEditRecipe,
+        {
+            name: '',
+            imageUrl: '',
+            ingredients: '',
+            preparation: '',
+        }
+    );
+
+    useEffect(() => {
+        recipesService.getOne(recipeId).then((result) => {
+            onChangeValues(result);
+            setEditRecipe(result);
+        });
+    }, [recipeId]);
+
     return (
         <>
             <header className={style.headerRecipe}>
@@ -19,7 +46,7 @@ export default function AddRecipe() {
                         onSubmit={onSubmit}
                         className={`${style.recipe} ${style.form}`}
                     >
-                        <h3>ADD RECIPE</h3>
+                        <h3>EDIT RECIPE</h3>
                         <input
                             type="text"
                             name="name"
@@ -51,7 +78,7 @@ export default function AddRecipe() {
                             placeholder="preparation"
                         />
 
-                        <button disabled={false}>Add</button>
+                        <button disabled={false}>Edit</button>
                     </form>
                 </div>
             </header>

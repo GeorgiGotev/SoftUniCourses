@@ -8,7 +8,6 @@ export const RecipesContext = createContext();
 export const RecipesProvider = ({ children }) => {
     const { id } = useAuthContext();
     const navigate = useNavigate();
-   
 
     const onCreateRecipe = async (data) => {
         const newRecipe = await recipesService.create({
@@ -16,12 +15,15 @@ export const RecipesProvider = ({ children }) => {
             ownerId: id,
             liked: [],
         });
-        
+
         navigate('/recipes');
     };
 
+    
+
     const contextValues = {
         onCreateRecipe,
+        // onEditRecipe
     };
 
     return (
