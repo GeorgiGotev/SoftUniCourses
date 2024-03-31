@@ -7,16 +7,9 @@ import { useEffect, useState } from 'react';
 export default function RecipeEdit() {
     const navigate = useNavigate();
     const { recipeId } = useParams();
-    const [editRecipe, setEditRecipe] = useState({});
 
     const onEditRecipe = async (editRecipe) => {
-        console.log(editRecipe);
-        await recipesService.editOffer(recipeId, {
-            ...editRecipe,
-            liked: [...editRecipe.liked],
-            ownerId: editRecipe.ownerId,
-            id: recipeId,
-        });
+        await recipesService.editOffer(recipeId, editRecipe);
         navigate(`/recipes/${recipeId}`);
     };
 
@@ -33,7 +26,6 @@ export default function RecipeEdit() {
     useEffect(() => {
         recipesService.getOne(recipeId).then((result) => {
             onChangeValues(result);
-            setEditRecipe(result);
         });
     }, [recipeId]);
 

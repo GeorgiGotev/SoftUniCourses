@@ -15,6 +15,7 @@ import { db } from '../lib/firebase';
 
 export const create = async (data) => {
     const dataRes = await addDoc(collection(db, 'recipes'), data);
+    console.log(dataRes);
     return dataRes;
 };
 
