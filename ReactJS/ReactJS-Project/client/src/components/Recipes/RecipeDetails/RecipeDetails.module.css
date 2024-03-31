@@ -1,0 +1,10 @@
+
+.detailsContainer{
+    margin-top: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnDetails{
+    margin-left: 5px;
+}

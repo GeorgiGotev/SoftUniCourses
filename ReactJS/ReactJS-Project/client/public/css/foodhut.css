@@ -42,7 +42,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, header, hgroup, main, nav, section {
   display: block;
 }
 
@@ -460,7 +460,7 @@ mark,
   font-size: 1.25rem;
 }
 
-.blockquote-footer {
+/* .blockquote-footer {
   display: block;
   font-size: 80%;
   color: #6c757d;
@@ -468,7 +468,7 @@ mark,
 
 .blockquote-footer::before {
   content: "\2014\00A0";
-}
+} */
 
 .img-fluid {
   max-width: 100%;
@@ -5105,11 +5105,11 @@ input[type="button"].btn-block {
   border-top: 0;
 }
 
-.card-footer {
+/* .card-footer {
   padding: 0.75rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid #495057;
-}
+} */
 
 .card-footer:last-child {
   border-radius: 0 0 calc(0.2rem - 1px) calc(0.2rem - 1px);
@@ -6340,11 +6340,11 @@ a.close.disabled {
 }
 
 .modal-dialog-scrollable .modal-header,
-.modal-dialog-scrollable .modal-footer {
+/* .modal-dialog-scrollable .modal-footer {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-}
+} */
 
 .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
@@ -6465,7 +6465,7 @@ a.close.disabled {
   padding: 1rem;
 }
 
-.modal-footer {
+/* .modal-footer {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6482,15 +6482,15 @@ a.close.disabled {
   border-top: 1px solid #495057;
   border-bottom-right-radius: 0.15rem;
   border-bottom-left-radius: 0.15rem;
-}
+} */
 
-.modal-footer > :not(:first-child) {
+/* .modal-footer > :not(:first-child) {
   margin-left: .25rem;
 }
 
 .modal-footer > :not(:last-child) {
   margin-right: .25rem;
-}
+} */
 
 .modal-scrollbar-measure {
   position: absolute;
@@ -11314,7 +11314,7 @@ pre {
 }
 
 .has-height-md {
-  min-height: 300px;
+  min-height: 200px;
 }
 
 .has-height-lg {
@@ -11396,7 +11396,7 @@ pre {
     transform: rotate(360deg);
   }
 }
-.footer_section {
+/* .footer_section {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 10px;
@@ -11405,4 +11405,4 @@ pre {
 }
 .footer_section p{
   text-align: center;
-}
+} */

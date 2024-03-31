@@ -24,7 +24,6 @@ export default function Recipes() {
             console.log(err);
         }
     }, []);
-    // console.log(recipes[0]?.data.id);
 
     return (
         <>
@@ -35,7 +34,7 @@ export default function Recipes() {
                 <h2 className={`${styles.space}`}>OUR MENU</h2>
             </div>
             {isLoading && <Spinner />}
-            <div className="gallary row">
+            <div className={`gallary row ${styles.customRow}`}>
                 {recipes.map((x) => (
                     <RecipeItem key={x.data?.id} {...x} />
                 ))}

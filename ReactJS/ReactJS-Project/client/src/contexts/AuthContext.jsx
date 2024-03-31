@@ -1,9 +1,11 @@
-import { createContext,useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../services/authService';
 import usePersistedState from '../hooks/useLocalStorage';
 // import { useAuth } from '../hooks/useAuth';
+// import { authenticated } from '../lib/firebase';
+// import { getAuth } from 'firebase/auth';
 
 export const AuthContext = createContext();
 
@@ -32,9 +34,9 @@ export const AuthProvider = ({ children }) => {
     const registerSubmitHandler = async (values) => {
         try {
             const user = await authService.register(values);
-
-            setAuth(user);
-            navigate('/gallery');
+            
+            loginSubmitHandler(values)
+            navigate('/recipes');
         } catch (err) {
             setError(err.message);
             setTimeout(() => {
@@ -75,4 +77,4 @@ export const useAuthContext = () => {
     const context = useContext(AuthContext);
 
     return context;
-}
+};

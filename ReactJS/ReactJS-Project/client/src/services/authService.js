@@ -1,8 +1,9 @@
 import {
-    // getAuth,
+    getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
+    updateProfile,
 } from 'firebase/auth';
 
 import { authenticated as auth } from '../lib/firebase';
@@ -24,11 +25,20 @@ export const register = async (values) => {
         values.email,
         values.password
     );
+
     if (!res) {
         throw new Error('Email is already in use!');
     }
-    const user = res.user;
 
+    try {
+        updateProfile(auth.currentUser, {
+            displayName: values.displayName,
+        });        
+    } catch (err) {
+        console.log(err);
+    }
+
+    const user = res.user;
     return user;
 };
 export const login = async (values) => {

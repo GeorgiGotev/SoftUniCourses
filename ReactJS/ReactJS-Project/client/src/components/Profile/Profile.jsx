@@ -39,7 +39,8 @@ export default function Profile() {
                 <div className={styles.container}>
                     <p>Profile Information</p>
                     <h4>
-                        <b>{user.email}</b>
+                        <p>{`name: ${user.displayName}`}</p>
+                        <p>{`e-mail: ${user.email}`}</p>
                     </h4>
                 </div>
             </div>

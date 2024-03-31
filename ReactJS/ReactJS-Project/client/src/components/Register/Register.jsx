@@ -16,6 +16,8 @@ export default function Register() {
 
     const { registerSubmitHandler, error } = useAuthContext();
     const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
+        liked: [],
+        displayName: '',
         [RegisterFormKeys.Email]: '',
         [RegisterFormKeys.Password]: '',
         [RegisterFormKeys.ConfirmPassword]: '',
@@ -64,12 +66,15 @@ export default function Register() {
                         onSubmit={onSubmit}
                         className={`${style.register} ${style.form}`}
                     >
-                        {/* <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Username</label>
                         <input
                             type="username"
-                            name="username"
+                            name="displayName"
+                            value={values["displayName"]}
+                            onChange={onChange}
+
                             placeholder="username"
-                        /> */}
+                        />
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
