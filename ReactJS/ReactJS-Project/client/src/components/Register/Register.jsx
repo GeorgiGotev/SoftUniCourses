@@ -22,6 +22,7 @@ export default function Register() {
         [RegisterFormKeys.Password]: '',
         [RegisterFormKeys.ConfirmPassword]: '',
     });
+    // todo onBlur for display name and email
     const passwordValidator = () => {
         if (values.password.length < 6) {
             setErrors((state) => ({
@@ -72,7 +73,7 @@ export default function Register() {
                             name="displayName"
                             value={values["displayName"]}
                             onChange={onChange}
-
+                            // onBlur={}
                             placeholder="username"
                         />
                         <label htmlFor="email">Email</label>
@@ -82,6 +83,7 @@ export default function Register() {
                             id="email"
                             value={values[RegisterFormKeys.Email]}
                             onChange={onChange}
+                            // onBlur={}
                             placeholder="name@abv.bg"
                         />
                         <label htmlFor="password">Password</label>

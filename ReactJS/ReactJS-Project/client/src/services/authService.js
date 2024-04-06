@@ -10,8 +10,11 @@ import { authenticated as auth } from '../lib/firebase';
 // todo: catch errors
 
 export const register = async (values) => {
-    if (values.email === '') {
-        throw new Error('Email is mandatory');
+    if(values.displayName.trim()===''){
+        throw new Error('Your name is important for us!')
+    }
+    if (values.email.trim() === '') {
+        throw new Error('Email is mandatory.');
     }
     if (values.password !== values.rePassword) {
         throw new Error("Passwords don't match");
