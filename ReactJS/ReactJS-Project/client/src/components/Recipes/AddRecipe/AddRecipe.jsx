@@ -3,7 +3,7 @@ import useForm from '../../../hooks/useForm';
 import { useRecipesContext } from '../../../contexts/recipesContext';
 
 export default function AddRecipe() {
-    const { onCreateRecipe } = useRecipesContext();
+    const { onCreateRecipe, error } = useRecipesContext();
     const { values, onChange, onSubmit } = useForm(onCreateRecipe, {
         name: '',
         imageUrl: '',
@@ -50,7 +50,7 @@ export default function AddRecipe() {
                             onChange={onChange}
                             placeholder="preparation"
                         />
-
+                        {error && <p className={style.errorMessage}>{error}</p>}
                         <button disabled={false}>Add</button>
                     </form>
                 </div>

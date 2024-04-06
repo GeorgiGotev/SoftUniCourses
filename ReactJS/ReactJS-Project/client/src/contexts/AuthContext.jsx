@@ -16,12 +16,13 @@ export const AuthProvider = ({ children }) => {
     
 
     const [auth, setAuth] = usePersistedState('auth', null);
+
+    //take errors which are throw from service  //this errors are context which i use in components
     const [error, setError] = useState(null);
 
     const loginSubmitHandler = async (values) => {
         try {
             const user = await authService.login(values);
-
             setAuth(user);
             navigate('/recipes');
         } catch (err) {

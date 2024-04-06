@@ -14,8 +14,20 @@ import { db } from '../lib/firebase';
 // import { useAuthContext } from './AuthContext';
 
 export const create = async (data) => {
+    if(data.name.trim()===''){
+        throw new Error('Name of the product is mandatory.')
+    }
+    if(data.imageUrl.trim()===''){
+        throw new Error('Image of the product is mandatory.')
+    }
+    if(data.ingredients.trim()===''){
+        throw new Error('Ingredients of the product is mandatory.')
+    }
+    if(data.preparation.trim()===''){
+        throw new Error('You should explain more about the preparation of the product.')
+    }
+    
     const dataRes = await addDoc(collection(db, 'recipes'), data);
-    console.log(dataRes);
     return dataRes;
 };
 
@@ -66,6 +78,18 @@ export const getLikedByUser = async (userId) => {
 };
 
 export const editRecipe = async (recipeId, data) => {
+    if(data.name.trim()===''){
+        throw new Error('Name of the product is mandatory.')
+    }
+    if(data.imageUrl.trim()===''){
+        throw new Error('Image of the product is mandatory.')
+    }
+    if(data.ingredients.trim()===''){
+        throw new Error('Ingredients of the product is mandatory.')
+    }
+    if(data.preparation.trim()===''){
+        throw new Error('You should explain more about the preparation of the product.')
+    }
     const res = await setDoc(doc(db, 'recipes', recipeId), data);
 
     return res;

@@ -6,24 +6,38 @@ import { useAuthContext } from './AuthContext';
 export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
+    const [ error, setError] = useState()
+    //take errors which are throw from service  //this errors are context which i use in components
+
+
+
     const { id } = useAuthContext();
     const navigate = useNavigate();
 
     const onCreateRecipe = async (data) => {
-        const newRecipe = await recipesService.create({
-            ...data,
-            ownerId: id,
-            liked: [],
-        });
-
-        navigate('/recipes');
-    };
+        try{
+            const newRecipe = await recipesService.create({
+                ...data,
+                ownerId: id,
+                liked: [],
+            });
+    
+            navigate('/recipes');
+        }catch (err) {
+            setError(err.message);
+            setTimeout(() => {
+              setError(null);
+            }, 2000);
+          }
+        };
+        
+    
 
     
 
     const contextValues = {
         onCreateRecipe,
-        // onEditRecipe
+        error,
     };
 
     return (
