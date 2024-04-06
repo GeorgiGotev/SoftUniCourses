@@ -11,7 +11,7 @@ export default function RecipeDetails() {
   const { recipeId } = useParams();
   const { user, isAuthenticated } = useAuthContext();
   const {} = useRecipesContext;
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
   const [recipes, setRecipes] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -19,11 +19,11 @@ export default function RecipeDetails() {
 
   useEffect(() => {
     recipeService.getOne(recipeId).then((result) => {
-      if (result.liked.some((x) => x === user.uid)) {
+      if (result.liked.some((x) => x === user?.uid)) {
         setLiked(true);
       }
       setRecipes(result);
-      if (result.ownerId === user.uid) {
+      if (result.ownerId === user?.uid) {
         setIsOwner(true);
       }
     });
