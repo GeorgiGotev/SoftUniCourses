@@ -9,7 +9,7 @@ export default function RecipeEdit() {
     const { recipeId } = useParams();
 
     const onEditRecipe = async (editRecipe) => {
-        await recipesService.editOffer(recipeId, editRecipe);
+        await recipesService.editRecipe(recipeId, editRecipe);
         navigate(`/recipes/${recipeId}`);
     };
 

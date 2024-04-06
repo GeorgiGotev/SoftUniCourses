@@ -65,8 +65,13 @@ export const getLikedByUser = async (userId) => {
     return data;
 };
 
-export const editOffer = async (recipeId, data) => {
+export const editRecipe = async (recipeId, data) => {
     const res = await setDoc(doc(db, 'recipes', recipeId), data);
 
     return res;
 };
+
+export const deleteRecipe = async (recipeId) => {
+    await deleteDoc(doc(db, "recipes", recipeId));
+  };
+

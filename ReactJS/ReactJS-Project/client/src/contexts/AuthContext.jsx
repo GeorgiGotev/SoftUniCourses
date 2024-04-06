@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../services/authService';
 import usePersistedState from '../hooks/useLocalStorage';
-// import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth';
 // import { authenticated } from '../lib/firebase';
 // import { getAuth } from 'firebase/auth';
 
@@ -12,9 +12,10 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
-    // const currentUser = useAuth();
+    const currentUser = useAuth();
+    
 
-    const [auth, setAuth] = usePersistedState('auth', {});
+    const [auth, setAuth] = usePersistedState('auth', null);
     const [error, setError] = useState(null);
 
     const loginSubmitHandler = async (values) => {
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
     const registerSubmitHandler = async (values) => {
         try {
-            const user = await authService.register(values);
+            await authService.register(values);
             
             loginSubmitHandler(values)
             navigate('/recipes');
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     const logoutHandler = () => {
         try {
             authService.logout();
-            setAuth({});
+            setAuth(null);
         } catch (err) {
             setError(err.message);
             setTimeout(() => {
@@ -62,10 +63,10 @@ export const AuthProvider = ({ children }) => {
         registerSubmitHandler,
         logoutHandler,
         
-        email: auth.email,
-        id: auth.uid,
+        email: auth?.email,
+        id: auth?.uid,
         user: auth,
-        isAuthenticated: !!auth.email,
+        isAuthenticated: !!auth?.uid,
         error,
     };
 

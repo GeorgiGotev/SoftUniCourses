@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+
 export default function usePersistedState(key, defaultValue) {
     const [state, setState] = useState(() => {
         const persistedStateSerialized = localStorage.getItem(key);
@@ -14,6 +15,7 @@ export default function usePersistedState(key, defaultValue) {
     });
 
     const setPersistedState = (value) => {
+
         setState(value);
 
         let serializedValue;
