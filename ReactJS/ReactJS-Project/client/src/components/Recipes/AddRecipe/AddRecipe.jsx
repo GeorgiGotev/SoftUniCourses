@@ -1,6 +1,6 @@
 import style from "./AddRecipe.module.css";
 import useForm from "../../../hooks/useForm";
-import { useRecipesContext } from "../../../contexts/recipesContext";
+import { useRecipesContext } from "../../../contexts/RecipesContext";
 
 export default function AddRecipe() {
     const { onCreateRecipe, error } = useRecipesContext();

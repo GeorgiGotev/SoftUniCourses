@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../services/authService';
 import usePersistedState from '../hooks/useLocalStorage';
-import { useAuth } from '../hooks/useAuth';
-// import { authenticated } from '../lib/firebase';
-// import { getAuth } from 'firebase/auth';
+// import { useAuth } from '../hooks/useAuth';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
-    const currentUser = useAuth();
+    // const currentUser = useAuth();
     
 
     const [auth, setAuth] = usePersistedState('auth', null);

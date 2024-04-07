@@ -10,19 +10,21 @@ import Spinner from "../../Spinner";
 export default function RecipeDetails() {
   const { recipeId } = useParams();
   const { user, isAuthenticated } = useAuthContext();
-  const {} = useRecipesContext;
+  const { deleteRecipe } = useRecipesContext();
 //   const navigate = useNavigate();
 
-  const [recipes, setRecipes] = useState(false);
+  const [recipe, setRecipe] = useState(false);
   const [liked, setLiked] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
+
+  // edit and delete should also change the state of recipes, just to render correct ones in gallery and profile...
 
   useEffect(() => {
     recipeService.getOne(recipeId).then((result) => {
       if (result.liked.some((x) => x === user?.uid)) {
         setLiked(true);
       }
-      setRecipes(result);
+      setRecipe(result);
       if (result.ownerId === user?.uid) {
         setIsOwner(true);
       }
@@ -31,7 +33,7 @@ export default function RecipeDetails() {
 
   const onLikeHandler = async () => {
     try {
-      await recipeService.onLike(recipeId, recipes.liked, user.uid);
+      await recipeService.onLike(recipeId, recipe.liked, user.uid);
       setLiked(true);
     } catch (err) {
       console.log(err);
@@ -40,10 +42,11 @@ export default function RecipeDetails() {
 
   const onDeleteHandler = async () => {
     try {
-      const result = confirm(`Are you sure you want to delete ${recipes.name}`);
+      const result = confirm(`Are you sure you want to delete ${recipe.name}`);
 
       if (result) {
         await recipeService.deleteRecipe(recipeId);
+        deleteRecipe(recipeId)
       }
       //   navigate('/recipes')
     } catch (err) {
@@ -54,20 +57,20 @@ export default function RecipeDetails() {
   return (
     <section className={styles.detailsContainer}>
       <div className="col-md-4">
-        {!recipes ? (
+        {!recipe ? (
           <Spinner />
         ) : (
           <>
             <div className="card bg-transparent border my-3 my-md-0">
               <img
-                src={recipes.imageUrl}
-                alt={recipes.name}
+                src={recipe.imageUrl}
+                alt={recipe.name}
                 className="rounded-0 card-img-top mg-responsive"
               />
               <div className="card-body">
-                <h4 className="pt20 pb20">{recipes.name}</h4>
-                <p className="text-white">{recipes.ingredients}. </p>
-                <p className="text-white">{recipes.preparation}. </p>
+                <h4 className="pt20 pb20">{recipe.name}</h4>
+                <p className="text-white">{recipe.ingredients}. </p>
+                <p className="text-white">{recipe.preparation}. </p>
                 {isAuthenticated && (
                   <h2 className="text-center mb-4">
                     {isOwner && (

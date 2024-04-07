@@ -7,6 +7,7 @@
     align-items: center;
     margin-top: 200px;
     padding: 20px;
+    margin-right: 20px;
 }
 .gallery1{
     margin-top: 20px;
@@ -33,3 +34,30 @@ p {
 /* .space {
     margin-top: 90px;
 } */
+
+.sidebare {
+    border: 2px solid gray;
+    box-shadow: 0 8px 8px 0 rgba(47, 24, 24, 0.2);
+    /* background-color: lightslategrey; */
+    width: 200px;
+    height: 500px;
+    position: absolute;
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: center;
+  }
+
+.contentDiv {
+    /* display: inline-block; */
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.sidebare a{
+    margin: 5px;
+    font-size: 20px;
+    display: flex;
+}
+
+

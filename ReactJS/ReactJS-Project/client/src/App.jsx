@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
-import { RecipesProvider } from './contexts/recipesContext';
+import { RecipesProvider } from './contexts/RecipesContext';
 
 import Footer from './components/Footer/Footer';
 import Recipes from './components/Recipes/Recipes';
