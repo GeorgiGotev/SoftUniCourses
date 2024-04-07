@@ -31,7 +31,7 @@ export default function Recipes() {
         id="gallery"
         className="text-center bg-dark text-light has-height-md middle-items wow fadeIn"
       >
-        <h2 className={`${styles.space}`}>OUR MENU</h2>
+        <h2 className={`${styles.space}`}>OUR RECIPES</h2>
       </div>
       {isLoading && <Spinner />}
       <div className={`gallary row ${styles.customRow}`}>
