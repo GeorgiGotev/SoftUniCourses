@@ -49,7 +49,7 @@ export default function Profile() {
                 </div>
             </div>
             <div className={styles.gallery1}>
-                <h2 className={`${styles.space}`}>Own Recipes</h2>
+                <h2 className={`${styles.space}`}>OWN RECIPES</h2>
             </div>
             <div className="gallary row">
                 {isLoading && <Spinner />}
