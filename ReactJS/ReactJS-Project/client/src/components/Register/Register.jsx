@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 
-import {useAuthContext} from '../../contexts/AuthContext';
-import useForm from '../../hooks/useForm';
-import style from '../Register/Register.module.css';
+import { useAuthContext } from "../../contexts/AuthContext";
+import useForm from "../../hooks/useForm";
+import style from "../Register/Register.module.css";
 
 const RegisterFormKeys = {
-    Email: 'email',
-    Password: 'password',
-    ConfirmPassword: 'rePassword',
+    Email: "email",
+    Password: "password",
+    ConfirmPassword: "rePassword",
 };
 
 export default function Register() {
@@ -17,44 +17,44 @@ export default function Register() {
     const { registerSubmitHandler, error } = useAuthContext();
     const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
         liked: [],
-        displayName: '',
-        [RegisterFormKeys.Email]: '',
-        [RegisterFormKeys.Password]: '',
-        [RegisterFormKeys.ConfirmPassword]: '',
+        displayName: "",
+        [RegisterFormKeys.Email]: "",
+        [RegisterFormKeys.Password]: "",
+        [RegisterFormKeys.ConfirmPassword]: "",
     });
     const nameValidator = () => {
-        if(values.displayName.length <3){
+        if (values.displayName.length < 3) {
             setErrors((state) => ({
                 ...state,
-                displayName: 'Name should be at least 3 characters',
+                displayName: "Name should be at least 3 characters",
             }));
-        }else {
+        } else {
             if (errors.displayName) {
-                setErrors((state) => ({ ...state, displayName: '' }));
+                setErrors((state) => ({ ...state, displayName: "" }));
             }
         }
-    }
+    };
     const emailValidator = () => {
-        if(!values.email.includes('@')){
+        if (!values.email.includes("@")) {
             setErrors((state) => ({
                 ...state,
                 email: "E-mail should include '@', please enter a valid e-mail.",
             }));
-        }else {
+        } else {
             if (errors.email) {
-                setErrors((state) => ({ ...state, email: '' }));
+                setErrors((state) => ({ ...state, email: "" }));
             }
         }
-    }
+    };
     const passwordValidator = () => {
         if (values.password.length < 6) {
             setErrors((state) => ({
                 ...state,
-                password: 'Password should be at least 6 characters',
+                password: "Password should be at least 6 characters",
             }));
         } else {
             if (errors.password) {
-                setErrors((state) => ({ ...state, password: '' }));
+                setErrors((state) => ({ ...state, password: "" }));
             }
         }
     };
@@ -67,17 +67,17 @@ export default function Register() {
             }));
         } else {
             if (errors.rePassword) {
-                setErrors((state) => ({ ...state, rePassword: '' }));
+                setErrors((state) => ({ ...state, rePassword: "" }));
             }
         }
         if (values.rePassword.length < 6) {
             setErrors((state) => ({
                 ...state,
-                rePassword: 'Repeat password should be at least 6 characters',
+                rePassword: "Repeat password should be at least 6 characters",
             }));
         } else {
             if (errors.rePassword) {
-                setErrors((state) => ({ ...state, rePassword: '' }));
+                setErrors((state) => ({ ...state, rePassword: "" }));
             }
         }
     };
@@ -100,9 +100,7 @@ export default function Register() {
                             placeholder="username"
                         />
                         {errors.displayName && (
-                            <p className={style.errorMessage}>
-                                {errors.displayName}
-                            </p>
+                            <p className={style.errorMessage}>{errors.displayName}</p>
                         )}
                         <label htmlFor="email">Email</label>
                         <input
@@ -115,9 +113,7 @@ export default function Register() {
                             placeholder="name@abv.bg"
                         />
                         {errors.email && (
-                            <p className={style.errorMessage}>
-                                {errors.email}
-                            </p>
+                            <p className={style.errorMessage}>{errors.email}</p>
                         )}
                         <label htmlFor="password">Password</label>
                         <input
@@ -130,9 +126,7 @@ export default function Register() {
                             placeholder="*********"
                         />
                         {errors.password && (
-                            <p className={style.errorMessage}>
-                                {errors.password}
-                            </p>
+                            <p className={style.errorMessage}>{errors.password}</p>
                         )}
 
                         <label htmlFor="password">Repeat Password</label>
@@ -147,16 +141,10 @@ export default function Register() {
                             placeholder="*********"
                         />
                         {errors.rePassword && (
-                            <p className={style.errorMessage}>
-                                {errors.rePassword}
-                            </p>
+                            <p className={style.errorMessage}>{errors.rePassword}</p>
                         )}
                         {error && <p className={style.errorMessage}>{error}</p>}
-                        <button
-                            disabled={Object.values(errors).some(
-                                (x) => x !== ''
-                            )}
-                        >
+                        <button disabled={Object.values(errors).some((x) => x !== "")}>
                             create
                         </button>
                         <p className={style.message}>
