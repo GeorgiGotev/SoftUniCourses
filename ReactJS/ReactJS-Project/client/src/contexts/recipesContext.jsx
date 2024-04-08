@@ -1,17 +1,14 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as recipesService from '../services/recipesService';
 import { useAuthContext } from './AuthContext';
 
 export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
-    const [error, setError] = useState()
-    //take errors which are throw from service  //this errors are context which i use in components
+    const [error, ] = useState()
     const [recipes, setRecipes] = useState([])
 
     const { id } = useAuthContext();
-    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -30,52 +27,27 @@ export const RecipesProvider = ({ children }) => {
     }, []);
 
 
-
-    const onCreateRecipe = async (data) => {
-        try {
-            const newRecipe = await recipesService.create({
-                ...data,
-                ownerId: id,
-                liked: [],
-            });
-            setRecipes(state => [...state, { data: { ...data, id: newRecipe._key.path.segments[1], ownerId: id, liked: [] } }])
-            navigate(`/recipes/${newRecipe._key.path.segments[1]}`);
-
-
-        } catch (err) {
-            setError(err.message);
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
+    const addRecipe = (data, recipeId) => {
+        setRecipes(state => [...state, { data: { ...data, id: recipeId, ownerId: id, liked: [] } }])
     };
-
 
     const deleteRecipe = (recipeId) => {
         setRecipes((state) => state.filter((recipe) => recipe.data.id !== recipeId));
     };
 
-    const onEditRecipe = async (editedData, recipeId) => {
-        try {
-            await recipesService.editRecipe(recipeId, editedData);
-            setRecipes((state) => state.map((x) => (x.data.id === editedData.id ? { data: editedData } : x)))
-            navigate(`/recipes/${recipeId}`);
-        } catch (err) {
-            setError(err.message);
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
+    const editRecipe = (recipeId, editedData) => {
+        setRecipes((state) => state.map((x) => (x.data.id === recipeId ? { data: { ...editedData, id: recipeId } } : x)))
     };
 
     const contextValues = {
-        onCreateRecipe,
-        onEditRecipe,
+        addRecipe,
+        editRecipe,
         deleteRecipe,
         recipes,
         error,
         isLoading
     };
+    console.log(recipes);
 
     return (
         <RecipesContext.Provider value={contextValues}>

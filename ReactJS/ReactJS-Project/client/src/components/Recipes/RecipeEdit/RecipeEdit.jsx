@@ -6,12 +6,23 @@ import { useEffect, useState } from "react";
 import { useRecipesContext } from "../../../contexts/recipesContext";
 
 export default function RecipeEdit() {
-    // const navigate = useNavigate();
-    // const [error, setError] = useState();
-
+    const navigate = useNavigate();
+    const { editRecipe } = useRecipesContext();
     const { recipeId } = useParams();
-    const { onEditRecipe, error } = useRecipesContext();
+    const [error, setError] = useState();
 
+    const onEditRecipe = async (editedData, recipeId) => {
+        try {
+            await recipesService.editRecipe(recipeId, editedData);
+            editRecipe(recipeId, editedData)
+            navigate(`/recipes/${recipeId}`);
+        } catch (err) {
+            setError(err.message);
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
+        }
+    };
 
 
     const { values, onChange, onSubmit, onChangeValues } = useForm(onEditRecipe, {

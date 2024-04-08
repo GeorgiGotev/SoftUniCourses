@@ -26,9 +26,9 @@ export const create = async (data) => {
     if(data.preparation.trim()===''){
         throw new Error('You should explain more about the preparation of the product.')
     }
-    
-    const dataRes = await addDoc(collection(db, 'recipes'), data);
-    return dataRes;
+        const dataRes = await addDoc(collection(db, 'recipes'), data);
+
+        return dataRes;
 };
 
 export const getAll = async () => {
