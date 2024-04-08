@@ -13,6 +13,8 @@ export default function Profile() {
     const [recipes, setRecipes] = useState([]);
     const [likedRecipes, setLikedRecipes] = useState([]);
 
+    //should change state when clicked own or liked recipes
+
     useEffect(() => {
         setIsLoading(true);
         try {

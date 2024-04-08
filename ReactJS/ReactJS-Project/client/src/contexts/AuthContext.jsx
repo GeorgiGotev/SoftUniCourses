@@ -1,72 +1,25 @@
 import { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import * as authService from '../services/authService';
 import usePersistedState from '../hooks/useLocalStorage';
-// import { useAuth } from '../hooks/useAuth';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const navigate = useNavigate();
-
-    // const currentUser = useAuth();
-    
 
     const [auth, setAuth] = usePersistedState('auth', null);
 
-    //take errors which are throw from service  //this errors are context which i use in components
-    const [error, setError] = useState(null);
+    const onLogin = (user) => setAuth(user);
 
-    const loginSubmitHandler = async (values) => {
-        try {
-            const user = await authService.login(values);
-            setAuth(user);
-            navigate('/recipes');
-        } catch (err) {
-            setError(err.message);
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
-    };
-
-    const registerSubmitHandler = async (values) => {
-        try {
-            await authService.register(values);
-            
-            loginSubmitHandler(values)
-            navigate('/recipes');
-        } catch (err) {
-            setError(err.message);
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
-    };
-
-    const logoutHandler = () => {
-        try {
-            authService.logout();
-            setAuth(null);
-        } catch (err) {
-            setError(err.message);
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
-    };
+    const onLogout = () =>  setAuth(null);
+    
 
     const values = {
-        loginSubmitHandler,
-        registerSubmitHandler,
-        logoutHandler,
-        
+        onLogin,
+        onLogout,
         email: auth?.email,
         id: auth?.uid,
         user: auth,
         isAuthenticated: !!auth?.uid,
-        error,
     };
 
     return (

@@ -1,9 +1,8 @@
-// import { useContext, useEffect, useState } from "react";
-import {useRecipesContext} from "../../contexts/recipesContext";
 import styles from "./Recipes.module.css";
+
+import {useRecipesContext} from "../../contexts/recipesContext";
 import RecipeItem from "./RecipeItem/RecipeItem";
 import Spinner from "../Spinner";
-// import * as recipesService from "../../services/recipesService";
 
 export default function Recipes() {
   const { recipes, isLoading } = useRecipesContext();

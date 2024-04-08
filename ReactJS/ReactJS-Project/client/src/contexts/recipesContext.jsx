@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+
 import * as recipesService from '../services/recipesService';
 import { useAuthContext } from './AuthContext';
 
 export const RecipesContext = createContext();
 
 export const RecipesProvider = ({ children }) => {
-    const [error, ] = useState()
     const [recipes, setRecipes] = useState([])
 
     const { id } = useAuthContext();
@@ -44,10 +44,8 @@ export const RecipesProvider = ({ children }) => {
         editRecipe,
         deleteRecipe,
         recipes,
-        error,
         isLoading
     };
-    console.log(recipes);
 
     return (
         <RecipesContext.Provider value={contextValues}>

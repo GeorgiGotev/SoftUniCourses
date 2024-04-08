@@ -1,9 +1,10 @@
-import style from "./RecipeEdit.module.css";
-import useForm from "../../../hooks/useForm";
 import { useNavigate, useParams } from "react-router-dom";
-import * as recipesService from "../../../services/recipesService";
 import { useEffect, useState } from "react";
 import { useRecipesContext } from "../../../contexts/recipesContext";
+
+import style from "./RecipeEdit.module.css";
+import useForm from "../../../hooks/useForm";
+import * as recipesService from "../../../services/recipesService";
 
 export default function RecipeEdit() {
     const navigate = useNavigate();
@@ -41,7 +42,6 @@ export default function RecipeEdit() {
     return (
         <>
             <header className={style.headerRecipe}>
-                {/* <img className={style.img} src="../../../public/imgs/main.jpg" alt="" /> */}
                 <div className={`${style.recipe} ${style.page}`}>
                     <form onSubmit={onSubmit} className={`${style.recipe} ${style.form}`}>
                         <h3>EDIT RECIPE</h3>
