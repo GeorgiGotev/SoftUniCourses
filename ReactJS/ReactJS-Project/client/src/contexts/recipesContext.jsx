@@ -55,8 +55,22 @@ export const RecipesProvider = ({ children }) => {
         setRecipes((state) => state.filter((recipe) => recipe.data.id !== recipeId));
     };
 
+    const onEditRecipe = async (editedData, recipeId) => {
+        try {
+            await recipesService.editRecipe(recipeId, editedData);
+            setRecipes((state) => state.map((x) => (x.data.id === editedData.id ? { data: editedData } : x)))
+            navigate(`/recipes/${recipeId}`);
+        } catch (err) {
+            setError(err.message);
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
+        }
+    };
+
     const contextValues = {
         onCreateRecipe,
+        onEditRecipe,
         deleteRecipe,
         recipes,
         error,

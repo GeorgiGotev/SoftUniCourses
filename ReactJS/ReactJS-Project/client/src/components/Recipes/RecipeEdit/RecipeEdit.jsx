@@ -3,30 +3,23 @@ import useForm from "../../../hooks/useForm";
 import { useNavigate, useParams } from "react-router-dom";
 import * as recipesService from "../../../services/recipesService";
 import { useEffect, useState } from "react";
+import { useRecipesContext } from "../../../contexts/recipesContext";
 
 export default function RecipeEdit() {
-    const navigate = useNavigate();
-    const { recipeId } = useParams();
-    const [error, setError] = useState();
+    // const navigate = useNavigate();
+    // const [error, setError] = useState();
 
-    const onEditRecipe = async (editedData) => {
-        try {
-            await recipesService.editRecipe(recipeId, editedData);
-            navigate(`/recipes/${recipeId}`);
-        } catch (err) {
-            setError(err.message);
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
-    };
+    const { recipeId } = useParams();
+    const { onEditRecipe, error } = useRecipesContext();
+
+
 
     const { values, onChange, onSubmit, onChangeValues } = useForm(onEditRecipe, {
         name: "",
         imageUrl: "",
         ingredients: "",
         preparation: "",
-    });
+    }, recipeId);
 
     useEffect(() => {
         recipesService.getOne(recipeId).then((result) => {
