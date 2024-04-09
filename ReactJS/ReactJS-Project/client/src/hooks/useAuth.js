@@ -1,7 +1,8 @@
-import { getAuth, onAuthStateChanged, } from "firebase/auth";
 import { useState, useEffect } from "react";
 
-const auth = getAuth();
+import { onAuthStateChanged } from "firebase/auth";
+import { authenticated as auth } from "../lib/firebase";
+
 
 export function useAuth() {
     const [currentUser, setCurrentUser] = useState();
@@ -11,6 +12,5 @@ export function useAuth() {
       return getUser;
     }, [])
 
-    
     return currentUser;
   }

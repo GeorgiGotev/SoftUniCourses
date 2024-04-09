@@ -16,7 +16,7 @@ import RecipeDetails from './components/Recipes/RecipeDetails/RecipeDetails';
 import RecipeEdit from './components/Recipes/RecipeEdit/RecipeEdit';
 import { NotFound } from './components/NotFound/NotFound';
 
-//todo: add route guards and error handler notify after navbar, maybe like a new div...
+//todo: add route guards and error handler notify after navbar, maybe like a new div...add error handler to 404???
 
 function App() {
     return (

@@ -16,6 +16,7 @@ export default function RecipeDetails() {
     const [recipe, setRecipe] = useState(false);
     const [liked, setLiked] = useState(false);
     const [isOwner, setIsOwner] = useState(false);
+    //try to take data from state, not from db
 
     useEffect(() => {
         try {

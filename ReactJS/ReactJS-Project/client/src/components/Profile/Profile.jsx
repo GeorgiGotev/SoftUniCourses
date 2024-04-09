@@ -8,28 +8,25 @@ import * as recipesService from '../../services/recipesService';
 import Spinner from '../Spinner';
 export default function Profile() {
     const { user, id } = useAuthContext();
-
     const [isLoading, setIsLoading] = useState(false);
     const [recipes, setRecipes] = useState([]);
-    const [likedRecipes, setLikedRecipes] = useState([]);
+    // const [likedRecipes, setLikedRecipes] = useState([]);
 
     //should change state when clicked own or liked recipes
-
+    // try to take data from state, not from db
     useEffect(() => {
         setIsLoading(true);
         try {
-            // add new service to get only recipes for this user, this is not good to take all recipes because they could me 1000 or more....
             recipesService
                 .getOwn(id)
                 .then((res) => {
-                    // let ownRecipes = res.filter((x) => x?.data?.ownerId === id)
                     setRecipes(res);
                 })
                 .finally(() => setIsLoading(false));
 
-            recipesService
-                .getLikedByUser(id)
-                .then((res) => setLikedRecipes(res));
+            // recipesService
+            //     .getLikedByUser(id)
+            //     .then((res) => setLikedRecipes(res));
         } catch (err) {
             console.log(err);
         }
