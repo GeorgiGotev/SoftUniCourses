@@ -12,13 +12,15 @@ export const AuthProvider = ({ children }) => {
     // const currUser = useAuth();
 
     const onLogin = (user) => setAuth(user);
-    const onRegister = (user,name) => setAuth({...user, displayName:name})
-    const onLogout = () =>  setAuth(null);
-    
+
+    // const onRegister = (user, userName) => setAuth({ ...user, displayName: userName });
+    // const onRegister = (user) => setAuth(user)
+
+    const onLogout = () => setAuth(null);
+
     const values = {
         onLogin,
         onLogout,
-        onRegister,
         email: auth?.email,
         id: auth?.uid,
         user: auth,

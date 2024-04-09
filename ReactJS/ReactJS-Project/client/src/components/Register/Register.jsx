@@ -9,14 +9,14 @@ import style from "../Register/Register.module.css";
 export default function Register() {
     const [errors, setErrors] = useState({});
     const [error, setError] = useState()
-    const { onRegister } = useAuthContext();
+    const { onLogin } = useAuthContext();
 
     const navigate = useNavigate();
     const registerSubmitHandler = async (values) => {
         try {
             const registeredUser = await authService.register(values);
-            
-            onRegister(registeredUser, values.displayName)
+
+            onLogin(registeredUser)
             navigate('/recipes');
         } catch (err) {
             setError(err.message);
@@ -101,6 +101,8 @@ export default function Register() {
                         onSubmit={onSubmit}
                         className={`${style.register} ${style.form}`}
                     >
+                        <h1>Register</h1>
+                        
                         <label htmlFor="username">Username</label>
                         <input
                             type="username"

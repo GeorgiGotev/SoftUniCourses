@@ -68,6 +68,7 @@ export default function Login() {
                         onSubmit={onSubmit}
                         className={`${styles.login} ${styles.form}`}
                     >
+                        <h1>Login</h1>
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"

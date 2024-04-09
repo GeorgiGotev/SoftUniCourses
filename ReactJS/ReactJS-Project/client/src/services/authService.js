@@ -8,28 +8,6 @@ import {
 
 import { authenticated as auth } from "../lib/firebase";
 
-
-
-export const login = async (values) => {
-    if (values.email.trim() === "") {
-        throw new Error("Enter your valid email");
-    }
-    if (values.password.trim() === "") {
-        throw new Error("Enter your valid password");
-    }
-
-    const res = await signInWithEmailAndPassword(
-        auth,
-        values.email,
-        values.password
-    );
-    const user = res.user;
-    if (!user) {
-        throw new Error("No user with this email or password");
-    }
-    return user;
-};
-
 export const register = async (values) => {
     if (values.displayName.trim() === "") {
         throw new Error("Your name is important for us!");
@@ -54,7 +32,7 @@ export const register = async (values) => {
         throw new Error("Email is already in use!");
     }
     try {
-        updateProfile(auth.currentUser, {
+      await updateProfile(auth.currentUser, {
             displayName: values.displayName,
         })
     } catch (err) {
@@ -62,6 +40,26 @@ export const register = async (values) => {
     }
     
     return res.user;
+};
+
+export const login = async (values) => {
+    if (values.email.trim() === "") {
+        throw new Error("Enter your valid email");
+    }
+    if (values.password.trim() === "") {
+        throw new Error("Enter your valid password");
+    }
+
+    const res = await signInWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+    );
+    const user = res.user;
+    if (!user) {
+        throw new Error("No user with this email or password");
+    }
+    return user;
 };
 
 export const logout = () => {

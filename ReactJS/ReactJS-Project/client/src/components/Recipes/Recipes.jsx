@@ -6,7 +6,7 @@ import Spinner from "../Spinner";
 
 export default function Recipes() {
   const { recipes, isLoading } = useRecipesContext();
-
+  //search bar???
   return (
     <>
       <div
