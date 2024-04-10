@@ -47,7 +47,7 @@ export const RecipesProvider = ({ children }) => {
         setRecipes((state) => state.map(x => x.data.id === recipeId ? { data: { ...x.data, liked: [...x.data.liked, userId] } } : x))
     }
 
-    // console.log(recipes);
+    console.log(recipes);
 
     const contextValues = {
         addRecipe,
