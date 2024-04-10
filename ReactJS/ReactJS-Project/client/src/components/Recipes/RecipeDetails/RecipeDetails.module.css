@@ -8,3 +8,7 @@
 .btnDetails{
     margin-left: 5px;
 }
+.recipeName {
+    text-transform:uppercase;
+    text-align: center;
+}

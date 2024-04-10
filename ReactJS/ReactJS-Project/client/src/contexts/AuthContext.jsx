@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         onLogout,
         email: auth?.email,
         id: auth?.uid,
-        user: auth,
+        user: auth || {},
         isAuthenticated: !!auth?.uid,
     };
 

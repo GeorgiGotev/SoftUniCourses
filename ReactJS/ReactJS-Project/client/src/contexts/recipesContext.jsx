@@ -39,10 +39,22 @@ export const RecipesProvider = ({ children }) => {
         setRecipes((state) => state.map((x) => (x.data.id === recipeId ? { data: { ...editedData, id: recipeId } } : x)))
     };
 
+    const selectedRecipe = (recipeId) => {
+        return recipes.find((x) => x.data.id === recipeId) || {}
+    }
+
+    const likeRecipe = (recipeId, userId) => {
+        setRecipes((state) => state.map(x => x.data.id === recipeId ? { data: { ...x.data, liked: [...x.data.liked, userId] } } : x))
+    }
+
+    // console.log(recipes);
+
     const contextValues = {
         addRecipe,
         editRecipe,
         deleteRecipe,
+        selectedRecipe,
+        likeRecipe,
         recipes,
         isLoading
     };
