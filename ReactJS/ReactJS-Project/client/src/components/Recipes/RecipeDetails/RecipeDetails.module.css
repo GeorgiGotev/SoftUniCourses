@@ -13,6 +13,14 @@
     text-align: center;
 }
 .ingredientsList{
+    font-family: "Roboto", sans-serif;
     list-style-type: none;
     padding-left: 20px;
+    font-size: 20px;
+}
+.ulText {
+    font-family: "Roboto", sans-serif;
+    color: #ff2150;
+    font-size: 28px;
+    text-transform: uppercase;
 }

@@ -12,7 +12,7 @@ export default function AddRecipe() {
     const { addRecipe } = useRecipesContext();
     const [error, setError] = useState();
     const navigate = useNavigate();
-
+    // on blur error handler
     const onCreateRecipe = async (data) => {
         try {
             const newRecipe = await recipesService.create({
@@ -65,9 +65,11 @@ export default function AddRecipe() {
                             name="ingredients"
                             value={values.ingredients}
                             onChange={onChange}
-                            placeholder="ingredients"
+                            placeholder="ingredients separated with comma"
                         />
-                        <input
+                        <textarea
+                            rows="4" 
+                            cols="34"
                             type="text"
                             name="preparation"
                             value={values.preparation}

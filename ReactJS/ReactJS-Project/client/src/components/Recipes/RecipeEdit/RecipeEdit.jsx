@@ -66,9 +66,11 @@ export default function RecipeEdit() {
                             name="ingredients"
                             value={values.ingredients}
                             onChange={onChange}
-                            placeholder="ingredients"
+                            placeholder="ingredients separated with comma"
                         />
-                        <input
+                        <textarea
+                            rows="4"
+                            cols="36"
                             type="text"
                             name="preparation"
                             value={values.preparation}

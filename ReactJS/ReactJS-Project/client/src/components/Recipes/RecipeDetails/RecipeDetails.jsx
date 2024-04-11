@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import styles from "./RecipeDetails.module.css";
 import Spinner from "../../Spinner";
@@ -8,6 +8,7 @@ import { useAuthContext } from "../../../contexts/AuthContext";
 import { useRecipesContext } from "../../../contexts/recipesContext";
 
 export default function RecipeDetails() {
+    const navigate = useNavigate();
     const { recipeId } = useParams();
     const { user, isAuthenticated } = useAuthContext();
     const { deleteRecipe, selectedRecipe, likeRecipe, unlikeRecipe } = useRecipesContext();
@@ -17,8 +18,8 @@ export default function RecipeDetails() {
     const currentRecipe = selectedRecipe(recipeId);
     const isOwner = currentRecipe.data?.ownerId === user.uid;
     const liked = currentRecipe.data?.liked.includes(user.uid)
-    let arrIngredients = [];
-
+    // let arrIngredients = [];
+    //generate shopping list from ingredients if own or liked recipe button show
     useEffect(() => {
         try {
             recipeService.getOne(recipeId).then((result) => {
@@ -30,10 +31,7 @@ export default function RecipeDetails() {
 
     }, [recipeId]);
 
-    if (recipe.ingredients) {
-        arrIngredients = recipe.ingredients.split(', ')
-        console.log(arrIngredients);
-    }
+
     const onLikeHandler = async () => {
         //add unlike func
         try {
@@ -60,11 +58,13 @@ export default function RecipeDetails() {
             if (result) {
                 await recipeService.deleteRecipe(recipeId);
                 deleteRecipe(recipeId)
+                navigate('/profile')
             }
         } catch (err) {
             console.log(err);
         }
     };
+
 
     return (
         <section className={styles.detailsContainer}>
@@ -83,17 +83,17 @@ export default function RecipeDetails() {
                             />
                             <div className="card-body">
                                 {/* <h4 className={`pt20 pb20 ${styles.recipeName}`}>{recipe.name}</h4> */}
-                                <p className="text-white">Ingredients: </p>
+                                <p className={styles.ulText}>Ingredients: </p>
                                 <ul className={styles.ingredientsList}>
-                                    {arrIngredients.map(x => <li>{x}</li>)}
+                                    {recipe.ingredients.split(',').map(x => <li key={recipe.id}>{x}</li>)}
                                 </ul>
-                                <p className="text-white">Preparation:</p>
-                                    <ul className={styles.ingredientsList}>
-                                        <li>
-                                            {recipe.preparation}.
-                                        </li>
-                                    </ul> 
-                                    
+                                <p className={styles.ulText}>Preparation:</p>
+                                <ul className={styles.ingredientsList}>
+
+                                    {recipe.preparation.split('\n').map(x => <li key={recipe.id}>{x}</li>)}
+
+                                </ul>
+
                                 {isAuthenticated && (
                                     <h2 className="text-center mb-4">
                                         {isOwner && (
@@ -107,7 +107,6 @@ export default function RecipeDetails() {
                                                 <Link
                                                     onClick={onDeleteHandler}
                                                     className={`badge badge-primary ${styles.btnDetails}`}
-                                                    to={`/profile`}
                                                 >
                                                     Delete
                                                 </Link>
