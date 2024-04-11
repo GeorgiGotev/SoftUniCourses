@@ -18,11 +18,9 @@ export const register = async (values) => {
     if (values.password !== values.rePassword) {
         throw new Error("Passwords don't match");
     }
-    if (values.password.trim() === "") {
-        throw new Error("Please enter your password");
-    }
-    if (values.password.length < 6) {
-        throw new Error("Password must be at least 6 characters.");
+    
+    if (values.password.trim().length < 6) {
+        throw new Error("Password must be at least 6 characters. (Don't use space)");
     }
 
     const res = await createUserWithEmailAndPassword(

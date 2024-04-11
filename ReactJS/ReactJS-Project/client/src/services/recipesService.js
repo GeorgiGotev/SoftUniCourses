@@ -64,6 +64,14 @@ export const onLike = async (recipeId, liked, userId) => {
     });
 };
 
+export const onUnlike = async (recipeId, liked, userId) => {
+    const docRef = doc(db, 'recipes', recipeId);
+    const newLikedList = liked.filter(x => x !== userId);
+    await updateDoc(docRef, {
+        liked: newLikedList
+    })
+}
+
 export const getLikedByUser = async (userId) => {
     const q = query(
         collection(db, 'recipes'),

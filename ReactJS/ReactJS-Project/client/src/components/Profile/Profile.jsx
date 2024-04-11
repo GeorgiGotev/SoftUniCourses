@@ -4,36 +4,34 @@ import { useRecipesContext } from '../../contexts/recipesContext';
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import RecipeItem from '../Recipes/RecipeItem/RecipeItem';
-import * as recipesService from '../../services/recipesService';
 import Spinner from '../Spinner';
+import * as recipesService from '../../services/recipesService';
 export default function Profile() {
     const { user, id } = useAuthContext();
-    const [isLoading, setIsLoading] = useState(false);
-    const [recipes, setRecipes] = useState([]);
-    // const [likedRecipes, setLikedRecipes] = useState([]);
+    const {  likedRecipes, ownRecipes, isLoading } = useRecipesContext();
 
-    //should change state when clicked own or liked recipes
-    // try to take data from state, not from db
+    const [profileRecipes, setProfileRecipes] = useState(likedRecipes(id));
+
     useEffect(() => {
-        setIsLoading(true);
         try {
-            recipesService
-                .getOwn(id)
-                .then((res) => {
-                    setRecipes(res);
-                })
-                .finally(() => setIsLoading(false));
-
-            // recipesService
-            //     .getLikedByUser(id)
-            //     .then((res) => setLikedRecipes(res));
+            recipesService.getLikedByUser(id)
+            .then(res => setProfileRecipes(res))
         } catch (err) {
             console.log(err);
         }
-    }, []);
+    }, [id])
+
+    const ownRecipesShow = () => {
+        setProfileRecipes(ownRecipes(id))
+    }
+    const favoriteRecipesShow = () => {
+        setProfileRecipes(likedRecipes(id))
+    }
+
 
     return (
-        <>
+        <>  
+            {/* sidebar? */}
             {/* <div className={styles.sidebare}>
                 <Link
                     className={`badge badge-primary ${styles.btnDetails} ${styles.sideBarBtn}`}
@@ -69,21 +67,23 @@ export default function Profile() {
                     <div className="col-sm-7 col-md-4 mb-5">
                         <ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
                             <li className="nav-item">
-                                <Link className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#foods" role="tab" aria-controls="pills-home" aria-selected="true">Own Recipes</Link>
+                                <a onClick={favoriteRecipesShow} className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#foods" role="tab" aria-controls="pills-home" aria-selected="true"
+                                >Favorite</a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#juices" role="tab" aria-controls="pills-profile" aria-selected="false">Favorite</Link>
+                                <a onClick={ownRecipesShow} className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#juices" role="tab" aria-controls="pills-profile" aria-selected="false"
+                                >Own Recipes</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div className="gallary row">
                     {isLoading && <Spinner />}
-                    {recipes.map((x) => (
+                    {profileRecipes && profileRecipes.map((x) => (
                         <RecipeItem key={x.data?.id} {...x} />
                     ))}
                 </div>
-                {!isLoading && recipes.length === 0 && (
+                {!isLoading && profileRecipes.length === 0 && (
                     <div className={styles.customHeading1}>
                         <h2>No recipes yet</h2>
                     </div>

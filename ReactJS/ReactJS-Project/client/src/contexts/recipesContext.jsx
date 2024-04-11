@@ -44,10 +44,28 @@ export const RecipesProvider = ({ children }) => {
     }
 
     const likeRecipe = (recipeId, userId) => {
-        setRecipes((state) => state.map(x => x.data.id === recipeId ? { data: { ...x.data, liked: [...x.data.liked, userId] } } : x))
+        setRecipes((state) => state.map(x => x.data.id === recipeId ?
+            { data: { ...x.data, liked: [...x.data.liked, userId] } }
+            : x))
+    }
+    const unlikeRecipe = (recipeId, liked, userId) => {
+        let newLiked = liked.filter(x => x !== userId)
+
+        setRecipes((state) => state.map(x => x.data.id === recipeId ?
+            { data: { ...x.data, liked: newLiked } }
+            : x))
     }
 
-    console.log(recipes);
+
+    // maybe should move own and  liked filters (this 2 func above) to profile Component, because it doesn't change/response state
+    const ownRecipes = (ownerId) => {
+        return recipes.filter(x => x.data.ownerId === ownerId)
+    }
+
+    const likedRecipes = (ownerId) => {
+        return recipes.filter(x => x.data.liked.includes(ownerId))
+    }
+
 
     const contextValues = {
         addRecipe,
@@ -55,8 +73,11 @@ export const RecipesProvider = ({ children }) => {
         deleteRecipe,
         selectedRecipe,
         likeRecipe,
+        ownRecipes,
+        likedRecipes,
+        unlikeRecipe,
         recipes,
-        isLoading
+        isLoading,
     };
 
     return (
