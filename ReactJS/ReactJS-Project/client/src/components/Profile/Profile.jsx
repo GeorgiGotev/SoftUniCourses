@@ -53,7 +53,7 @@ export default function Profile() {
                         style={{ width: '10%' }}
                     />
                     <div className={styles.container}>
-                        <p>Profile Information</p>
+                        <p>User Information</p>
                         <h4>
                             <p>{`name: ${user.displayName}`}</p>
                             <p>{`e-mail: ${user.email}`}</p>
