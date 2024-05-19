@@ -1,0 +1,7 @@
+ul li{
+    list-style: decimal;
+}
+
+.done-list{
+    text-decoration: line-through;
+}
