@@ -1,0 +1,47 @@
+Food Menu
+Home
+About
+Foods
+Contacts
+
+Search for Food
+Search
+
+Explore Our Foods
+Green Leafy Dish
+Fish Salad Dish
+Classic Burger
+
+Green Leafy Dish
+12.54 $
+Enjoy a fresh and vibrant Green Leafy dish featuring crisp avocado, mixed green leaf salads, and tender calamari.
+Order Now
+
+Fish Salad Dish
+18.22 $
+Savor a delicious Fish Salad featuring tender salmon, creamy avocado, crisp Romaine lettuce, and juicy cherry tomatoes. Lightly dressed, this dish offers a perfect balance of freshness and rich flavors.
+Order Now
+
+Classic Burger
+7.50 $
+Enjoy a classic burger with a juicy beef patty, fresh lettuce, ripe tomatoes, and melted cheese, all served in a soft toasted bun. Perfectly seasoned and grilled, it's a timeless favorite for every burger lover.
+Order Now
+
+Green Leafy Dish
+12.54 $
+Enjoy a fresh and vibrant Green Leafy dish featuring crisp avocado, mixed green leaf salads, and tender calamari.
+Order Now
+
+Fish Salad Dish
+18.22 $
+Savor a delicious Fish Salad featuring tender salmon, creamy avocado, crisp Romaine lettuce, and juicy cherry tomatoes. Lightly dressed, this dish offers a perfect balance of freshness and rich flavors.
+Order Now
+
+Classic Burger
+7.50 $
+Enjoy a classic burger with a juicy beef patty, fresh lettuce, ripe tomatoes, and melted cheese, all served in a soft toasted bun. Perfectly seasoned and grilled, it's a timeless favorite for every burger lover.
+Order Now
+
+See All Foods
+
+© All rights reserved | SoftUni

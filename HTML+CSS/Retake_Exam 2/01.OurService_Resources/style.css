@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font: 14px/1.5 'Lora', sans-serif;
+}
+
+body,
+input,
+textarea {
+    font: inherit;
+}
+
+.main-content {
+    background-color: #e5f1f2;
+    padding: 2em;
+    max-width: 1200px;
+    margin: auto;
+    border: 2px solid #11b1bb;
+    text-align: center;
+}   
+
+header {
+    padding-top: 1.5em;
+}
+
+header h2 {
+    padding: 1.5em;
+    font-size: 2em;
+}
+
+header h3 {
+    color: #11b1bb;
+
+}
+
+h4{
+    font-size: 1.2em;
+}
+
+img {
+    display: block;
+    width: 70%;
+    height: auto;
+    margin: auto;
+}
+
+.media {
+    padding: 2em;
+}
+article>p {
+    font-size: 1em;
+    padding: 1.5em;
+}
+
+.button a{
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    padding: 2em;
+}
+.section {
+    display: flex;
+    gap: 2em;
+    color: white;
+    padding: 1em;
+}
+
+article {
+    background-color: #11b1bb;
+    padding: 2em;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.socials li{
+    padding-top: 2em;
+    padding-bottom: 2em;
+    list-style-type: none;
+}
+
+
+
+.socials span {
+    display: none;
+}
+
+
+
+
+footer p>span {
+    text-decoration: underline;
+    color: #064549;
+}
+
+footer p {
+    font-size: 1.5em;
+    color: #11b1bb;
+}

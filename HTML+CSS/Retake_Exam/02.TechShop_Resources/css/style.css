@@ -1,0 +1,186 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css);
+
+html {
+    box-sizing: border-box;
+    color: rgba(63, 59, 59, 0.733);
+    background: white;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+h1, h2, nav > * {
+    color: rgba(0, 0, 0, 0.774);
+}
+
+body {
+    margin: 0 auto;
+    width: 80%;
+    padding: 0;
+    background: #ecdab13a;
+}
+nav {
+    display: flex;
+    background: #fee2b3;
+    padding: 0.3% 20% 0.3% 5%;
+    align-items: center;
+    width: 100%;
+
+}
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+.logo_img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 2%;
+    border-radius: 100%;
+}
+
+.shop_name {
+    font-weight: 900;
+    margin-right: 70%;
+}
+
+nav ul {
+    display: flex;
+    gap: 50px;
+}
+
+.nav-burger-menu {
+    display: none;
+}
+
+.welcome {
+    display: flex;
+    width: 45%;
+    margin: 20px auto;
+    gap: 50px;
+    align-items: center;
+}
+
+.welcome > img {
+    width: 40%;
+}
+
+.welcome > div >  h1 {
+    font-size: 23px;
+    width: 88%;
+    
+}
+
+.welcome > div >  p {
+    font-size: 14px;
+    margin-bottom: 50px;
+    text-align: left;
+    width: 85%;
+}
+
+.welcome > div >  button {
+    border: none;
+    background: #fee2b3;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 900;
+    color: rgba(199, 119, 27, 0.781);
+    border: rgba(199, 119, 27, 0.781) solid 1px;
+}
+
+main > h1 {
+    margin-top: 80px;
+    text-align: center;
+}
+
+
+
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.services div {
+    width: 30%;
+    box-shadow: 2px 3px 7px 0px rgba(33,32,29,0.82);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.services div img {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.services div h2 {
+    font-size: 14px;
+}
+
+.services div p {
+    font-size: 12px;
+}
+
+footer {
+    background: #fee2b3;
+    padding: 20px 100px;
+    margin-top: 100px;
+    width: 100%;
+}
+
+footer > ul {
+    display: flex;
+    gap: 90px;
+    padding-bottom: 20px;
+    margin-left: 80px;
+    
+}
+
+footer > ul li:nth-child(1) {
+    width: 60%;
+    
+}
+
+footer > ul li:nth-child(1) > p {
+   padding-right: 40%;
+    
+}
+
+footer > ul li:not(:nth-child(1)) h2 {
+    font-size: 17px;
+    
+}
+
+.inner_list {
+    display: flex;
+    width: 120px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inner_list li a{
+    font-size: 15px;
+    text-decoration: none;
+    color: rgb(134, 88, 88);
+}
+
+footer > div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+footer > div > p {
+    display: inline-block;
+    width: 60%;
+    padding-top: 10px;
+    border-top: rgba(0, 0, 0, 0.349) solid 1px;
+}
+
+

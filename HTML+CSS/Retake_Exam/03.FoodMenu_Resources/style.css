@@ -1,0 +1,144 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font: 18px/1.5 'Montserrat', serif;
+}
+
+
+.site-section {
+    max-width: 1600px;
+    padding: 2em 10em;
+}
+
+
+.site-banner {
+    background-image: url("./img/search_area_bg.jpg");
+    background-repeat: no-repeat;
+    height: 100px;
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.site-header nav ul {
+    display: flex;
+    list-style: none outside;
+    gap: 0.5em;
+    padding-top: 2px;
+    margin: auto;
+
+}
+
+.site-title {
+    display: flex;
+}
+
+.logo-title {
+    margin: auto;
+}
+
+.logo {
+    height: 3em;
+    margin: auto;
+
+}
+
+.site-header nav ul li a {
+    text-decoration: none;
+    color: #fa6692;
+}
+
+.explore h2 {
+    text-align: center;
+    padding: 2em 2em;
+}
+
+.search {
+    display: block;
+    text-align: center;
+    padding: 2em;
+}
+
+.explore-container {
+    display: flex;
+    justify-content: space-around;
+
+    flex-wrap: nowrap;
+
+}
+
+.media {
+    display: flex;
+    flex-direction: column;
+}
+
+.media img {
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.price {
+    color: #fa6692;
+    font-weight: bold;
+}
+
+article {
+    border-radius: 15px;
+    padding: 25px;
+    font-size: 12px;
+}
+
+.row1 {
+    padding: 40px;
+    padding-top: 2em;
+    margin-top: 2em;
+    background-color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.menu-img img {
+    border-radius: 15px;
+    height: 100px;
+    width: 100px;
+}
+
+.row1 article {
+    background-color: white;
+    display: flex;
+    flex: 1 0 35%;
+}
+
+section a {
+    text-decoration: none;
+    color: white;
+    background-color: #fa6692;
+    border-radius: 30px;
+    padding: 4px;
+}
+
+section {
+    padding-left: 10px;
+}
+.more{
+    display: block;
+}
+
+footer {
+    padding-top: 20px;
+    text-align: center;
+}
